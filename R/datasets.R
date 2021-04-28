@@ -1,18 +1,22 @@
-#' @title
-#' Pfal_geneID2GO: A curated P. falciparum GO database (accessed from GeneDB Dec 08, 2020).
+#' @name Pfal_geneID2GO
+#' @docType data
+#' @description
+#' A P. falciparum GO database containing all curated GO terms mapped to P. falciparum genes (accessed from GeneDB Dec 08, 2020).
 #'
-#' A dataset containing all curated GO terms mapped to P. falciparum genes.
-#'
+#' @usage data(Pfal_geneID2GO)
 #' @format A list of 3381 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
 #' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
-#' @description formatted into the geneID2GO input for run.topGO.meta from the source-url using the included format.curated.GOdb function followed by `topGO::readMappings()`
+#' @description can be used as the geneID2GO input for run.topGO.meta.
+#' @example run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
 "Pfal_geneID2GO"
 
 
-#' @title
-#' pf.annot: Functional annotations for all P. falciparum genes (accessed from GeneDB Dec 08, 2020)
+#' @name pf.annot
+#' @docType data
 #'
-#' A dataset containing all P. falciparum gene annotations.
+#' @description
+#' A dataset containing all P. falciparum gene-product annotations.
+#' @usage data(pf.annot)
 #'
 #' @format A data frame of 5545 rows and 5 columns.
 #'
@@ -26,6 +30,7 @@
 #'
 #' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
 #'
+#' @keywords dataset
 #' @details
 #' These data aren't explicitly required for running any enrichments with this package. They are included for reference to aid exploring your enrichment results.
 #'
@@ -34,8 +39,11 @@
 #' Some redundant columns were filtered/removed from the original data source.
 "pf.annot"
 
-#' @title
-#' pf.genesets.mpmp: curated P. falciparum metabolic pathways, genesets, GO terms (credit CW)
+#' @name pf.genesets.mpmp
+#' @docType data
+#' @description
+#' curated P. falciparum metabolic pathways, genesets, GO terms from MPMP
+#' @usage data(pf.genesets.mpmp)
 #'
 #' @format A large data frame of 54090 rows and 5 columns.
 #'
