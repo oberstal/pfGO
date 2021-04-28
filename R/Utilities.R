@@ -573,16 +573,16 @@ formatGOdb <- function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/
   }
 
 #' @title
-#' format.curated.GOdb
+#' formatGOdb.curated
 #'
 #' @description
 #' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
 #'
-#' @param gaf.gz_url = url to a gaf.gz file. Defaults to latest Pf consortium .gaf annotation file from GeneDB, hosted here: ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz
-#'@param organism = optional string to include in your output file-name. Defaults to "Pf".
+#' @param gaf.gz_url url to a gaf.gz file. Defaults to latest Pf consortium .gaf annotation file from GeneDB.
+#'@param organism optional string to include in your output file-name. Defaults to "Pf".
 #'
 #' @details
-#' You may need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
+#' You will need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
 #'
 #' *notes on gaf.gz format*
 #' The gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
@@ -590,7 +590,7 @@ formatGOdb <- function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/
 #' a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
 #' @export
-format.curated.GOdb <-
+formatGOdb.curated <-
   function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
            organism = "Pf") {
     # make connection to gaf.gz file without downloading it, then read it in.
@@ -661,6 +661,8 @@ format.curated.GOdb <-
     GO.db = read.delim(GOdb.file, header = FALSE)
     return(GO.db)
   }
+
+
 
 # ########## Other useful functions #############
 # ## to.pdf: Plot the output of any function to pdf ##
