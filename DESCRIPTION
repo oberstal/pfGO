@@ -7,8 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jobersta@usf.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package is a test-run for functions I commonly use,
-particularly for P. falciparum functional enrichment analyses.
+Description: This package is a test-run for functions I commonly use, particularly for P. falciparum functional enrichment analyses.
 License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true

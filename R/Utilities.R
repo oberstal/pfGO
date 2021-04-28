@@ -5,15 +5,14 @@ library(dplyr)
 library(scales)
 library(formatR)
 
-
-#' Make "Routput" directory if it doesn't already exist.
+#' @title
+#' Make "Routput" directory if it doesn't already exist
 #'
+#' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
-
 #' @return newly created path
 #'
-
 #' @export
 makeRoutput.dir <- function () {
   mainDir = getwd()
@@ -26,13 +25,14 @@ makeRoutput.dir <- function () {
   newDir
 }
 
-#' Make "Routput/GO" directory if it doesn't already exist.
+#' @title
+#' Make "Routput/GO" directory if it doesn't already exist
 #'
+#' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
-
 #' @return newly created path
-#'----
+#'
 #' @export
 makeGOoutput.dir <- function() {
   file.path = getwd()
@@ -46,14 +46,14 @@ makeGOoutput.dir <- function() {
   newDir
 }
 
-#' Make "/Routput/GO/sig.genes.by.term" output folder if it doesn't exist.
+#' @title
+#' Make "/Routput/GO/sig.genes.by.term" output folder if it doesn't exist
 #'
+#' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
-
 #' @return newly created path
 #'
-
 #' @export
 makeGOsig.genes.dir <- function() {
   file.path = getwd()
@@ -65,14 +65,13 @@ makeGOsig.genes.dir <- function() {
 }
 
 
-#' Make "/Routput/GO/hierarchy.plots" output folder if it doesn't exist.
-#'
+#' @title
+#' Make "/Routput/GO/hierarchy.plots" output folder if it doesn't exist
+#' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
-
 #' @return newly created path
 #'
-
 #' @export
 makeGOhierarchy.dir <- function() {
   file.path = getwd()
@@ -105,23 +104,33 @@ makeGOhierarchy.dir <- function() {
 ############### run.topGO.meta ----
 # script slightly modified from my run.topGO script especially to test for GO enrichment in art-R meta-analysis gene-categories of interest. STILL CLUNKY BUT IT WORKS
 
-#' Run JO's topGO pipeline.
+#' @title
+#' Run JO's topGO pipeline
 #'
+#' @description
 #' This function tests for functional enrichment in gene-categories of interest.
 #'
-#' @param data frame with geneIDs in column 1, and interest-category classifications in column 2
+#' @param mydf dataframe with geneIDs in column 1, and interest-category classifications in column 2
 #' @param geneID2GO a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2
-#' @return writes enrichment results, sig genes per term, plots of the GO-term hierarchy, and thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
+#' @return writes enrichment results, sig genes per term, plots of the GO-term hierarchy, and thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis. Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
 #'
-
-
-## Arguments: ##
-# 1. mydf = a data frame of 2 columns, with geneIDs in column 1, and interest-category classifications in column 2 (both just columns from my master table)
-
-
-# 2. geneID2GO = a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2 (and will be used for the gene2GO setting in the GOdata object).
-##### the geneID2GO object: make GO.db into the correct format (a named character-vector: each vector named by geneID, with GO terms as each element) to use in defining the topGO GOdata object FIRST
-
+#' @details
+#'
+#' The run.topGO.meta function makes the GOdata object for topGO, performs GO analysis by ontology (molecular function, biological process, cellular compartment) on all groups of interest at once, and then outputs results to several tables (tab.txt files that can be opened in Excel).
+#'
+#' run.topGO.meta defines which genes are interesting and which should be defined as background for each defined category (for example in an RNAseq analysis, common categories might be "upregulated", "downregulated", and "background"). Genes in the category of interest are tested for enrichment against all the other genes included in mydf (the "gene universe"). In an RNAseq experiment, the gene universe would consist of all genes detected above your threshold cutoffs (*not necessarily all genes in the genome*).
+#'
+#' TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with the "feasible genes" indicated in the topGO.log files in the Routput folder.
+#'
+#' *Using your own custom GO database*
+#'
+#' A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses. You may also provide your own, so long as it is a named character-vector--each vector named by geneID, with GO terms as each element).
+#'
+#' You can use the included format.curated.GOdb function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the formatGOdb function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
+#'
+#' @example
+#' run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
+#'
 #' @export
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
   require(topGO)
@@ -457,32 +466,45 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
   )
 }
 
-## primary output from run.topGO is "Routput/GO/all.bin.combined.GO.output", which we'll use for input to the next part of the analyses (generating figures).
-
-
-# ##### get.value ----
-# a lookup function to match an ID and return the matching values
+#' @title get.value
+#'
+#'@description
+#' a lookup function to match an ID and return the matching values
+#' @param id a character-string you want to match on
+#' @param lookupvector a named vector you will search for your id
+#'
+#' @details
+#' This one needs more documentation. I don't remember what it returns as I wrote it a long time ago. Could be a vector of matching values, or could be a vector of positions you can then filter the lookupvector on to return the values.
+#'
+#' @export
 get.value <- function(id, lookupvector = named.vector){
   value = unname(lookupvector[id])
   return(value)
 }
 
 
-# ####################### formatGOdb ----
-# # a GOdb from Sanger's latest annotation in December of 2020 pre-formatted using this function is provided for the analysis. This function is generally useful for keeping GO analyses up-to-date.
-#
-# # makes new GOdb from latest Pf consortium .gaf file (ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz). The output-file of this function is the master Pf GOdb with all genes that have GO terms (from which the topGO background "gene universe" will be selected)
-#
-# # Arguments:
-# ## gaf.gz_url = url to the gaf.gz file. Defaults to latest Pf consortium .gaf annotation file from geneDB, hosted here: ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz
-# ### the file is in tabular format with 17 columns, one row for each GO term associated with a geneID.
-#
-# ## organism = optional string to include in your output file-name. Defaults to "Pf".
-#
-#
-# ### WORKS perfectly for retrieving GO annotations assigned by ANY evidence-code (also have a version that weeds out any non-curated, inferred-from-electronic-annotation assignments (evidence code IEA)) ###
-formatGOdb <-
-  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
+#' @title
+#' formatGOdb
+#'
+#' @description
+#' This function fetches P. falciparum annotations from GeneDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
+#'
+#' @param gaf.gz_url = url to a gaf.gz file. Defaults to latest Pf consortium .gaf annotation file from GeneDB, hosted here: ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz
+#' @param organism = optional string to include in your output file-name. Defaults to "Pf".
+#'
+#' @details
+#'
+#' You may need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
+#'
+#' *notes on gaf.gz format*
+#' The gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
+#'
+#' Retrieves GO annotations assigned by *all* evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see format.curated.GOdb))
+#'
+#' a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using the *curated* version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#'
+#' @export
+formatGOdb <- function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
            organism = "Pf") {
     # make connection to gaf.gz file without downloading it, then read it in.
     con = gzcon(url(gaf.gz_url))
@@ -550,10 +572,24 @@ formatGOdb <-
     return(GO.db)
   }
 
-
-###### format.curated.GOdb ######
-# generate new GO db only from curated evidence-codes #
-
+#' @title
+#' format.curated.GOdb
+#'
+#' @description
+#' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
+#'
+#' @param gaf.gz_url = url to a gaf.gz file. Defaults to latest Pf consortium .gaf annotation file from GeneDB, hosted here: ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz
+#'@param organism = optional string to include in your output file-name. Defaults to "Pf".
+#'
+#' @details
+#' You may need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
+#'
+#' *notes on gaf.gz format*
+#' The gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
+#'
+#' a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#'
+#' @export
 format.curated.GOdb <-
   function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
            organism = "Pf") {
