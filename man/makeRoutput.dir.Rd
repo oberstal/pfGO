@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utilities.R
 \name{makeRoutput.dir}
 \alias{makeRoutput.dir}
-\title{Make "Routput" directory if it doesn't already exist.}
+\title{Make "Routput" directory if it doesn't already exist}
 \usage{
 makeRoutput.dir()
 }

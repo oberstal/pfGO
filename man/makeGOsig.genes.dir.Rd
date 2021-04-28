@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utilities.R
 \name{makeGOsig.genes.dir}
 \alias{makeGOsig.genes.dir}
-\title{Make "/Routput/GO/sig.genes.by.term" output folder if it doesn't exist.}
+\title{Make "/Routput/GO/sig.genes.by.term" output folder if it doesn't exist}
 \usage{
 makeGOsig.genes.dir()
 }

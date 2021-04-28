@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utilities.R
 \name{makeGOhierarchy.dir}
 \alias{makeGOhierarchy.dir}
-\title{Make "/Routput/GO/hierarchy.plots" output folder if it doesn't exist.}
+\title{Make "/Routput/GO/hierarchy.plots" output folder if it doesn't exist}
 \usage{
 makeGOhierarchy.dir()
 }

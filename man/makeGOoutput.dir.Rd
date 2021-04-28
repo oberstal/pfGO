@@ -2,13 +2,12 @@
 % Please edit documentation in R/Utilities.R
 \name{makeGOoutput.dir}
 \alias{makeGOoutput.dir}
-\title{Make "Routput/GO" directory if it doesn't already exist.}
+\title{Make "Routput/GO" directory if it doesn't already exist}
 \usage{
 makeGOoutput.dir()
 }
 \value{
-\subsection{newly created path}{
-}
+newly created path
 }
 \description{
 This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
