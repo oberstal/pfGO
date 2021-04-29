@@ -3,4 +3,6 @@
 export(formatGOdb)
 export(formatGOdb.curated)
 export(get.value)
+export(makeRoutput.dir)
 export(run.topGO.meta)
+exportMethods("")

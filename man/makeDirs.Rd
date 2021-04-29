@@ -17,10 +17,8 @@ makeGOsig.genes.dir()
 makeGOhierarchy.dir()
 }
 \arguments{
-\item{...}{not required. Defaults to creating top-level Routput directory in current working directory.
-
-Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.}
+\item{...}{not required. Defaults to creating top-level Routput directory in current working directory.}
 }
 \description{
-Creating directory-structure
+Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 }

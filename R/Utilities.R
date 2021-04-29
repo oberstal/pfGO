@@ -7,14 +7,16 @@ library(formatR)
 
 #' Creating directory-structure
 #'
+#' Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
+#'
 #' @param ... not required. Defaults to creating top-level Routput directory in current working directory.
 #'
-#' Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #' @name makeDirs
 NULL
 #> NULL
 
 #' @rdname makeDirs
+#' @export
 makeRoutput.dir <- function () {
   mainDir = getwd()
   subDir = "/Routput"
@@ -27,6 +29,7 @@ makeRoutput.dir <- function () {
 }
 
 #' @rdname makeDirs
+#' @exportMethod
 makeGOoutput.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/"
@@ -41,6 +44,7 @@ makeGOoutput.dir <- function() {
 
 
 #' @rdname makeDirs
+#' @exportMethod
 makeGOsig.genes.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/GO"
@@ -51,6 +55,7 @@ makeGOsig.genes.dir <- function() {
 }
 
 #' @rdname makeDirs
+#' @exportMethod
 makeGOhierarchy.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/GO"
