@@ -17,5 +17,6 @@ Imports:
     topGO,
     plyr,
     dplyr
+Remotes: bioc::release/topGO, bioc::release/Biobase
 Depends: 
     R (>= 2.10)
