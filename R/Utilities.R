@@ -87,17 +87,24 @@ makeGOhierarchy.dir <- function() {
 #' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2
 #' @param geneID2GO a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2
 #'
-#' @return writes enrichment results, sig genes per term, plots of the GO-term hierarchy, and thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis. Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
+#' @return run.topGO.meta creates several output-files, including:
+#' *enrichment results,
+#' *significant genes per significant term,
+#' *plots of the GO-term hierarchy relevant to the analysis, and
+#' *thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
+#'
+#' Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
 #'
 #'
 #' @details
 #' The **run.topGO.meta** function:
 #' * defines which genes are "interesting" and which should be defined as background for each category specified in mydf,
 #' * makes the GOdata object for topGO,
-#' * performs GO analysis by each ontology (molecular function, biological process, cellular compartment) on all groups of interest at once,
-#'     *Genes in each category of interest are tested for enrichment against all the other genes included in mydf (the "gene universe").
-#'
+#' * tests each category of interest for enriched GO-terms against all the other genes included in mydf (the "gene universe"),
 #' * and then outputs results to several tables (tab.txt files that can be opened in Excel).
+#'
+#' Enrichments are performed by each ontology (molecular function, biological process, cellular compartment) sequentially on all groups of interest. Results are combined in the final output-table ("Routput/GO/all.combined.GO.results.tab.txt").
+
 #'
 #'
 #' TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with "feasible genes" indicated in the topGO.log files in the "Routput/GO" folder.
