@@ -5,16 +5,16 @@ library(dplyr)
 library(scales)
 library(formatR)
 
-#' @title
-#' Make "Routput" directory if it doesn't already exist
+#' Creating directory-structure
 #'
-#' @family makeDirs
-#' @description
-#' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
+#' @param ... not required. Defaults to creating top-level Routput directory in current working directory.
 #'
-#' @return newly created path
-#'
-#' @export
+#' Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
+#' @name makeDirs
+NULL
+#> NULL
+
+#' @rdname makeDirs
 makeRoutput.dir <- function () {
   mainDir = getwd()
   subDir = "/Routput"
@@ -26,16 +26,7 @@ makeRoutput.dir <- function () {
   newDir
 }
 
-#' @title
-#' Make "Routput/GO" directory if it doesn't already exist
-#'
-#' @family makeDirs
-#' @description
-#' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
-#'
-#' @return newly created path
-#'
-#' @export
+#' @rdname makeDirs
 makeGOoutput.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/"
@@ -48,17 +39,8 @@ makeGOoutput.dir <- function() {
   newDir
 }
 
-#' @title
-#' Make "/Routput/GO/sig.genes.by.term" output folder if it doesn't exist
-#'
-#' @family makeDirs
-#'
-#' @description
-#' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
-#'
-#' @return newly created path
-#'
-#' @export
+
+#' @rdname makeDirs
 makeGOsig.genes.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/GO"
@@ -68,42 +50,22 @@ makeGOsig.genes.dir <- function() {
   newDir
 }
 
-
-#' @title
-#' Make "/Routput/GO/hierarchy.plots" output folder if it doesn't exist
-#'
-#' @family makeDirs
-#'
-#' @description
-#' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
-#'
-#' @return newly created path
-#'
-#' @export
+#' @rdname makeDirs
 makeGOhierarchy.dir <- function() {
   file.path = getwd()
-    mainDir = "/Routput/GO"
-    subDir = "/hierarchy.plots"
-    newDir = paste(file.path,
-                   mainDir,
-                   subDir,
-                   sep = "")
-    dir.create(newDir, showWarnings = FALSE)
-    newDir
+  mainDir = "/Routput/GO"
+  subDir = "/hierarchy.plots"
+  newDir = paste(file.path,
+                 mainDir,
+                 subDir,
+                 sep = "")
+  dir.create(newDir, showWarnings = FALSE)
+  newDir
 }
 
-# general makeDirectory function (checks if the directory (and any specified subdirectories) exists; if not it makes it. If so, will not overwrite.) not using in attempt to reduce each function to single purpose ----
-# makeDir.jo <- function(mainDir="Routput", subDir=NULL, subDir2=NULL, subDir3=NULL) {
-#   file.path = getwd()
-#   dir.create(paste(file.path,
-#                    mainDir,
-#                    subDir,
-#                    subDir2,
-#                    subDir3,
-#                    sep = "/"),
-#              recursive = TRUE,
-#              showWarnings = TRUE)
-# }
+
+
+
 
 
 
