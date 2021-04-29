@@ -8,6 +8,7 @@ library(formatR)
 #' @title
 #' Make "Routput" directory if it doesn't already exist
 #'
+#' @family makeDirs
 #' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
@@ -28,6 +29,7 @@ makeRoutput.dir <- function () {
 #' @title
 #' Make "Routput/GO" directory if it doesn't already exist
 #'
+#' @family makeDirs
 #' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
@@ -49,6 +51,8 @@ makeGOoutput.dir <- function() {
 #' @title
 #' Make "/Routput/GO/sig.genes.by.term" output folder if it doesn't exist
 #'
+#' @family makeDirs
+#'
 #' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
@@ -67,6 +71,9 @@ makeGOsig.genes.dir <- function() {
 
 #' @title
 #' Make "/Routput/GO/hierarchy.plots" output folder if it doesn't exist
+#'
+#' @family makeDirs
+#'
 #' @description
 #' This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
@@ -503,6 +510,8 @@ get.value <- function(id, lookupvector = named.vector){
 #'
 #' a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using the *curated* version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
+#' @seealso [formatGOdb.curated()]
+#'
 #' @export
 formatGOdb <- function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
            organism = "Pf") {
@@ -589,6 +598,7 @@ formatGOdb <- function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/
 #'
 #' a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
+#' @seealso [formatGOdb()]
 #' @export
 formatGOdb.curated <-
   function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
