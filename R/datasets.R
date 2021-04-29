@@ -1,8 +1,8 @@
-#' @title All curated GO terms mapped to P. falciparum genes
+#' @title All curated GO terms mapped to *P. falciparum* genes
 #' @name Pfal_geneID2GO
 #' @docType data
 #' @description
-#' A P. falciparum GO database containing all curated GO terms mapped to P. falciparum genes (accessed from GeneDB Dec 08, 2020).
+#' A *P. falciparum* GO database containing all curated GO terms mapped to *P. falciparum* genes (accessed from GeneDB Dec 08, 2020).
 #'
 #' @usage data(Pfal_geneID2GO)
 #' @format A list of 3381 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
@@ -12,18 +12,18 @@
 "Pfal_geneID2GO"
 
 
-#' @title All P. falciparum gene-product annotations.
+#' @title All *P. falciparum* gene-product annotations.
 #' @name pf.annot
 #' @docType data
 #'
 #' @description
-#' A dataset containing all P. falciparum gene-product annotations.
+#' A dataset containing all *P. falciparum* gene-product annotations.
 #' @usage data(pf.annot)
 #'
 #' @format A data frame of 5545 rows and 5 columns.
 #'
 #' \describe{
-#'   \item{organism_name}{P. falciparum)}
+#'   \item{organism_name}{*P. falciparum*)}
 #'   \item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.)}
 #'   \item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.)}
 #'   \item{gene_name}{the gene symbol, or short name, if one exists)}
@@ -33,7 +33,7 @@
 #' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
 #'
 #' @keywords dataset
-#' @details
+#' @details ## Keep in mind:
 #' These data aren't explicitly required for running any enrichments with this package. They are included for reference to aid exploring your enrichment results.
 #'
 #' Note there are 5545 *transcripts*--not unique geneIDs. There are 5473 unique geneIDs in this dataset.
@@ -41,7 +41,7 @@
 #' Some redundant columns were filtered/removed from the original data source.
 "pf.annot"
 
-#' @title Curated P. falciparum gene-sets.
+#' @title Curated *P. falciparum* gene-sets.
 #' @name pf.genesets.mpmp
 #' @docType data
 #' @description
