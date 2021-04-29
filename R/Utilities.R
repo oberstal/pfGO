@@ -29,7 +29,7 @@ makeRoutput.dir <- function () {
 }
 
 #' @rdname makeDirs
-#' @exportMethod
+#' @export
 makeGOoutput.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/"
@@ -44,7 +44,7 @@ makeGOoutput.dir <- function() {
 
 
 #' @rdname makeDirs
-#' @exportMethod
+#' @export
 makeGOsig.genes.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/GO"
@@ -55,7 +55,7 @@ makeGOsig.genes.dir <- function() {
 }
 
 #' @rdname makeDirs
-#' @exportMethod
+#' @export
 makeGOhierarchy.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/GO"
