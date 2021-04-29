@@ -3,7 +3,7 @@
 \docType{data}
 \name{pf.genesets.mpmp}
 \alias{pf.genesets.mpmp}
-\title{Curated P. falciparum gene-sets.}
+\title{Curated \emph{P. falciparum} gene-sets.}
 \format{
 A large data frame of 54090 rows and 5 columns.
 

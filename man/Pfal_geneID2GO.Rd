@@ -3,7 +3,7 @@
 \docType{data}
 \name{Pfal_geneID2GO}
 \alias{Pfal_geneID2GO}
-\title{All curated GO terms mapped to P. falciparum genes}
+\title{All curated GO terms mapped to \emph{P. falciparum} genes}
 \format{
 A list of 3381 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
 }
@@ -14,7 +14,7 @@ A list of 3381 named vectors--one vector for each Pf geneID to which GO terms ar
 data(Pfal_geneID2GO)
 }
 \description{
-A P. falciparum GO database containing all curated GO terms mapped to P. falciparum genes (accessed from GeneDB Dec 08, 2020).
+A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from GeneDB Dec 08, 2020).
 
 can be used as the geneID2GO input for run.topGO.meta.
 }

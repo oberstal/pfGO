@@ -3,12 +3,12 @@
 \docType{data}
 \name{pf.annot}
 \alias{pf.annot}
-\title{All P. falciparum gene-product annotations.}
+\title{All \emph{P. falciparum} gene-product annotations.}
 \format{
 A data frame of 5545 rows and 5 columns.
 
 \describe{
-\item{organism_name}{P. falciparum)}
+\item{organism_name}{\emph{P. falciparum})}
 \item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.)}
 \item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.)}
 \item{gene_name}{the gene symbol, or short name, if one exists)}
@@ -22,13 +22,16 @@ A data frame of 5545 rows and 5 columns.
 data(pf.annot)
 }
 \description{
-A dataset containing all P. falciparum gene-product annotations.
+A dataset containing all \emph{P. falciparum} gene-product annotations.
 }
 \details{
+\subsection{Keep in mind:}{
+
 These data aren't explicitly required for running any enrichments with this package. They are included for reference to aid exploring your enrichment results.
 
 Note there are 5545 \emph{transcripts}--not unique geneIDs. There are 5473 unique geneIDs in this dataset.
 
 Some redundant columns were filtered/removed from the original data source.
+}
 }
 \keyword{dataset}

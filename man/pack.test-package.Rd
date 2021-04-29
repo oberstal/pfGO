@@ -4,12 +4,12 @@
 \name{pack.test-package}
 \alias{pack.test}
 \alias{pack.test-package}
-\title{pack.test: JO's Common Functions TEST}
+\title{pack.test: JO's Common Functions}
 \description{
-This package is a test-run for functions I commonly use, particularly for P. falciparum functional enrichment analyses.
+This package is a test-run for functions I commonly use, particularly for \emph{P. falciparum} functional enrichment analyses.
 }
 \author{
-\strong{Maintainer}: J Oberstaller \email{jobersta@usf.edu} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: J Oberstaller \email{jobersta@usf.edu} (\href{https://orcid.org/0000-0002-3033-2212}{ORCID})
 
 }
 \keyword{internal}
