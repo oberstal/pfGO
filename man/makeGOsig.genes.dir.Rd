@@ -12,3 +12,10 @@ newly created path
 \description{
 This function creates the main output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 }
+\seealso{
+Other makeDirs: 
+\code{\link{makeGOhierarchy.dir}()},
+\code{\link{makeGOoutput.dir}()},
+\code{\link{makeRoutput.dir}()}
+}
+\concept{makeDirs}

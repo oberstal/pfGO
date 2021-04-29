@@ -28,3 +28,6 @@ Retrieves GO annotations assigned by \emph{all} evidence-codes. A version that w
 
 a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 }
+\seealso{
+\code{\link[=formatGOdb.curated]{formatGOdb.curated()}}
+}

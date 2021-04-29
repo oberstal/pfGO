@@ -26,3 +26,6 @@ The gaf.gz file should be in tabular format with 17 columns, one row for each GO
 
 a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 }
+\seealso{
+\code{\link[=formatGOdb]{formatGOdb()}}
+}
