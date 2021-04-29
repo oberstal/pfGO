@@ -84,26 +84,40 @@ makeGOhierarchy.dir <- function() {
 #' @description
 #' This function tests for functional enrichment in gene-categories of interest.
 #'
-#' @param mydf dataframe with geneIDs in column 1, and interest-category classifications in column 2
+#' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2
 #' @param geneID2GO a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2
+#'
 #' @return writes enrichment results, sig genes per term, plots of the GO-term hierarchy, and thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis. Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
 #'
+#'
 #' @details
+#' The **run.topGO.meta** function
+#' * makes the GOdata object for topGO,
+#' * performs GO analysis by each ontology (molecular function, biological process, cellular compartment) on all groups of interest at once,
+#' * and then outputs results to several tables (tab.txt files that can be opened in Excel).
 #'
-#' The run.topGO.meta function makes the GOdata object for topGO, performs GO analysis by ontology (molecular function, biological process, cellular compartment) on all groups of interest at once, and then outputs results to several tables (tab.txt files that can be opened in Excel).
+#' run.topGO.meta defines which genes are "interesting" and which should be defined as background for each defined category. Genes in the category of interest are tested for enrichment against all the other genes included in mydf (the "gene universe").
 #'
-#' run.topGO.meta defines which genes are interesting and which should be defined as background for each defined category (for example in an RNAseq analysis, common categories might be "upregulated", "downregulated", and "background"). Genes in the category of interest are tested for enrichment against all the other genes included in mydf (the "gene universe"). In an RNAseq experiment, the gene universe would consist of all genes detected above your threshold cutoffs (*not necessarily all genes in the genome*).
+
 #'
-#' TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with the "feasible genes" indicated in the topGO.log files in the Routput folder.
+#' TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with "feasible genes" indicated in the topGO.log files in the Routput folder.
 #'
-#' *Using your own custom GO database*
 #'
-#' A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses. You may also provide your own, so long as it is a named character-vector--each vector named by geneID, with GO terms as each element).
+#' @section **Using your own custom GO database**:
 #'
-#' You can use the included format.curated.GOdb function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the formatGOdb function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
+#' A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses ([Pfal_geneID2GO]). You may also provide your own, so long as it is a named character-vector--each vector named by geneID, with GO terms as each element).
 #'
-#' @example
-#' run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
+#' You can use the included [format.curated.GOdb()] function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
+#'
+#' @examples
+#' run.topGO.meta(mydf = [mydf], geneID2GO = [Pfal_geneID2GO])
+#'
+#'#' @example *RNAseq*
+#' In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (*not necessarily all genes in the genome*).
+#' @examples *piggyBac screens*
+#' In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*).
+#'
+#'
 #'
 #' @export
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
