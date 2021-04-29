@@ -1,13 +1,13 @@
 Package: pack.test
-Title: JO's Common Functions TEST
-Version: 0.0.0.9000
+Title: JO's Common Functions
+Version: 1.0
 Authors@R: 
     person(given = "J",
            family = "Oberstaller",
            role = c("aut", "cre"),
            email = "jobersta@usf.edu",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package is a test-run for functions I commonly use, particularly for P. falciparum functional enrichment analyses.
+           comment = c(ORCID = "0000-0002-3033-2212"))
+Description: This package is a test-run for functions I commonly use, particularly for \emph{P. falciparum} functional enrichment analyses.
 License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true
