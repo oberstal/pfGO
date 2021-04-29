@@ -18,33 +18,36 @@ writes enrichment results, sig genes per term, plots of the GO-term hierarchy, a
 This function tests for functional enrichment in gene-categories of interest.
 }
 \details{
-The \strong{run.topGO.meta} function
+The \strong{run.topGO.meta} function:
 \itemize{
+\item defines which genes are "interesting" and which should be defined as background for each category specified in mydf,
 \item makes the GOdata object for topGO,
 \item performs GO analysis by each ontology (molecular function, biological process, cellular compartment) on all groups of interest at once,
+*Genes in each category of interest are tested for enrichment against all the other genes included in mydf (the "gene universe").
 \item and then outputs results to several tables (tab.txt files that can be opened in Excel).
 }
 
-run.topGO.meta defines which genes are "interesting" and which should be defined as background for each defined category. Genes in the category of interest are tested for enrichment against all the other genes included in mydf (the "gene universe").
-
-TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with "feasible genes" indicated in the topGO.log files in the Routput folder.
+TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with "feasible genes" indicated in the topGO.log files in the "Routput/GO" folder.
 }
+\section{\strong{Concepts for common use-cases}}{
+
+
+\emph{RNAseq}:
+In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (\emph{not necessarily all genes in the genome}).
+
+\emph{piggyBac screens}:
+In pooled \emph{piggyBac}-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (\emph{again, not all genes in the genome}).
+}
+
 \section{\strong{Using your own custom GO database}}{
 
 
 A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses (\link{Pfal_geneID2GO}). You may also provide your own, so long as it is a named character-vector--each vector named by geneID, with GO terms as each element).
 
-You can use the included \code{\link[=format.curated.GOdb]{format.curated.GOdb()}} function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the \code{\link[=formatGOdb]{formatGOdb()}} function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
+You can use the included \code{\link[=formatGOdb.curated]{formatGOdb.curated()}} function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the \code{\link[=formatGOdb]{formatGOdb()}} function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
 }
 
 \examples{
 run.topGO.meta(mydf = [mydf], geneID2GO = [Pfal_geneID2GO])
-
-#' @example *RNAseq*
-In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (*not necessarily all genes in the genome*).
-*piggyBac screens*
-In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*).
-
-
 
 }
