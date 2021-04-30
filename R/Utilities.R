@@ -213,7 +213,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
       )
 
       #make GOdata object if you're using a custom GO database (ie, Plasmodium)
-      GOdata = topGO::new(
+      GOdata = new(
         "topGOdata",
         ontology = o,
         allGenes = geneList,
