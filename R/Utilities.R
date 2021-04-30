@@ -125,6 +125,8 @@ makeGOhierarchy.dir <- function() {
 #'
 #' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
 #'
+#' @seealso [topGO::topGO()]
+#'
 #' @examples
 #' run.topGO.meta(mydf = [mydf], geneID2GO = [Pfal_geneID2GO])
 #'
