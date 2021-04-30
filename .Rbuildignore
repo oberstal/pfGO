@@ -1,2 +1,3 @@
 ^pack\.test\.Rproj$
 ^\.Rproj\.user$
+^data-raw$

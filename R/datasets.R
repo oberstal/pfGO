@@ -1,8 +1,8 @@
-#' @title All curated GO terms mapped to *P. falciparum* genes
+#' @title All curated GO terms mapped to \emph{P. falciparum} genes
 #' @name Pfal_geneID2GO
 #' @docType data
 #' @description
-#' A *P. falciparum* GO database containing all curated GO terms mapped to *P. falciparum* genes (accessed from GeneDB Dec 08, 2020).
+#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from GeneDB Dec 08, 2020).
 #'
 #' @usage data(Pfal_geneID2GO)
 #' @format A list of 3381 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
@@ -12,12 +12,12 @@
 "Pfal_geneID2GO"
 
 
-#' @title All *P. falciparum* gene-product annotations.
+#' @title All \emph{P. falciparum} gene-product annotations.
 #' @name pf.annot
 #' @docType data
 #'
 #' @description
-#' A dataset containing all *P. falciparum* gene-product annotations.
+#' A dataset containing all \emph{P. falciparum} gene-product annotations.
 #' @usage data(pf.annot)
 #'
 #' @format A data frame of 5545 rows and 5 columns.
@@ -41,11 +41,11 @@
 #' Some redundant columns were filtered/removed from the original data source.
 "pf.annot"
 
-#' @title Curated *P. falciparum* gene-sets.
+#' @title Curated \emph{P. falciparum} gene-sets.
 #' @name pf.genesets.mpmp
 #' @docType data
 #' @description
-#' curated P. falciparum metabolic pathways, gene-sets, GO terms from MPMP
+#' curated \emph{P. falciparum} metabolic pathways, gene-sets, GO terms from MPMP
 #' @usage data(pf.genesets.mpmp)
 #'
 #' @format A large data frame of 54090 rows and 5 columns.

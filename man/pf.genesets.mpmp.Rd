@@ -22,7 +22,7 @@ the Malaria Parasite Metabolic Pathways database (MPMP). \url{https://mpmp.huji.
 data(pf.genesets.mpmp)
 }
 \description{
-curated P. falciparum metabolic pathways, gene-sets, GO terms from MPMP
+curated \emph{P. falciparum} metabolic pathways, gene-sets, GO terms from MPMP
 }
 \details{
 Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2020.
