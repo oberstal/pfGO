@@ -11,15 +11,6 @@ run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO")
 
 \item{geneID2GO}{a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2}
 }
-\value{
-run.topGO.meta creates several output-files, including:
-*enrichment results,
-*significant genes per significant term,
-*plots of the GO-term hierarchy relevant to the analysis, and
-*thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
-
-Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
-}
 \description{
 This function tests for functional enrichment in gene-categories of interest.
 }
@@ -36,6 +27,17 @@ Enrichments are performed by each ontology (molecular function, biological proce
 
 TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with "feasible genes" indicated in the topGO.log files in the "Routput/GO" folder.
 }
+\section{\strong{outputs}}{
+
+run.topGO.meta creates several output-files, including:
+*enrichment results,
+*significant genes per significant term,
+*plots of the GO-term hierarchy relevant to the analysis, and
+*thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
+
+Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
+}
+
 \section{\strong{Concepts for common use-cases}}{
 
 

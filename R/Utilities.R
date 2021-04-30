@@ -87,7 +87,8 @@ makeGOhierarchy.dir <- function() {
 #' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2
 #' @param geneID2GO a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2
 #'
-#' @return run.topGO.meta creates several output-files, including:
+#' @section **outputs**:
+#'  run.topGO.meta creates several output-files, including:
 #' *enrichment results,
 #' *significant genes per significant term,
 #' *plots of the GO-term hierarchy relevant to the analysis, and
