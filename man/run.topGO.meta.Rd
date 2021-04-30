@@ -58,3 +58,6 @@ You can use the included \code{\link[=formatGOdb.curated]{formatGOdb.curated()}}
 run.topGO.meta(mydf = [mydf], geneID2GO = [Pfal_geneID2GO])
 
 }
+\seealso{
+\code{\link[topGO:topGO-package]{topGO::topGO()}}
+}
