@@ -116,7 +116,7 @@ makeGOhierarchy.dir <- function() {
 #' In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (*not necessarily all genes in the genome*).
 #'
 #' *piggyBac screens*:
-#' In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*).
+#' In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*). See the included [mydf] as an example.
 #'
 #'
 #' @section **Using your own custom GO database**:
@@ -128,7 +128,7 @@ makeGOhierarchy.dir <- function() {
 #' @seealso [topGO::topGO()]
 #'
 #' @examples
-#' run.topGO.meta(mydf = [mydf], geneID2GO = [Pfal_geneID2GO])
+#' run.topGO.meta([mydf],[Pfal_geneID2GO])
 #'
 #' @export
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {

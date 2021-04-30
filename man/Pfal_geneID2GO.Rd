@@ -18,4 +18,7 @@ A \emph{P. falciparum} GO database containing all curated GO terms mapped to \em
 
 can be used as the geneID2GO input for run.topGO.meta.
 }
+\examples{
+run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
+}
 \keyword{datasets}

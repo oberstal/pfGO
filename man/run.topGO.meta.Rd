@@ -43,7 +43,7 @@ TopGO automatically accounts for genes that cannot be mapped to GO terms (or are
 In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (\emph{not necessarily all genes in the genome}).
 
 \emph{piggyBac screens}:
-In pooled \emph{piggyBac}-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (\emph{again, not all genes in the genome}).
+In pooled \emph{piggyBac}-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (\emph{again, not all genes in the genome}). See the included \link{mydf} as an example.
 }
 
 \section{\strong{Using your own custom GO database}}{
@@ -55,7 +55,7 @@ You can use the included \code{\link[=formatGOdb.curated]{formatGOdb.curated()}}
 }
 
 \examples{
-run.topGO.meta(mydf = [mydf], geneID2GO = [Pfal_geneID2GO])
+run.topGO.meta([mydf],[Pfal_geneID2GO])
 
 }
 \seealso{

@@ -8,7 +8,8 @@
 #' @format A list of 3381 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
 #' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
 #' @description can be used as the geneID2GO input for run.topGO.meta.
-#' @example run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
+#' @examples
+#' run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
 "Pfal_geneID2GO"
 
 
