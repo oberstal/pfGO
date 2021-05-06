@@ -30,10 +30,12 @@ TopGO automatically accounts for genes that cannot be mapped to GO terms (or are
 \section{\strong{outputs}}{
 
 run.topGO.meta creates several output-files, including:
-*enrichment results,
-*significant genes per significant term,
-*plots of the GO-term hierarchy relevant to the analysis, and
-*thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
+\itemize{
+\item enrichment results,
+\item significant genes per significant term,
+\item plots of the GO-term hierarchy relevant to the analysis, and
+\item thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
+}
 
 Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
 }
@@ -45,7 +47,7 @@ Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.resul
 In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (\emph{not necessarily all genes in the genome}).
 
 \emph{piggyBac screens}:
-In pooled \emph{piggyBac}-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (\emph{again, not all genes in the genome}). See the included \link{mydf} as an example.
+In pooled \emph{piggyBac}-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (\emph{again, not all genes in the genome}).
 }
 
 \section{\strong{Using your own custom GO database}}{
@@ -57,7 +59,7 @@ You can use the included \code{\link[=formatGOdb.curated]{formatGOdb.curated()}}
 }
 
 \examples{
-run.topGO.meta([mydf],[Pfal_geneID2GO])
+run.topGO.meta(mydf,Pfal_geneID2GO)
 
 }
 \seealso{

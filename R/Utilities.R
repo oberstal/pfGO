@@ -12,6 +12,7 @@ library(formatR)
 #' @param ... not required. Defaults to creating top-level Routput directory in current working directory.
 #'
 #' @name makeDirs
+#' @export
 NULL
 #> NULL
 
@@ -92,11 +93,11 @@ makeGOhierarchy.dir <- function() {
 #' @param geneID2GO a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2
 #'
 #' @section **outputs**:
-#'  run.topGO.meta creates several output-files, including:
-#' *enrichment results,
-#' *significant genes per significant term,
-#' *plots of the GO-term hierarchy relevant to the analysis, and
-#' *thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
+#' run.topGO.meta creates several output-files, including:
+#' * enrichment results,
+#' * significant genes per significant term,
+#' * plots of the GO-term hierarchy relevant to the analysis, and
+#' * thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
 #'
 #' Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
 #'
@@ -121,7 +122,8 @@ makeGOhierarchy.dir <- function() {
 #' In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (*not necessarily all genes in the genome*).
 #'
 #' *piggyBac screens*:
-#' In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*). See the included [mydf] as an example.
+#' In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*).
+### See the included [mydf] as an example. (doesn't work, add in later)
 #'
 #'
 #' @section **Using your own custom GO database**:
@@ -133,7 +135,7 @@ makeGOhierarchy.dir <- function() {
 #' @seealso [topGO::topGO()]
 #'
 #' @examples
-#' run.topGO.meta([mydf],[Pfal_geneID2GO])
+#' run.topGO.meta(mydf,Pfal_geneID2GO)
 #'
 #' @export
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
