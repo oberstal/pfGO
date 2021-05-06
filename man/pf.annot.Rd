@@ -8,11 +8,11 @@
 A data frame of 5545 rows and 5 columns.
 
 \describe{
-\item{organism_name}{\emph{P. falciparum})}
-\item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.)}
-\item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.)}
+\item{organism_name}{\emph{P. falciparum}}
+\item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.}
+\item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.}
 \item{gene_name}{the gene symbol, or short name, if one exists)}
-\item{product}{functional annotation)}
+\item{product}{functional annotation}
 }
 }
 \source{
