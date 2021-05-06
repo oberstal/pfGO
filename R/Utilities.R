@@ -16,6 +16,7 @@ NULL
 #> NULL
 
 #' @rdname makeDirs
+#' @keywords internal
 #' @export
 makeRoutput.dir <- function () {
   mainDir = getwd()
@@ -29,6 +30,7 @@ makeRoutput.dir <- function () {
 }
 
 #' @rdname makeDirs
+#' @keywords internal
 #' @export
 makeGOoutput.dir <- function() {
   file.path = getwd()
@@ -44,6 +46,7 @@ makeGOoutput.dir <- function() {
 
 
 #' @rdname makeDirs
+#' @keywords internal
 #' @export
 makeGOsig.genes.dir <- function() {
   file.path = getwd()
@@ -55,6 +58,7 @@ makeGOsig.genes.dir <- function() {
 }
 
 #' @rdname makeDirs
+#' @keywords internal
 #' @export
 makeGOhierarchy.dir <- function() {
   file.path = getwd()

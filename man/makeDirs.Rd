@@ -22,3 +22,4 @@ makeGOhierarchy.dir()
 \description{
 Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 }
+\keyword{internal}
