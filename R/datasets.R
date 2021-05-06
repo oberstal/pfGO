@@ -24,11 +24,11 @@
 #' @format A data frame of 5545 rows and 5 columns.
 #'
 #' \describe{
-#'   \item{organism_name}{*P. falciparum*)}
-#'   \item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.)}
-#'   \item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.)}
+#'   \item{organism_name}{*P. falciparum*}
+#'   \item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.}
+#'   \item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.}
 #'   \item{gene_name}{the gene symbol, or short name, if one exists)}
-#'   \item{product}{functional annotation)}
+#'   \item{product}{functional annotation}
 #' }
 #'
 #' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
@@ -52,14 +52,14 @@
 #' @format A large data frame of 54090 rows and 5 columns.
 #'
 #' \describe{
-#'   \item{Gene.ID}{P. falciparum gene ID)}
-#'   \item{Map.Name}{name of the metabolic pathway map/other gene-set curated from publication; searchable at the MPMP website)}
+#'   \item{Gene.ID}{*P. falciparum* gene ID}
+#'   \item{Map.Name}{name of the metabolic pathway map/other gene-set curated from publication; searchable at the MPMP website}
 #'   \item{Map_id}{the mpmp website address for the pathway map if applicable/the mpmp page for that gene-set. Follow these links to view pathways of interest.)}
-#'   \item{Map.cat}{appears to be the gene symbol (short name), or gene-product where available)}
-#'   \item{pla.id}{appears to be the GO term or enzyme-code where applicable/available)}
+#'   \item{Map.cat}{appears to be the gene symbol (short name), or gene-product where available}
+#'   \item{pla.id}{appears to be the GO term or enzyme-code where applicable/available}
 #' }
 #'
 #' @source the Malaria Parasite Metabolic Pathways database (MPMP). <https://mpmp.huji.ac.il>
 #'
-#' @details Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2020.
+#' @details Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2021.
 "pf.genesets.mpmp"

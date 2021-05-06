@@ -8,11 +8,11 @@
 A large data frame of 54090 rows and 5 columns.
 
 \describe{
-\item{Gene.ID}{P. falciparum gene ID)}
-\item{Map.Name}{name of the metabolic pathway map/other gene-set curated from publication; searchable at the MPMP website)}
+\item{Gene.ID}{\emph{P. falciparum} gene ID}
+\item{Map.Name}{name of the metabolic pathway map/other gene-set curated from publication; searchable at the MPMP website}
 \item{Map_id}{the mpmp website address for the pathway map if applicable/the mpmp page for that gene-set. Follow these links to view pathways of interest.)}
-\item{Map.cat}{appears to be the gene symbol (short name), or gene-product where available)}
-\item{pla.id}{appears to be the GO term or enzyme-code where applicable/available)}
+\item{Map.cat}{appears to be the gene symbol (short name), or gene-product where available}
+\item{pla.id}{appears to be the GO term or enzyme-code where applicable/available}
 }
 }
 \source{
@@ -25,6 +25,6 @@ data(pf.genesets.mpmp)
 curated \emph{P. falciparum} metabolic pathways, gene-sets, GO terms from MPMP
 }
 \details{
-Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2020.
+Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2021.
 }
 \keyword{datasets}
