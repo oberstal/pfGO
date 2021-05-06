@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{sigGenes}
 \alias{sigGenes}
-\title{import topGO functions to auto-load topGO with pack.test}
+\title{sigGenes (imported from topGO)}
 \description{
-import topGO functions to auto-load topGO with pack.test
+sigGenes (imported from topGO)
 }
 \keyword{internal}

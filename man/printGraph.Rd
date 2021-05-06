@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{printGraph}
 \alias{printGraph}
-\title{import topGO functions to auto-load topGO with pack.test}
+\title{printGraph (imported from topGO)}
 \description{
-import topGO functions to auto-load topGO with pack.test
+printGraph (imported from topGO)
 }
 \keyword{internal}

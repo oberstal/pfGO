@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{GenTable}
 \alias{GenTable}
-\title{import topGO functions to auto-load topGO with pack.test}
+\title{GenTable (imported from topGO)}
 \description{
-import topGO functions to auto-load topGO with pack.test
+GenTable (imported from topGO)
 }
 \keyword{internal}

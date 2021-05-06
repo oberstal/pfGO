@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{genesInTerm}
 \alias{genesInTerm}
-\title{import topGO functions to auto-load topGO with pack.test}
+\title{genesInTerm (imported from topGO)}
 \description{
-import topGO functions to auto-load topGO with pack.test
+genesInTerm (imported from topGO)
 }
 \keyword{internal}

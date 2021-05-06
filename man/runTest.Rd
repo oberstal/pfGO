@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{runTest}
 \alias{runTest}
-\title{import topGO functions to auto-load topGO with pack.test}
+\title{runTest (imported from topGO)}
 \description{
-import topGO functions to auto-load topGO with pack.test
+runTest (imported from topGO)
 }
 \keyword{internal}

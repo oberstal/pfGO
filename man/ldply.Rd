@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{ldply}
 \alias{ldply}
-\title{import plyr function to auto-load plyr with pack.test}
+\title{ldply (imported from plyr)}
 \description{
-import plyr function to auto-load plyr with pack.test
+ldply (imported from plyr)
 }
 \keyword{internal}

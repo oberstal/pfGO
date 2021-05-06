@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{readMappings}
 \alias{readMappings}
-\title{import topGO functions to auto-load topGO with pack.test}
+\title{readMappings (imported from topGO)}
 \description{
-import topGO functions to auto-load topGO with pack.test
+readMappings (imported from topGO)
 }
 \keyword{internal}

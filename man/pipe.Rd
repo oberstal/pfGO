@@ -2,11 +2,11 @@
 % Please edit documentation in R/__imports.R
 \name{\%>\%}
 \alias{\%>\%}
-\title{re-export magrittr pipe operator}
+\title{pipe operator (from magrittr)}
 \usage{
 lhs \%>\% rhs
 }
 \description{
-re-export magrittr pipe operator
+pipe operator (from magrittr)
 }
 \keyword{internal}

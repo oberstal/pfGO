@@ -2,8 +2,8 @@
 % Please edit documentation in R/__imports.R
 \name{bind_rows}
 \alias{bind_rows}
-\title{import plyr function to auto-load plyr with pack.test}
+\title{bind_rows (imported from dplyr)}
 \description{
-import plyr function to auto-load plyr with pack.test
+bind_rows (imported from dplyr)
 }
 \keyword{internal}

@@ -1,5 +1,5 @@
 
-#' re-export magrittr pipe operator
+#' pipe operator (from magrittr)
 #'
 #' @name %>%
 #' @rdname pipe
@@ -9,7 +9,16 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-#' import topGO functions to auto-load topGO with pack.test
+#' bind_rows (imported from dplyr)
+#'
+#' @name bind_rows
+#' @rdname bind_rows
+#' @keywords internal
+#' @export
+#' @importFrom dplyr bind_rows
+NULL
+
+#' runTest (imported from topGO)
 #'
 #' @name runTest
 #' @rdname runTest
@@ -18,7 +27,7 @@ NULL
 #' @importFrom topGO runTest
 NULL
 
-#' import topGO functions to auto-load topGO with pack.test
+#' sigGenes (imported from topGO)
 #'
 #' @name sigGenes
 #' @rdname sigGenes
@@ -28,7 +37,7 @@ NULL
 NULL
 
 
-#' import topGO functions to auto-load topGO with pack.test
+#' printGraph (imported from topGO)
 #'
 #' @name printGraph
 #' @rdname printGraph
@@ -37,7 +46,7 @@ NULL
 #' @importFrom topGO printGraph
 NULL
 
-#' import topGO functions to auto-load topGO with pack.test
+#' GenTable (imported from topGO)
 #'
 #' @name GenTable
 #' @rdname GenTable
@@ -47,7 +56,7 @@ NULL
 NULL
 
 
-#' import topGO functions to auto-load topGO with pack.test
+#' genesInTerm (imported from topGO)
 #'
 #' @name genesInTerm
 #' @rdname genesInTerm
@@ -57,7 +66,7 @@ NULL
 NULL
 
 
-#' import topGO functions to auto-load topGO with pack.test
+#' readMappings (imported from topGO)
 #'
 #' @name readMappings
 #' @rdname readMappings
@@ -67,7 +76,7 @@ NULL
 NULL
 
 
-#' import plyr function to auto-load plyr with pack.test
+#' ldply (imported from plyr)
 #'
 #' @name ldply
 #' @rdname ldply
@@ -77,13 +86,6 @@ NULL
 NULL
 
 
-#' import plyr function to auto-load plyr with pack.test
-#'
-#' @name bind_rows
-#' @rdname bind_rows
-#' @keywords internal
-#' @export
-#' @importFrom plyr bind_rows
-NULL
+
 
 
