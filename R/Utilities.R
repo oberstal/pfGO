@@ -1,9 +1,10 @@
 library(topGO)
 library(ggplot2)
-library(plyr)
-library(dplyr)
+library(plyr) # use tidyverse instead?
+library(dplyr) # use tidyverse instead?
 library(scales)
 library(formatR)
+library(stringr)
 
 #' Creating directory-structure
 #'
@@ -670,6 +671,58 @@ formatGOdb.curated <-
     GO.db = read.delim(GOdb.file, header = FALSE)
     return(GO.db)
   }
+
+
+#' @title
+#' format_annot
+#'
+#' @description
+#' Extracts and formats annotations from a gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from plasmoDB.
+#'
+#' @param x input gff file
+
+
+#' *notes on gff format*
+#' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
+#'
+#' an annotation created from PlasmoDB's latest P. falciparum gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#'
+#' @seealso [formatGOdb()]
+#' @export
+format_annot <- function(x) {
+  require(stringr)
+  require(tidyverse)
+  # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
+  x = x %>% filter(type == "protein_coding_gene" | type == "ncRNA_gene")
+  # Keep only informative columns
+  x = x[, c(1:5, 7, 9)]
+
+  # format attributes column to get annotations #
+  ## geneID will be first field (semicolon-delimited) in attributes column. remove all characters except the geneID
+  x$geneID = stringr::str_replace(x$attributes, ";.+", "")
+  x$geneID = stringr::str_replace(x$geneID, "ID=", "")
+
+  # description is always last field in attributes column
+  x$description = stringr::str_replace(x$attributes, ".+description=", "")
+  # and replace the "%2C" misformattings with comma
+  x$description = stringr::str_replace(x$description, "\\%2C", ",")
+
+  # some entries have "Name=" entries; others only have "description=". use names for the genes that have a genesymbol, and for the others set name = to what's left (the geneID)
+  x$geneName = "blank"
+  # remove all characters leading up to the gene symbol
+  x$geneName = stringr::str_replace(x$attributes, ".+Name=", "")
+  # then remove all characters after the gene symbol (will start with semicolon)
+  x$geneName = stringr::str_replace(x$geneName, ";.+", "")
+  x$geneName = stringr::str_replace(x$geneName, "ID=", "")
+  # now drop "attributes" column
+  x$attributes = NULL
+  x
+}
+
+
+
+
+
 
 
 
