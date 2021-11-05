@@ -2,11 +2,11 @@
 #' @name Pfal_geneID2GO
 #' @docType data
 #' @description
-#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from GeneDB Dec 08, 2020).
+#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from PlasmoDB Nov 5, 2021).
 #'
 #' @usage data(Pfal_geneID2GO)
-#' @format A list of 3381 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
-#' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
+#' @format A list of 3878 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf>
 #' @description can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
@@ -18,29 +18,37 @@
 #' @docType data
 #'
 #' @description
-#' A dataset containing all \emph{P. falciparum} gene-product annotations.
+#' A dataset containing all \emph{P. falciparum} gene-product annotations taken directly from gff file. Only "gene" entries are kept to remove redundancy.
+#'
 #' @usage data(pf.annot)
 #'
-#' @format A data frame of 5545 rows and 5 columns.
+#' @format A data frame of 5562 rows and 9 columns.
 #'
 #' \describe{
 #'   \item{organism_name}{*P. falciparum*}
-#'   \item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.}
-#'   \item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.}
-#'   \item{gene_name}{the gene symbol, or short name, if one exists}
-#'   \item{product}{functional annotation}
+#'   \item{seqid}{chromosome ID.}
+#'   \item{source}{annotation source.}
+#'   \item{type}{type of annotation. Here only protein-coding genes and ncRNA genes are kept.}
+#'   \item{feature_start}{gene start coordinate.}
+#'   \item{feature_end}{gene end coordinate.}
+#'   \item{strand}{gene strand.}
+#'   \item{geneID}{gene ID.}
+#'   \item{description}{functional annotation}
+#'   \item{geneName}{the gene symbol, or short name, if one exists}
+
 #' }
 #'
-#' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
+#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff>
 #'
 #' @keywords dataset
 #' @details ## Keep in mind:
 #' These data aren't explicitly required for running any enrichments with this package. They are included for reference to aid exploring your enrichment results.
 #'
-#' Note there are 5545 *transcripts*--not unique geneIDs. There are 5473 unique geneIDs in this dataset.
 #'
 #' Some redundant columns were filtered/removed from the original data source.
 "pf.annot"
+#' Updated versions can be generated using the get_pfannot function.
+
 
 #' @title Curated \emph{P. falciparum} gene-sets.
 #' @name pf.genesets.mpmp
