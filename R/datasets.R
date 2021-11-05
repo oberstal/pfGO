@@ -2,11 +2,11 @@
 #' @name Pfal_geneID2GO
 #' @docType data
 #' @description
-#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from GeneDB Dec 08, 2020).
+#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from PlasmoDB Nov 5, 2021).
 #'
 #' @usage data(Pfal_geneID2GO)
-#' @format A list of 3381 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
-#' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
+#' @format A list of 3878 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf>
 #' @description can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
@@ -18,29 +18,38 @@
 #' @docType data
 #'
 #' @description
-#' A dataset containing all \emph{P. falciparum} gene-product annotations.
+#' A dataset containing all \emph{P. falciparum} gene-product annotations taken directly from gff file. Only "gene" entries are kept to remove redundancy.
+#'
 #' @usage data(pf.annot)
 #'
-#' @format A data frame of 5545 rows and 5 columns.
+#' @format A data frame of 5562 rows and 9 columns.
 #'
 #' \describe{
-#'   \item{organism_name}{*P. falciparum*)}
-#'   \item{transcript_id}{transcript ID. Most genes in Pf are single-transcript (end in .1), but a few are multi-transcript.)}
-#'   \item{gene_id}{gene ID. All enrichment-analyses in this package are based on gene ID, not transcript ID.)}
-#'   \item{gene_name}{the gene symbol, or short name, if one exists)}
-#'   \item{product}{functional annotation)}
+#'   \item{organism_name}{*P. falciparum*}
+#'   \item{seqid}{chromosome ID.}
+#'   \item{source}{annotation source.}
+#'   \item{type}{type of annotation. Here only protein-coding genes and ncRNA genes are kept.}
+#'   \item{feature_start}{gene start coordinate.}
+#'   \item{feature_end}{gene end coordinate.}
+#'   \item{strand}{gene strand.}
+#'   \item{geneID}{gene ID.}
+#'   \item{description}{functional annotation}
+#'   \item{geneName}{the gene symbol, or short name, if one exists}
+
 #' }
 #'
-#' @source <ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz>
+#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff>
 #'
 #' @keywords dataset
 #' @details ## Keep in mind:
 #' These data aren't explicitly required for running any enrichments with this package. They are included for reference to aid exploring your enrichment results.
 #'
-#' Note there are 5545 *transcripts*--not unique geneIDs. There are 5473 unique geneIDs in this dataset.
 #'
 #' Some redundant columns were filtered/removed from the original data source.
+#' Updated versions can be generated using the get_pfannot function.
 "pf.annot"
+
+
 
 #' @title Curated \emph{P. falciparum} gene-sets.
 #' @name pf.genesets.mpmp
@@ -52,14 +61,27 @@
 #' @format A large data frame of 54090 rows and 5 columns.
 #'
 #' \describe{
-#'   \item{Gene.ID}{P. falciparum gene ID)}
-#'   \item{Map.Name}{name of the metabolic pathway map/other gene-set curated from publication; searchable at the MPMP website)}
+#'   \item{Gene.ID}{*P. falciparum* gene ID}
+#'   \item{Map.Name}{name of the metabolic pathway map/other gene-set curated from publication; searchable at the MPMP website}
 #'   \item{Map_id}{the mpmp website address for the pathway map if applicable/the mpmp page for that gene-set. Follow these links to view pathways of interest.)}
-#'   \item{Map.cat}{appears to be the gene symbol (short name), or gene-product where available)}
-#'   \item{pla.id}{appears to be the GO term or enzyme-code where applicable/available)}
+#'   \item{Map.cat}{appears to be the gene symbol (short name), or gene-product where available}
+#'   \item{pla.id}{appears to be the GO term or enzyme-code where applicable/available}
 #' }
 #'
 #' @source the Malaria Parasite Metabolic Pathways database (MPMP). <https://mpmp.huji.ac.il>
 #'
-#' @details Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2020.
+#' @details Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2021.
 "pf.genesets.mpmp"
+
+
+#' @title \emph{piggyBac} insertions reported in Zhang et al. 2018 (Science)
+#' @name insertions
+#' @docType data
+#' @description
+#' \emph{P. falciparum} insertion-data as published in Science 2018. Contains 3 of the published supplemental tables (Table S1, Pilot_library; Table S3, Saturation_library; Table S5, GenesbyMIS). Not need to run GO enrichment functions, but useful additional info to have for interpreting output.
+#'
+#' @usage data(insertions)
+#' @format A list of 3 dataframes--Pilot_library, corresponding to published table S1; Saturation_library, corresponding to Table S3, and GenesbyMIS, corresponding to Table S5.
+#' @source <https://www.science.org/doi/10.1126/science.aap7847>
+
+"insertions"

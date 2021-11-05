@@ -6,7 +6,7 @@
 \usage{
 formatGOdb.curated(
  
-    gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
+    gaf.gz_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf",
   organism = "Pf"
 )
 }

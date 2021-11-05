@@ -1,9 +1,10 @@
 library(topGO)
-library(ggplot2)
-library(plyr)
-library(dplyr)
+#library(ggplot2) # loads with tidyverse
+library(plyr) # does not load with tidyverse
+library(dplyr) # use tidyverse instead?
 library(scales)
 library(formatR)
+library(stringr) # loads with tidyverse
 
 #' Creating directory-structure
 #'
@@ -89,7 +90,7 @@ makeGOhierarchy.dir <- function() {
 #' This function tests for functional enrichment in gene-categories of interest.
 #'
 #' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2
-#' @param geneID2GO a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2
+#' @param geneID2GO A list of named vectors of GO IDs--one vector of GO-terms for each geneID.
 #'
 #' @section **outputs**:
 #' run.topGO.meta creates several output-files, including:
@@ -127,7 +128,7 @@ makeGOhierarchy.dir <- function() {
 #'
 #' @section **Using your own custom GO database**:
 #'
-#' A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses ([Pfal_geneID2GO]). You may also provide your own, so long as it is a named character-vector--each vector named by geneID, with GO terms as each element).
+#' A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses ([Pfal_geneID2GO]). You may also provide your own, so long as it is a named character-vector of GO-terms (each vector named by geneID, with GO terms as each element).
 #'
 #' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
 #'
@@ -137,8 +138,9 @@ makeGOhierarchy.dir <- function() {
 #' run.topGO.meta(mydf,Pfal_geneID2GO)
 #'
 #' @export
-run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
+run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) {
   require(topGO)
+  require(tidyverse)
   require(plyr)
 
   # make required directories for output if they don't exist. each one evaluates to that path, so can save the paths as variables
@@ -289,7 +291,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
 
       # do a p. adjust for FDR on the entire dataset (NOT NECESSARY for topGO method):
       #        res$FDR = p.adjust(res$topGO, method = "fdr")
-      res.significant = res[which(res$topGO <= 0.1),]
+      res.significant = res[which(res$topGO <= pval),]
       #                                    & res$FDR <= 0.05),]
 
       # # to output ONLY the significant genes from enriched GO terms, not every gene in a significant GO term in the gene universe(this seems to be the part where things go wrong and pipeline breaks--when it comes to converting to a df):
@@ -430,11 +432,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
     #    build on to the results-tables for each interest-category (1 loop for each of the interest categories)
     if (interesting.category.counter != 1) {
       all.bin.combined.GO.output = rbind.data.frame(all.bin.combined.GO.output, combined.GO.output)
-      all.bin.combined.significant.GO.output = rbind.data.frame(all.bin.combined.significant.GO.output,
-                                                                combined.significant.GO.output)
+
     } else {
       all.bin.combined.GO.output = combined.GO.output
-      all.bin.combined.significant.GO.output = combined.significant.GO.output
     }
   }### THIS ENDS THE LOOP FOR EACH INTERESTING-GENE CATEGORY (counter incremented at beginning of loop)
 
@@ -447,17 +447,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
     sep = "\t",
     row.names = FALSE
   )
-  # output a table with ALL SIGNIFICANT (p<=0.05) interest-category GO analyses in one with an added column for interest-category
-  write.table(
-    all.bin.combined.significant.GO.output,
-    paste(
-      "Routput/GO/all.combined.significant.GO.results.tab.txt",
-      sep = ""
-    ),
-    quote = FALSE,
-    sep = "\t",
-    row.names = FALSE
-  )
+
   # print some progress-messages to screen
   cat("\nAll interesting-gene categories have been tested for GO-term enrichment.")
   cat(
@@ -469,6 +459,14 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
   cat(
     "\n\nSee log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/genes_by_GOterm.*.tab.txt'."
   )
+
+  # sig genes per term doesn't work with creating runGOdata object yet. But option for the future to store multiple outputs from single run. returns major output as R object (does not interfere with created output files)
+#  setClass("runGOdata", slots = c(enrichmentResult = "ANY", sigGenes = "ANY"))
+
+#  myrunGOdata <- new("runGOdata", enrichmentResult = all.bin.combined.GO.output, sigGenes = combined.sig.per.term.output)
+
+#  myrunGOdata
+  all.bin.combined.GO.output
 }
 
 #' @title get.value
@@ -599,16 +597,22 @@ formatGOdb <- function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/
 #' @seealso [formatGOdb()]
 #' @export
 formatGOdb.curated <-
-  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
-           organism = "Pf") {
+  function(gaf.gz_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf",
+           organism = "Pf"){
+
+#  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
+#           organism = "Pf") {
     # make connection to gaf.gz file without downloading it, then read it in.
+
     con = gzcon(url(gaf.gz_url))
+
     input = readLines(con)
     x = read.delim(textConnection(input),
                    sep = "\t",
                    comment.char = "!",
                    header = FALSE,
                    stringsAsFactors = TRUE)
+
     # weed out any electronically-inferred evidence-codes (only want curated GO terms)
     x = x[x[,7]!="IEA",]
 
@@ -668,7 +672,94 @@ formatGOdb.curated <-
     }
     GO.db = read.delim(GOdb.file, header = FALSE)
     return(GO.db)
+    }
+
+
+#' @title
+#' get_annot
+#'
+#' @description
+#' Extracts and formats annotations from a gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from plasmoDB.
+#'
+#' @param x input gff file
+
+
+#' *notes on gff format*
+#' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the file at the provided url.
+#'
+#' an annotation created from PlasmoDB's latest P. falciparum gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#'
+#' @seealso [formatGOdb()]
+#' @export
+get_annot <- function(x) {
+  require(tidyverse)
+  # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
+  x = x %>% filter(type == "protein_coding_gene" | type == "ncRNA_gene")
+  # Keep only informative columns
+  x = x[, c(1:5, 7, 9)]
+
+  # format attributes column to get annotations
+  ## geneID will be first field (semicolon-delimited) in attributes column. remove all characters except the geneID
+  x$geneID = stringr::str_replace(x$attributes, ";.+", "")
+  x$geneID = stringr::str_replace(x$geneID, "ID=", "")
+
+  # description is always last field in attributes column
+  x$description = stringr::str_replace(x$attributes, ".+description=", "")
+  # and replace the "%2C" misformattings with comma
+  x$description = stringr::str_replace(x$description, "\\%2C", ",")
+
+  # some entries have "Name=" entries; others only have "description=". use names for the genes that have a genesymbol, and for the others set name = to what's left (the geneID)
+  x$geneName = "blank"
+  # remove all characters leading up to the gene symbol
+  x$geneName = stringr::str_replace(x$attributes, ".+Name=", "")
+  # then remove all characters after the gene symbol (will start with semicolon)
+  x$geneName = stringr::str_replace(x$geneName, ";.+", "")
+  x$geneName = stringr::str_replace(x$geneName, "ID=", "")
+  # now drop "attributes" column
+  x$attributes = NULL
+  x
+}
+
+
+#' @title
+#' get_pfannot
+#'
+#' @description
+#' Extracts and formats annotations from a gff file from plasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the gff file from plasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
+#'
+#' @param gff_url connection to gff file. Defaults to "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff"
+
+
+#' *notes on gff format*
+#' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
+#'
+#' an annotation created from PlasmoDB's latest P. falciparum gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#'
+#' @seealso [get_annot()]
+#' @export
+get_pfannot <-
+  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff",
+           organism = "Pf") {
+    # make connection to gff file without downloading it, then read it in.
+    con = gzcon(url(gff_url))
+    input = readLines(con)
+
+    x = read.delim(textConnection(input),
+                   sep = "\t",
+                   comment.char = "#",
+                   header = FALSE,
+                   stringsAsFactors = TRUE)
+    # set column names for standard gff file
+    colnames(x) = c("seqid","source","type","feature_start","feature_end","score","strand","phase","attributes")
+
+    annot = get_annot(x) # then the get_annot function formats the gff file for non-redundancy and readability
+    annot
   }
+
+
+
+
+
 
 
 

@@ -4,12 +4,12 @@
 \alias{run.topGO.meta}
 \title{Run JO's topGO pipeline}
 \usage{
-run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO")
+run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05)
 }
 \arguments{
 \item{mydf}{data frame with geneIDs in column 1, and interest-category classifications in column 2}
 
-\item{geneID2GO}{a data frame of 2 columns, with geneIDs in column 1, and comma-separated GOterms in column2}
+\item{geneID2GO}{A list of named vectors of GO IDs--one vector of GO-terms for each geneID.}
 }
 \description{
 This function tests for functional enrichment in gene-categories of interest.
@@ -53,7 +53,7 @@ In pooled \emph{piggyBac}-mutant screening, common categories might be "sensitiv
 \section{\strong{Using your own custom GO database}}{
 
 
-A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses (\link{Pfal_geneID2GO}). You may also provide your own, so long as it is a named character-vector--each vector named by geneID, with GO terms as each element).
+A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses (\link{Pfal_geneID2GO}). You may also provide your own, so long as it is a named character-vector of GO-terms (each vector named by geneID, with GO terms as each element).
 
 You can use the included \code{\link[=formatGOdb.curated]{formatGOdb.curated()}} function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the \code{\link[=formatGOdb]{formatGOdb()}} function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
 }
