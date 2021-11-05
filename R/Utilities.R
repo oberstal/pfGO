@@ -598,16 +598,22 @@ formatGOdb <- function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/
 #' @seealso [formatGOdb()]
 #' @export
 formatGOdb.curated <-
-  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
-           organism = "Pf") {
+  function(gaf.gz_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf",
+           organism = "Pf"){
+
+#  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
+#           organism = "Pf") {
     # make connection to gaf.gz file without downloading it, then read it in.
+
     con = gzcon(url(gaf.gz_url))
+
     input = readLines(con)
     x = read.delim(textConnection(input),
                    sep = "\t",
                    comment.char = "!",
                    header = FALSE,
                    stringsAsFactors = TRUE)
+
     # weed out any electronically-inferred evidence-codes (only want curated GO terms)
     x = x[x[,7]!="IEA",]
 
@@ -667,11 +673,11 @@ formatGOdb.curated <-
     }
     GO.db = read.delim(GOdb.file, header = FALSE)
     return(GO.db)
-  }
+    }
 
 
 #' @title
-#' format_annot
+#' get_annot
 #'
 #' @description
 #' Extracts and formats annotations from a gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from plasmoDB.
@@ -680,21 +686,20 @@ formatGOdb.curated <-
 
 
 #' *notes on gff format*
-#' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
+#' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the file at the provided url.
 #'
 #' an annotation created from PlasmoDB's latest P. falciparum gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
 #'
 #' @seealso [formatGOdb()]
 #' @export
-format_annot <- function(x) {
-  require(stringr)
+get_annot <- function(x) {
   require(tidyverse)
   # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
   x = x %>% filter(type == "protein_coding_gene" | type == "ncRNA_gene")
   # Keep only informative columns
   x = x[, c(1:5, 7, 9)]
 
-  # format attributes column to get annotations #
+  # format attributes column to get annotations
   ## geneID will be first field (semicolon-delimited) in attributes column. remove all characters except the geneID
   x$geneID = stringr::str_replace(x$attributes, ";.+", "")
   x$geneID = stringr::str_replace(x$geneID, "ID=", "")
@@ -715,6 +720,42 @@ format_annot <- function(x) {
   x$attributes = NULL
   x
 }
+
+
+#' @title
+#' get_pfannot
+#'
+#' @description
+#' Extracts and formats annotations from a gff file from plasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the gff file from plasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
+#'
+#' @param gff_url connection to gff file. Defaults to "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff"
+
+
+#' *notes on gff format*
+#' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
+#'
+#' an annotation created from PlasmoDB's latest P. falciparum gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#'
+#' @seealso [get_annot()]
+#' @export
+get_pfannot <-
+  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff",
+           organism = "Pf") {
+    # make connection to gff file without downloading it, then read it in.
+    con = gzcon(url(gff_url))
+    input = readLines(con)
+
+    x = read.delim(textConnection(input),
+                   sep = "\t",
+                   comment.char = "#",
+                   header = FALSE,
+                   stringsAsFactors = TRUE)
+    # set column names for standard gff file
+    colnames(x) = c("seqid","source","type","feature_start","feature_end","score","strand","phase","attributes")
+
+    annot = get_annot(x) # then the get_annot function formats the gff file for non-redundancy and readability
+    annot
+  }
 
 
 
