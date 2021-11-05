@@ -1,10 +1,10 @@
 library(topGO)
-library(ggplot2)
-library(plyr) # use tidyverse instead?
+#library(ggplot2) # loads with tidyverse
+library(plyr) # does not load with tidyverse
 library(dplyr) # use tidyverse instead?
 library(scales)
 library(formatR)
-library(stringr)
+library(stringr) # loads with tidyverse
 
 #' Creating directory-structure
 #'
@@ -139,8 +139,9 @@ makeGOhierarchy.dir <- function() {
 #' run.topGO.meta(mydf,Pfal_geneID2GO)
 #'
 #' @export
-run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
+run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) {
   require(topGO)
+  require(tidyverse)
   require(plyr)
 
   # make required directories for output if they don't exist. each one evaluates to that path, so can save the paths as variables
@@ -291,7 +292,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
 
       # do a p. adjust for FDR on the entire dataset (NOT NECESSARY for topGO method):
       #        res$FDR = p.adjust(res$topGO, method = "fdr")
-      res.significant = res[which(res$topGO <= 0.1),]
+      res.significant = res[which(res$topGO <= pval),]
       #                                    & res$FDR <= 0.05),]
 
       # # to output ONLY the significant genes from enriched GO terms, not every gene in a significant GO term in the gene universe(this seems to be the part where things go wrong and pipeline breaks--when it comes to converting to a df):
@@ -432,11 +433,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
     #    build on to the results-tables for each interest-category (1 loop for each of the interest categories)
     if (interesting.category.counter != 1) {
       all.bin.combined.GO.output = rbind.data.frame(all.bin.combined.GO.output, combined.GO.output)
-      all.bin.combined.significant.GO.output = rbind.data.frame(all.bin.combined.significant.GO.output,
-                                                                combined.significant.GO.output)
+
     } else {
       all.bin.combined.GO.output = combined.GO.output
-      all.bin.combined.significant.GO.output = combined.significant.GO.output
     }
   }### THIS ENDS THE LOOP FOR EACH INTERESTING-GENE CATEGORY (counter incremented at beginning of loop)
 
@@ -449,17 +448,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
     sep = "\t",
     row.names = FALSE
   )
-  # output a table with ALL SIGNIFICANT (p<=0.05) interest-category GO analyses in one with an added column for interest-category
-  write.table(
-    all.bin.combined.significant.GO.output,
-    paste(
-      "Routput/GO/all.combined.significant.GO.results.tab.txt",
-      sep = ""
-    ),
-    quote = FALSE,
-    sep = "\t",
-    row.names = FALSE
-  )
+
   # print some progress-messages to screen
   cat("\nAll interesting-gene categories have been tested for GO-term enrichment.")
   cat(
@@ -471,6 +460,14 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO") {
   cat(
     "\n\nSee log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/genes_by_GOterm.*.tab.txt'."
   )
+
+  # sig genes per term doesn't work with creating runGOdata object yet. But option for the future to store multiple outputs from single run. returns major output as R object (does not interfere with created output files)
+#  setClass("runGOdata", slots = c(enrichmentResult = "ANY", sigGenes = "ANY"))
+
+#  myrunGOdata <- new("runGOdata", enrichmentResult = all.bin.combined.GO.output, sigGenes = combined.sig.per.term.output)
+
+#  myrunGOdata
+  all.bin.combined.GO.output
 }
 
 #' @title get.value
