@@ -4,7 +4,7 @@
 \alias{run.topGO.meta}
 \title{Run JO's topGO pipeline}
 \usage{
-run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO")
+run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05)
 }
 \arguments{
 \item{mydf}{data frame with geneIDs in column 1, and interest-category classifications in column 2}
