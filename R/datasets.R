@@ -46,8 +46,9 @@
 #'
 #'
 #' Some redundant columns were filtered/removed from the original data source.
-"pf.annot"
 #' Updated versions can be generated using the get_pfannot function.
+"pf.annot"
+
 
 
 #' @title Curated \emph{P. falciparum} gene-sets.
@@ -71,3 +72,16 @@
 #'
 #' @details Not sure about date of access or exact origins of this dataset, but shared from Chengqi Wang in April 2021.
 "pf.genesets.mpmp"
+
+
+#' @title \emph{piggyBac} insertions reported in Zhang et al. 2018 (Science)
+#' @name insertions
+#' @docType data
+#' @description
+#' \emph{P. falciparum} insertion-data as published in Science 2018. Contains 3 of the published supplemental tables (Table S1, Pilot_library; Table S3, Saturation_library; Table S5, GenesbyMIS). Not need to run GO enrichment functions, but useful additional info to have for interpreting output.
+#'
+#' @usage data(insertions)
+#' @format A list of 3 dataframes--Pilot_library, corresponding to published table S1; Saturation_library, corresponding to Table S3, and GenesbyMIS, corresponding to Table S5.
+#' @source <https://www.science.org/doi/10.1126/science.aap7847>
+
+"insertions"
