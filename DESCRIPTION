@@ -16,8 +16,7 @@ RoxygenNote: 7.1.2
 Imports:
     topGO,
     tidyverse,
-    plyr,
-    dplyr
+    plyr
 Remotes: bioc::release/topGO, bioc::release/Biobase
 Depends: 
     R (>= 2.10)
