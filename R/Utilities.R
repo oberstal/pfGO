@@ -13,7 +13,6 @@ library(stringr) # loads with tidyverse
 #' @param ... not required. Defaults to creating top-level Routput directory in current working directory.
 #'
 #' @name makeDirs
-#' @export
 NULL
 #> NULL
 
