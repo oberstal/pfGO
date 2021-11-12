@@ -17,7 +17,8 @@ Imports:
     topGO,
     plyr,
     dplyr,
-    stringr
+    stringr,
+    magrittr
 Remotes: bioc::release/topGO, bioc::release/Biobase
 Depends: 
     R (>= 2.10)
