@@ -7,3 +7,4 @@
 ^tests$
 ^extra$
 ^notes\.R$
+^data-raw$
