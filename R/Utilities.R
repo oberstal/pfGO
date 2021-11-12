@@ -1,10 +1,10 @@
-library(topGO)
+#library(topGO)
 #library(ggplot2) # loads with tidyverse
-library(plyr) # does not load with tidyverse
-library(dplyr) # use tidyverse instead?
-library(scales)
-library(formatR)
-library(stringr) # loads with tidyverse
+#library(plyr) # does not load with tidyverse
+#library(dplyr) # use tidyverse instead?
+#library(scales)
+#library(formatR)
+#library(stringr) # loads with tidyverse
 
 #' Creating directory-structure
 #'
