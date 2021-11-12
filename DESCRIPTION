@@ -15,8 +15,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
     topGO,
-    tidyverse,
-    plyr
+    plyr,
+    dplyr,
+    stringr
 Remotes: bioc::release/topGO, bioc::release/Biobase
 Depends: 
     R (>= 2.10)
