@@ -4,7 +4,7 @@
 ^data-raw$
 ^README\.Rmd$
 ^\.github$
-^\.Routput$
-^\.tests$
-^\.extra$
+^Routput$
+^tests$
+^extra$
 ^notes\.R$
