@@ -139,9 +139,9 @@ makeGOhierarchy.dir <- function() {
 #'
 #' @export
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) {
-  require(topGO)
-  require(tidyverse)
-  require(plyr)
+#  require(topGO)
+#  require(tidyverse)
+ # require(plyr)
 
   # make required directories for output if they don't exist. each one evaluates to that path, so can save the paths as variables
   R.dir = makeRoutput.dir()
