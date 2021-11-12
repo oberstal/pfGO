@@ -91,6 +91,7 @@ makeGOhierarchy.dir <- function() {
 #'
 #' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2
 #' @param geneID2GO A list of named vectors of GO IDs--one vector of GO-terms for each geneID.
+#' @param pval pvalue threshold for significance. Defaults to 0.05.
 #'
 #' @section **outputs**:
 #' run.topGO.meta creates several output-files, including:
@@ -134,8 +135,9 @@ makeGOhierarchy.dir <- function() {
 #'
 #' @seealso [topGO::topGO()]
 #'
-#' @examples
-#' run.topGO.meta(mydf,Pfal_geneID2GO)
+#' @example data-raw/runtopGOexample.R
+#'
+# #' run.topGO.meta(mydf,Pfal_geneID2GO)
 #'
 #' @export
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) {
