@@ -135,9 +135,9 @@ makeGOhierarchy.dir <- function() {
 #'
 #' @seealso [topGO::topGO()]
 #'
-#' @example data-raw/runtopGOexample.R
+#' @examples
 #'
-# #' run.topGO.meta(mydf,Pfal_geneID2GO)
+#' run.topGO.meta(exampleMydf,Pfal_geneID2GO)
 #'
 #' @export
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) {
