@@ -502,7 +502,7 @@ get.value <- function(id, lookupvector = named.vector){
 #' *notes on gaf.gz format*
 #' The gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' Retrieves GO annotations assigned by *all* evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see format.curated.GOdb))
+#' Retrieves GO annotations assigned by *all* evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{format.curated.GOdb}}))
 #'
 #' a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using the *curated* version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
