@@ -13,6 +13,26 @@
 "Pfal_geneID2GO"
 
 
+
+
+#' @title *piggyBac* mutant classification-data from pooled 1k heat shock screen (to use as example "mydf" parameter for run.topGO.meta()).
+#' @name exampleMydf
+#' @docType data
+#' @description
+#' A data frame with \emph{P. falciparum} geneIDs in column 1, and interest-category classifications in column 2. In pooled *piggyBac*-mutant screening, common interest-category classifications are "sensitive", "tolerant", and "neutral". All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from https://www.nature.com/articles/s41467-021-24814-1, Table S2.
+
+#'
+#' @usage data(exampleMydf)
+#' @format A 2-column data frame with 752 \emph{P. falciparum} geneIDs in column 1, and interest-category classifications (here, phenotypes in pooled screening) in column 2.
+#' @source <https://www.nature.com/articles/s41467-021-24814-1>
+#' @description can be used as example mydf input for run.topGO.meta.
+#' @examples
+#' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
+"exampleMydf"
+
+
+
+
 #' @title All \emph{P. falciparum} gene-product annotations.
 #' @name pf.annot
 #' @docType data

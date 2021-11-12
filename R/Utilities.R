@@ -89,7 +89,7 @@ makeGOhierarchy.dir <- function() {
 #' @description
 #' This function tests for functional enrichment in gene-categories of interest.
 #'
-#' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2
+#' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2.
 #' @param geneID2GO A list of named vectors of GO IDs--one vector of GO-terms for each geneID.
 #' @param pval pvalue threshold for significance. Defaults to 0.05.
 #'
@@ -124,7 +124,7 @@ makeGOhierarchy.dir <- function() {
 #'
 #' *piggyBac screens*:
 #' In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*).
-### See the included [mydf] as an example. (doesn't work, add in later)
+#' See the included [exampleMydf] as an example.
 #'
 #'
 #' @section **Using your own custom GO database**:
