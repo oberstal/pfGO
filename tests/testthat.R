@@ -1,4 +1,4 @@
 library(testthat)
-library(pack.test)
+library(pfGO)
 
-test_check("pack.test")
+test_check("pfGO")
