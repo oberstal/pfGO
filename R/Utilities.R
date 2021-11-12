@@ -676,7 +676,7 @@ formatGOdb.curated <-
 
 
 #' @title
-#' get_annot
+#' get.annot
 #'
 #' @description
 #' Extracts and formats annotations from a gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from plasmoDB.
@@ -691,7 +691,7 @@ formatGOdb.curated <-
 #'
 #' @seealso [formatGOdb()]
 #' @export
-get_annot <- function(x) {
+get.annot <- function(x) {
 #  require(tidyverse)
   # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
   x = x %>% filter(type == "protein_coding_gene" | type == "ncRNA_gene")
@@ -722,7 +722,7 @@ get_annot <- function(x) {
 
 
 #' @title
-#' get_pfannot
+#' get.pfannot
 #'
 #' @description
 #' Extracts and formats annotations from a gff file from plasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the gff file from plasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
@@ -735,9 +735,9 @@ get_annot <- function(x) {
 #'
 #' an annotation created from PlasmoDB's latest P. falciparum gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
 #'
-#' @seealso [get_annot()]
+#' @seealso [get.annot()]
 #' @export
-get_pfannot <-
+get.pfannot <-
   function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff",
            organism = "Pf") {
     # make connection to gff file without downloading it, then read it in.
@@ -752,7 +752,7 @@ get_pfannot <-
     # set column names for standard gff file
     colnames(x) = c("seqid","source","type","feature_start","feature_end","score","strand","phase","attributes")
 
-    annot = get_annot(x) # then the get_annot function formats the gff file for non-redundancy and readability
+    annot = get.annot(x) # then the get.annot function formats the gff file for non-redundancy and readability
     annot
   }
 
