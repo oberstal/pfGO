@@ -28,71 +28,71 @@ NULL
 NULL
 
 
-#' topGO
-#' @name topGO
-#' @rdname topGO
-#' @keywords internal
-#' @import topGO
-NULL
+# #' topGO
+# #' @name topGO
+# #' @rdname topGO
+# #' @keywords internal
+# #' @import topGO
+# NULL
 
 # comment out topGO individual functions, import full package instead
-# #' runTest (imported from topGO)
-# #'
-# #' @name runTest
-# #' @rdname runTest
-# #' @keywords internal
-# #' @export
-# #' @importFrom topGO runTest
-# NULL
-#
-# #' sigGenes (imported from topGO)
-# #'
-# #' @name sigGenes
-# #' @rdname sigGenes
-# #' @keywords internal
-# #' @export
-# #' @importFrom topGO sigGenes
-# NULL
-#
-#
-# #' printGraph (imported from topGO)
-# #'
-# #' @name printGraph
-# #' @rdname printGraph
-# #' @keywords internal
-# #' @export
-# #' @importFrom topGO printGraph
-# NULL
-#
-# #' GenTable (imported from topGO)
-# #'
-# #' @name GenTable
-# #' @rdname GenTable
-# #' @keywords internal
-# #' @export
-# #' @importFrom topGO GenTable
-# NULL
-#
-#
-# #' genesInTerm (imported from topGO)
-# #'
-# #' @name genesInTerm
-# #' @rdname genesInTerm
-# #' @keywords internal
-# #' @export
-# #' @importFrom topGO genesInTerm
-# NULL
-#
-#
-# #' readMappings (imported from topGO)
-# #'
-# #' @name readMappings
-# #' @rdname readMappings
-# #' @keywords internal
-# #' @export
-# #' @importFrom topGO readMappings
-# NULL
-#
+#' runTest (imported from topGO)
+#'
+#' @name runTest
+#' @rdname runTest
+#' @keywords internal
+#' @export
+#' @importFrom topGO runTest
+NULL
+
+#' sigGenes (imported from topGO)
+#'
+#' @name sigGenes
+#' @rdname sigGenes
+#' @keywords internal
+#' @export
+#' @importFrom topGO sigGenes
+NULL
+
+
+#' printGraph (imported from topGO)
+#'
+#' @name printGraph
+#' @rdname printGraph
+#' @keywords internal
+#' @export
+#' @importFrom topGO printGraph
+NULL
+
+#' GenTable (imported from topGO)
+#'
+#' @name GenTable
+#' @rdname GenTable
+#' @keywords internal
+#' @export
+#' @importFrom topGO GenTable
+NULL
+
+
+#' genesInTerm (imported from topGO)
+#'
+#' @name genesInTerm
+#' @rdname genesInTerm
+#' @keywords internal
+#' @export
+#' @importFrom topGO genesInTerm
+NULL
+
+
+#' readMappings (imported from topGO)
+#'
+#' @name readMappings
+#' @rdname readMappings
+#' @keywords internal
+#' @export
+#' @importFrom topGO readMappings
+NULL
+
 
 
 
