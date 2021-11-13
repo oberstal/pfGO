@@ -9,7 +9,7 @@
 #' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf>
 #' @description can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
-#' run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
+#' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
 "Pfal_geneID2GO"
 
 
