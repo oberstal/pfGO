@@ -7,7 +7,7 @@
 run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05)
 }
 \arguments{
-\item{mydf}{data frame with geneIDs in column 1, and interest-category classifications in column 2}
+\item{mydf}{data frame with geneIDs in column 1, and interest-category classifications in column 2.}
 
 \item{geneID2GO}{A list of named vectors of GO IDs--one vector of GO-terms for each geneID.}
 
@@ -50,6 +50,7 @@ In an RNAseq analysis, common categories might be "upregulated", "downregulated"
 
 \emph{piggyBac screens}:
 In pooled \emph{piggyBac}-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (\emph{again, not all genes in the genome}).
+See the included \link{exampleMydf} as an example.
 }
 
 \section{\strong{Using your own custom GO database}}{
