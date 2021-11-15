@@ -1,0 +1,63 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# pfGO
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of pfGO is to package handy functions and datasets specifically enabling *Plasmodium falciparum* functional enrichment analyses. pfGO acts as a wrapper around the topGO package for much of its enrichment functionality, while also providing several functions for incorporating latest gene-ontology and functional annotations.
+
+pfGO enables chaining together many parallel enrichment-analyses at once, generating thorough logs and outputs supporting reproducible analyses.
+
+
+## Installation
+
+You can install the development version of pfGO from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("oberstal/pfGO")
+```
+
+See individual functions/data objects for further documentation. E.g.:
+``` r 
+?run.topGO.meta
+?Pfal_geneID2GO
+
+# for all available functions/data:
+?pfGO
+  # then scroll to the bottom and click the "index" link.
+```
+
+
+
+## Example
+
+This is a basic example demonstrating how to run an enrichment analysis:
+
+```{r message=FALSE, warning=FALSE}
+library(pfGO)
+```
+
+```{r example}
+# load included pf GO database and example-data to be tested for functional enrichment
+data("Pfal_geneID2GO")
+data("exampleMydf")
+
+# run the topGO pipeline on all experimental categories of interest from exampleMydf
+run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
+
+```

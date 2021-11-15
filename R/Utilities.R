@@ -140,7 +140,7 @@ makeGOhierarchy.dir <- function() {
 #' run.topGO.meta(exampleMydf,Pfal_geneID2GO)
 #'
 #' @export
-run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) {
+run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0.05) {
 #  require(topGO)
 #  require(tidyverse)
  # require(plyr)
