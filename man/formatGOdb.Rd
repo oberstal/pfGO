@@ -24,7 +24,7 @@ You may need to run \code{topGO::readmappings()} on the file generated with form
 \emph{notes on .gaf format}
 The .gaf file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 
-Retrieves GO annotations assigned by \emph{all} evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{format.curated.GOdb}})
+Retrieves GO annotations assigned by \emph{all} evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{formatGOdb.curated}})
 
 a GOdb from PlasmoDB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 }
