@@ -43,58 +43,9 @@ This is a basic example demonstrating how to run an enrichment analysis:
 
 ``` r
 library(pfGO)
-#> Loading required package: topGO
-#> Loading required package: BiocGenerics
-#> Loading required package: parallel
-#> 
-#> Attaching package: 'BiocGenerics'
-#> The following objects are masked from 'package:parallel':
-#> 
-#>     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-#>     clusterExport, clusterMap, parApply, parCapply, parLapply,
-#>     parLapplyLB, parRapply, parSapply, parSapplyLB
-#> The following objects are masked from 'package:stats':
-#> 
-#>     IQR, mad, sd, var, xtabs
-#> The following objects are masked from 'package:base':
-#> 
-#>     anyDuplicated, append, as.data.frame, basename, cbind, colnames,
-#>     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-#>     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
-#>     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
-#>     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
-#>     union, unique, unsplit, which.max, which.min
-#> Loading required package: graph
-#> Loading required package: Biobase
-#> Welcome to Bioconductor
-#> 
-#>     Vignettes contain introductory material; view with
-#>     'browseVignettes()'. To cite Bioconductor, see
-#>     'citation("Biobase")', and for packages 'citation("pkgname")'.
-#> Loading required package: GO.db
-#> Loading required package: AnnotationDbi
-#> Loading required package: stats4
-#> Loading required package: IRanges
-#> Loading required package: S4Vectors
-#> 
-#> Attaching package: 'S4Vectors'
-#> The following objects are masked from 'package:base':
-#> 
-#>     expand.grid, I, unname
-#> 
-#> Loading required package: SparseM
-#> 
-#> Attaching package: 'SparseM'
-#> The following object is masked from 'package:base':
-#> 
-#>     backsolve
-#> 
-#> groupGOTerms:    GOBPTerm, GOMFTerm, GOCCTerm environments built.
-#> 
-#> Attaching package: 'topGO'
-#> The following object is masked from 'package:IRanges':
-#> 
-#>     members
+```
+
+``` r
 # load included pf GO database and example-data to be tested for functional enrichment
 data("Pfal_geneID2GO")
 data("exampleMydf")

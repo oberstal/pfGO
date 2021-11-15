@@ -48,8 +48,11 @@ See individual functions/data objects for further documentation. E.g.:
 
 This is a basic example demonstrating how to run an enrichment analysis:
 
-```{r example}
+```{r message=FALSE, warning=FALSE}
 library(pfGO)
+```
+
+```{r example}
 # load included pf GO database and example-data to be tested for functional enrichment
 data("Pfal_geneID2GO")
 data("exampleMydf")
