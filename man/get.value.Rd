@@ -4,7 +4,7 @@
 \alias{get.value}
 \title{get.value}
 \usage{
-get.value(id, lookupvector = named.vector)
+get.value(id, lookupvector)
 }
 \arguments{
 \item{id}{a character-string you want to match on}

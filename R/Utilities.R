@@ -482,7 +482,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
 #' This one needs more documentation. I don't remember what it returns as I wrote it a long time ago. Could be a vector of matching values, or could be a vector of positions you can then filter the lookupvector on to return the values.
 #'
 #' @export
-get.value <- function(id, lookupvector = named.vector){
+get.value <- function(id, lookupvector){
   value = unname(lookupvector[id])
   return(value)
 }
@@ -694,7 +694,7 @@ formatGOdb.curated <-
 #' @seealso [formatGOdb()]
 #' @export
 get.annot <- function(x) {
-#  require(tidyverse)
+  # "type" column is standard third column from .gff file
   # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
   x = x %>% dplyr::filter(type == "protein_coding_gene" | type == "ncRNA_gene")
   # Keep only informative columns
