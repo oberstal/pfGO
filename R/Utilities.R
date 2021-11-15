@@ -737,11 +737,12 @@ get.annot <- function(x) {
 #'
 #' an annotation created from PlasmoDB's latest P. falciparum gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
 #'
+#' You *will* need to update the gff url accordingly to the latest version when PlasmoDB is updated.
+#'
 #' @seealso [get.annot()]
 #' @export
 get.pfannot <-
-  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff",
-           organism = "Pf") {
+  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff") {
     # make connection to gff file without downloading it, then read it in.
     con = gzcon(url(gff_url))
     input = readLines(con)
