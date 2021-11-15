@@ -6,27 +6,27 @@
 \usage{
 formatGOdb(
  
-    gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
+    url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
   organism = "Pf"
 )
 }
 \arguments{
-\item{gaf.gz_url}{= url to a gaf.gz file. Defaults to latest Pf consortium .gaf annotation file from GeneDB, hosted here: ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz}
+\item{url}{= url to a .gaf or .gaf.gz file. Defaults to latest \emph{Pf} consortium .gaf annotation file from GeneDB, hosted here: ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz}
 
 \item{organism}{= optional string to include in your output file-name. Defaults to "Pf".}
 }
 \description{
-This function fetches P. falciparum annotations from GeneDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
+This function fetches \emph{P. falciparum} annotations from GeneDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
 }
 \details{
 You may need to run \code{topGO::readmappings()} on the file generated with formatGOdb before using it as the geneID2GO parameter.
 
-\emph{notes on gaf.gz format}
-The gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
+\emph{notes on .gaf format}
+The .gaf file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 
-Retrieves GO annotations assigned by \emph{all} evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{format.curated.GOdb}}))
+Retrieves GO annotations assigned by \emph{all} evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{format.curated.GOdb}})
 
-a GOdb from Sanger's latest P. falciparum annotation (accessed December 8, 2020) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+a GOdb from PlasmoDB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 }
 \seealso{
 \code{\link[=formatGOdb.curated]{formatGOdb.curated()}}

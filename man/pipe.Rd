@@ -3,9 +3,6 @@
 \name{\%>\%}
 \alias{\%>\%}
 \title{pipe operator (from magrittr)}
-\usage{
-lhs \%>\% rhs
-}
 \description{
 pipe operator (from magrittr)
 }
