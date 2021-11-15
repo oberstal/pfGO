@@ -9,8 +9,28 @@
 #' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf>
 #' @description can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
-#' run.topGO.meta(mydf = mydf, geneID2GO = Pfal_geneID2GO)
+#' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
 "Pfal_geneID2GO"
+
+
+
+
+#' @title *piggyBac* mutant classification-data from pooled 1k heat shock screen (to use as example "mydf" parameter for run.topGO.meta()).
+#' @name exampleMydf
+#' @docType data
+#' @description
+#' A data frame with \emph{P. falciparum} geneIDs in column 1, and interest-category classifications in column 2. In pooled *piggyBac*-mutant screening, common interest-category classifications are "sensitive", "tolerant", and "neutral". All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from https://www.nature.com/articles/s41467-021-24814-1, Table S2.
+
+#'
+#' @usage data(exampleMydf)
+#' @format A 2-column data frame with 752 \emph{P. falciparum} geneIDs in column 1, and interest-category classifications (here, phenotypes in pooled screening) in column 2.
+#' @source <https://www.nature.com/articles/s41467-021-24814-1>
+#' @description can be used as example mydf input for run.topGO.meta.
+#' @examples
+#' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
+"exampleMydf"
+
+
 
 
 #' @title All \emph{P. falciparum} gene-product annotations.
@@ -18,14 +38,13 @@
 #' @docType data
 #'
 #' @description
-#' A dataset containing all \emph{P. falciparum} gene-product annotations taken directly from gff file. Only "gene" entries are kept to remove redundancy.
+#' A dataset containing all \emph{P. falciparum} gene-product annotations taken directly from gff file(reference strain 3D7). Only "gene" entries are kept to remove redundancy.
 #'
 #' @usage data(pf.annot)
 #'
 #' @format A data frame of 5562 rows and 9 columns.
 #'
 #' \describe{
-#'   \item{organism_name}{*P. falciparum*}
 #'   \item{seqid}{chromosome ID.}
 #'   \item{source}{annotation source.}
 #'   \item{type}{type of annotation. Here only protein-coding genes and ncRNA genes are kept.}

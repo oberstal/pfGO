@@ -1,3 +1,10 @@
 ^pack\.test\.Rproj$
+^pfGO\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+^\.github$
+^Routput$
+^tests$
+^extra$
+^notes\.R$
 ^data-raw$

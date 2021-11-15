@@ -1,6 +1,6 @@
-Package: pack.test
+Package: pfGO
 Title: JO's Common Functions
-Version: 1.0
+Version: 1.1
 Authors@R: 
     person(given = "J",
            family = "Oberstaller",
@@ -8,18 +8,24 @@ Authors@R:
            email = "jobersta@usf.edu",
            comment = c(ORCID = "0000-0002-3033-2212"))
 Description: This package is a test-run for functions I commonly use, particularly for \emph{P. falciparum} functional enrichment analyses.
-License: `use_mit_license()`
+License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
-    topGO,
-    tidyverse,
-    plyr
+    plyr,
+    dplyr,
+    stringr,
+    magrittr,
+    utils,
+    methods
 Remotes: bioc::release/topGO, bioc::release/Biobase
 Depends: 
-    R (>= 2.10)
+    R (>= 2.10),
+    topGO
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+URL: https://github.com/oberstal/pfGO
+BugReports: https://github.com/oberstal/pfGO/issues

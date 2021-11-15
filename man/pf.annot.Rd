@@ -8,7 +8,6 @@
 A data frame of 5562 rows and 9 columns.
 
 \describe{
-\item{organism_name}{\emph{P. falciparum}}
 \item{seqid}{chromosome ID.}
 \item{source}{annotation source.}
 \item{type}{type of annotation. Here only protein-coding genes and ncRNA genes are kept.}
@@ -27,7 +26,7 @@ A data frame of 5562 rows and 9 columns.
 data(pf.annot)
 }
 \description{
-A dataset containing all \emph{P. falciparum} gene-product annotations taken directly from gff file. Only "gene" entries are kept to remove redundancy.
+A dataset containing all \emph{P. falciparum} gene-product annotations taken directly from gff file(reference strain 3D7). Only "gene" entries are kept to remove redundancy.
 }
 \details{
 \subsection{Keep in mind:}{

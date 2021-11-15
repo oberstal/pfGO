@@ -3,4 +3,8 @@
 .RData
 .Ruserdata
 Routput
-
+notes.R
+data-raw
+extra
+tests
+.DS_Store
