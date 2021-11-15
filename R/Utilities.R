@@ -152,7 +152,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
   hier.dir = makeGOhierarchy.dir()
 
   # go ahead and write the input-df to file in the run-folder so you don't have to wonder later:
-  write.table(
+  utils::write.table(
     mydf,
     file = "Routput/GO/run.TopGO.input.df.txt",
     quote = FALSE,
@@ -231,7 +231,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
         nodeSize = 3,
         description = 'GO analysis of genes comprising each art-R interest-category against all other genes in the comparison'
       )
-      capture.output(GOdata, file = logfile, append = TRUE)
+      utils::capture.output(GOdata, file = logfile, append = TRUE)
 
       # Enrichment analyses: could use any number of statistical tests; the "weight01" algorithm is the default
 
@@ -504,7 +504,7 @@ get.value <- function(id, lookupvector = named.vector){
 #' *notes on .gaf format*
 #' The .gaf file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' Retrieves GO annotations assigned by *all* evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{format.curated.GOdb}})
+#' Retrieves GO annotations assigned by *all* evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{formatGOdb.curated}})
 #'
 #' a GOdb from PlasmoDB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using the *curated* version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
