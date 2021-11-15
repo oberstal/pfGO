@@ -222,7 +222,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
       )
 
       #make GOdata object if you're using a custom GO database (ie, Plasmodium)
-      GOdata = new(
+      GOdata = methods::new(
         "topGOdata",
         ontology = o,
         allGenes = geneList,
@@ -247,7 +247,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
         file = logfile,
         append = TRUE
       )
-      capture.output(sig.genes, file = logfile, append = TRUE)
+      utils::capture.output(sig.genes, file = logfile, append = TRUE)
 
       cat(
         paste(
@@ -315,7 +315,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
         file = logfile,
         append = TRUE
       )
-      capture.output(goresults.genes, file = logfile, append = TRUE)
+      utils::capture.output(goresults.genes, file = logfile, append = TRUE)
       cat(
         paste(
           "\n\n--------------------------------------------------------------------------------\n\n\n"
@@ -336,7 +336,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
       # THIS MAGICAL ONE-LINER TURNS THE WHOLE LIST OF LISTS OF UNEVEN SIZES INTO A BEAUTIFUL DF (this one works)
 #      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind)
       ## 4/26/2021: this is where I would fix the format of the output genes-in-terms file
-      print(str(genes.in.terms.df))
+      print(utils::str(genes.in.terms.df))
       print(genes.in.terms.df)
 
 
@@ -349,7 +349,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
         file = logfile,
         append = TRUE
       )
-      capture.output(genes.in.terms.df, file = logfile, append = TRUE)
+      utils::capture.output(genes.in.terms.df, file = logfile, append = TRUE)
       ontology.counter = ontology.counter + 1
       # print status messages to logfile
       cat(
@@ -419,7 +419,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
     )
 
     ##### output a table with all GO (MF, BP, CC) significant-genes-per-term analyses in one for each interest category
-    write.table(
+    utils::write.table(
       combined.sig.per.term.output,
       file = paste(
         "Routput/GO/sig.genes.by.term/",
@@ -441,7 +441,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05) 
   }### THIS ENDS THE LOOP FOR EACH INTERESTING-GENE CATEGORY (counter incremented at beginning of loop)
 
   # output a table with ALL interest-category GO analyses in one with an added column for interest-category
-  write.table(
+  utils::write.table(
     all.bin.combined.GO.output,
     paste("Routput/GO/all.combined.GO.results.tab.txt",
           sep = ""),
@@ -516,7 +516,7 @@ formatGOdb <- function(url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/
     # make connection to gaf file without downloading it, then read it in.
     con = gzcon(url(url))
     input = readLines(con)
-    x = read.delim(textConnection(input),
+    x = utils::read.delim(textConnection(input),
                    sep = "\t",
                    comment.char = "!",
                    header = FALSE,
@@ -575,7 +575,7 @@ formatGOdb <- function(url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/
         }
       }
     }
-    GO.db = read.delim(GOdb.file, header = FALSE)
+    GO.db = utils::read.delim(GOdb.file, header = FALSE)
     return(GO.db)
   }
 
@@ -609,7 +609,7 @@ formatGOdb.curated <-
     con = gzcon(url(url))
 
     input = readLines(con)
-    x = read.delim(textConnection(input),
+    x = utils::read.delim(textConnection(input),
                    sep = "\t",
                    comment.char = "!",
                    header = FALSE,
@@ -672,7 +672,7 @@ formatGOdb.curated <-
         }
       }
     }
-    GO.db = read.delim(GOdb.file, header = FALSE)
+    GO.db = utils::read.delim(GOdb.file, header = FALSE)
     return(GO.db)
     }
 
@@ -696,7 +696,7 @@ formatGOdb.curated <-
 get.annot <- function(x) {
 #  require(tidyverse)
   # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
-  x = x %>% filter(type == "protein_coding_gene" | type == "ncRNA_gene")
+  x = x %>% dplyr::filter(type == "protein_coding_gene" | type == "ncRNA_gene")
   # Keep only informative columns
   x = x[, c(1:5, 7, 9)]
 
@@ -747,7 +747,7 @@ get.pfannot <-
     con = gzcon(url(gff_url))
     input = readLines(con)
 
-    x = read.delim(textConnection(input),
+    x = utils::read.delim(textConnection(input),
                    sep = "\t",
                    comment.char = "#",
                    header = FALSE,
