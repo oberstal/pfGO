@@ -8,7 +8,7 @@ Authors@R:
            email = "jobersta@usf.edu",
            comment = c(ORCID = "0000-0002-3033-2212"))
 Description: This package is a test-run for functions I commonly use, particularly for \emph{P. falciparum} functional enrichment analyses.
-License: `use_mit_license()`
+License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
