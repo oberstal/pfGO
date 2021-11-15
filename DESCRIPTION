@@ -1,6 +1,6 @@
 Package: pfGO
 Title: JO's Common Functions
-Version: 1.0
+Version: 1.1
 Authors@R: 
     person(given = "J",
            family = "Oberstaller",
