@@ -6,7 +6,7 @@
 #' @keywords internal
 # #' @export
 #' @importFrom magrittr %>%
-#' @usage lhs \%>\% rhs
+# #' @usage lhs \%>\% rhs
 NULL
 
 #' bind_rows (imported from dplyr)
