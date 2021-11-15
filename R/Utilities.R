@@ -511,7 +511,7 @@ get.value <- function(id, lookupvector){
 #' @seealso [formatGOdb.curated()]
 #'
 #' @export
-formatGOdb <- function(url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
+formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf",
            organism = "Pf") {
     # make connection to gaf file without downloading it, then read it in.
     con = gzcon(url(url))
