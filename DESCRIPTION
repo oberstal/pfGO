@@ -18,7 +18,8 @@ Imports:
     dplyr,
     stringr,
     magrittr,
-    utils
+    utils,
+    methods
 Remotes: bioc::release/topGO, bioc::release/Biobase
 Depends: 
     R (>= 2.10),
