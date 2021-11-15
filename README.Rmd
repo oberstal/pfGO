@@ -33,7 +33,7 @@ devtools::install_github("oberstal/pfGO")
 ```
 
 See individual functions/data objects for further documentation. E.g.:
-``` {r help}
+``` r 
 ?run.topGO.meta
 ?Pfal_geneID2GO
 
