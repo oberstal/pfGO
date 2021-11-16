@@ -1,5 +1,5 @@
 Package: pfGO
-Title: JO's Common Functions
+Title: \emph{P. falciparum} functional enrichment analysis tools
 Version: 1.1
 Authors@R: 
     person(given = "J",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jobersta@usf.edu",
            comment = c(ORCID = "0000-0002-3033-2212"))
-Description: This package is a test-run for functions I commonly use, particularly for \emph{P. falciparum} functional enrichment analyses.
+Description: Handy functions and datasets specifically enabling \emph{Plasmodium falciparum} functional enrichment analyses.
 License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true

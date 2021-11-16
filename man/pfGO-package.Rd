@@ -4,9 +4,9 @@
 \name{pfGO-package}
 \alias{pfGO}
 \alias{pfGO-package}
-\title{pfGO: JO's Common Functions}
+\title{pfGO: \emph{P. falciparum} functional enrichment analysis tools}
 \description{
-This package is a test-run for functions I commonly use, particularly for \emph{P. falciparum} functional enrichment analyses.
+Handy functions and datasets specifically enabling \emph{Plasmodium falciparum} functional enrichment analyses.
 }
 \seealso{
 Useful links:
