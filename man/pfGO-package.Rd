@@ -17,7 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: J Oberstaller \email{jobersta@usf.edu} (\href{https://orcid.org/0000-0002-3033-2212}{ORCID})
+\strong{Maintainer}: 
+
+Authors:
+\itemize{
+  \item J Oberstaller \email{jobersta@usf.edu} (\href{https://orcid.org/0000-0002-3033-2212}{ORCID})
+}
 
 }
 \keyword{internal}
