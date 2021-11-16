@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utilities.R
 \name{formatGOdb.curated}
 \alias{formatGOdb.curated}
-\title{formatGOdb.curated}
+\title{Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.}
 \usage{
 formatGOdb.curated(
  
@@ -20,12 +20,13 @@ Generates new GO database from curated evidence-codes only for functional enrich
 }
 \details{
 You will need to run \code{topGO::readmappings()} on the file generated with formatGOdb before using it as the geneID2GO parameter.
-
-\emph{notes on gaf.gz format}
+}
+\section{\strong{Notes on gaf.gz format}}{
 The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 
-a GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 }
+
 \seealso{
 \code{\link[=formatGOdb]{formatGOdb()}}
 }

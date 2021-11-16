@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utilities.R
 \name{get.pfannot}
 \alias{get.pfannot}
-\title{get.pfannot}
+\title{Extracts and formats annotations from a gff file from PlasmoDB.}
 \usage{
 get.pfannot(
  
@@ -10,17 +10,19 @@ get.pfannot(
 )
 }
 \arguments{
-\item{gff_url}{connection to .gff file. Defaults to "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff"
-\emph{notes on gff format}
-The .gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
-
-an annotation created from PlasmoDB's latest \emph{P. falciparum} gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
-
-You \emph{will} need to update the gff url accordingly to the latest version when PlasmoDB is updated.}
+\item{gff_url}{connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff}}
 }
 \description{
 Extracts and formats annotations from a gff file from PlasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the .gff file from PlasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
 }
+\section{\strong{Notes on gff format}}{
+The .gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
+
+an annotation created from PlasmoDB's latest \emph{P. falciparum} gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+
+You \emph{will} need to update the gff url accordingly to the latest version when PlasmoDB is updated.
+}
+
 \seealso{
 \code{\link[=get.annot]{get.annot()}}
 }

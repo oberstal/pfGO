@@ -87,7 +87,7 @@ makeGOhierarchy.dir <- function() {
 #' Run JO's topGO pipeline
 #'
 #' @description
-#' This function tests for functional enrichment in gene-categories of interest.
+#' Tests for functional enrichment in gene-categories of interest.
 #'
 #' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2.
 #' @param geneID2GO A list of named vectors of GO IDs--one vector of GO-terms for each geneID.
@@ -487,26 +487,26 @@ get.value <- function(id, lookupvector){
   return(value)
 }
 
-
+## formatGOdb
 #' @title
-#' formatGOdb
+#' Creates a GO database compatible with topGO from .gaf file retrieved from PlasmoDB.
 #'
 #' @description
-#' This function fetches \emph{P. falciparum} annotations from GeneDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
+#' Fetches \emph{P. falciparum} annotations from PlasmoDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
 #'
-#' @param url = url to a .gaf or .gaf.gz file. Defaults to latest \emph{Pf} consortium .gaf annotation file from GeneDB, hosted here: ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz
+#' @param url = url to a .gaf or .gaf.gz file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: /url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf}
 #' @param organism = optional string to include in your output file-name. Defaults to "Pf".
 #'
 #' @details
 #'
-#' You may need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
+#' You will need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
 #'
-#' *notes on .gaf format*
+#' @details # \strong{Notes on .gaf format}
 #' The .gaf file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' Retrieves GO annotations assigned by *all* evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{formatGOdb.curated}})
+#' Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{formatGOdb.curated}})
 #'
-#' a GOdb from PlasmoDB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using the *curated* version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#' a GOdb from PlasmoDB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
 #' @seealso [formatGOdb.curated()]
 #'
@@ -579,8 +579,9 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
     return(GO.db)
   }
 
+## formatGOdb.curated
 #' @title
-#' formatGOdb.curated
+#' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
 #'
 #' @description
 #' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
@@ -591,10 +592,10 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #' @details
 #' You will need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
 #'
-#' *notes on gaf.gz format*
+#' @details # \strong{Notes on gaf.gz format}
 #' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' a GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#' A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
 #' @seealso [formatGOdb()]
 #' @export
@@ -676,9 +677,9 @@ formatGOdb.curated <-
     return(GO.db)
     }
 
-
+## get.annot
 #' @title
-#' get.annot
+#' Extracts and formats annotations from a .gff file.
 #'
 #' @description
 #' Extracts and formats annotations from a .gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from PlasmoDB.
@@ -722,17 +723,17 @@ get.annot <- function(x) {
   x
 }
 
-
+## get.pfannot
 #' @title
-#' get.pfannot
+#' Extracts and formats annotations from a gff file from PlasmoDB.
 #'
 #' @description
 #' Extracts and formats annotations from a gff file from PlasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the .gff file from PlasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
 #'
-#' @param gff_url connection to .gff file. Defaults to "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff"
+#' @param gff_url connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff}
 
 
-#' *notes on gff format*
+#' @details # \strong{Notes on gff format}
 #' The .gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
 #'
 #' an annotation created from PlasmoDB's latest \emph{P. falciparum} gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).

@@ -4,7 +4,7 @@
 \alias{run.topGO.meta}
 \title{Run JO's topGO pipeline}
 \usage{
-run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05)
+run.topGO.meta(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0.05)
 }
 \arguments{
 \item{mydf}{data frame with geneIDs in column 1, and interest-category classifications in column 2.}
@@ -14,7 +14,7 @@ run.topGO.meta(mydf = "mydf", geneID2GO = "geneID2GO", pval = 0.05)
 \item{pval}{pvalue threshold for significance. Defaults to 0.05.}
 }
 \description{
-This function tests for functional enrichment in gene-categories of interest.
+Tests for functional enrichment in gene-categories of interest.
 }
 \details{
 The \strong{run.topGO.meta} function:

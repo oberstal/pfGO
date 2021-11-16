@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utilities.R
 \name{get.annot}
 \alias{get.annot}
-\title{get.annot}
+\title{Extracts and formats annotations from a .gff file.}
 \usage{
 get.annot(x)
 }

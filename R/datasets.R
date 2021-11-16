@@ -1,3 +1,5 @@
+
+## Pfal_geneID2GO ----
 #' @title All curated GO terms mapped to \emph{P. falciparum} genes
 #' @name Pfal_geneID2GO
 #' @docType data
@@ -5,21 +7,23 @@
 #' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from PlasmoDB Nov 5, 2021).
 #'
 #' @usage data(Pfal_geneID2GO)
-#' @format A list of 3878 named vectors--one vector for each Pf geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
+#' @format A list of 3878 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
 #' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf>
-#' @description can be used as the geneID2GO input for run.topGO.meta.
+#' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
 "Pfal_geneID2GO"
 
 
 
-
-#' @title *piggyBac* mutant classification-data from pooled 1k heat shock screen (to use as example "mydf" parameter for run.topGO.meta()).
+## exampleMydf ----
+#' @title \emph{piggyBac} mutant classification-data from pooled 1k heat shock screen
 #' @name exampleMydf
 #' @docType data
 #' @description
-#' A data frame with \emph{P. falciparum} geneIDs in column 1, and interest-category classifications in column 2. In pooled *piggyBac*-mutant screening, common interest-category classifications are "sensitive", "tolerant", and "neutral". All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from https://www.nature.com/articles/s41467-021-24814-1, Table S2.
+#' A data frame with \emph{P. falciparum} geneIDs in column 1, and interest-category classifications in column 2. In pooled \emph{piggyBac}-mutant screening, common interest-category classifications may be some form of "sensitive", "tolerant", and "neutral".
+#'
+#' All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from /url{https://www.nature.com/articles/s41467-021-24814-1}, Table S2.
 
 #'
 #' @usage data(exampleMydf)
@@ -32,7 +36,7 @@
 
 
 
-
+## pf.annot ----
 #' @title All \emph{P. falciparum} gene-product annotations.
 #' @name pf.annot
 #' @docType data
@@ -69,7 +73,7 @@
 "pf.annot"
 
 
-
+## pf.genesets.mpmp ----
 #' @title Curated \emph{P. falciparum} gene-sets.
 #' @name pf.genesets.mpmp
 #' @docType data
@@ -93,6 +97,7 @@
 "pf.genesets.mpmp"
 
 
+## insertions ----
 #' @title \emph{piggyBac} insertions reported in Zhang et al. 2018 (Science)
 #' @name insertions
 #' @docType data
