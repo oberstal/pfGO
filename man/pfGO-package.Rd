@@ -8,13 +8,11 @@
 \description{
 Handy functions and datasets specifically enabling \emph{Plasmodium falciparum} functional enrichment analyses.
 }
-\seealso{
-Useful links:
-\itemize{
-  \item \url{https://github.com/oberstal/pfGO}
-  \item Report bugs at \url{https://github.com/oberstal/pfGO/issues}
+\details{
+See the documentation for the \code{\link[=run.topGO.meta]{run.topGO.meta()}} function for examples and common use-cases. See the "index" link at the bottom of this window for all included datasets and functions.
 }
-
+\seealso{
+\code{\link[=run.topGO.meta]{run.topGO.meta()}}
 }
 \author{
 \strong{Maintainer}: J Oberstaller \email{jobersta@usf.edu} (\href{https://orcid.org/0000-0002-3033-2212}{ORCID})
