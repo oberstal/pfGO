@@ -640,9 +640,7 @@ run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
 #> 
 #> All interesting-gene categories have been tested for GO-term enrichment.
 #> 
-#> See SIGNIFICANT enrichment by interesting-gene category in 'Routput/GO/significant.GO.results*.tab.txt' and 'Routput/GO/all.combined.significant.GO.results.tab.txt'.
-#> 
-#> See ALL TOP 30 enrichment by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'.
+#> See ALL TOP 30 enriched terms by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'.
 #> 
 #> See log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/genes_by_GOterm.*.tab.txt'.
 #>          GO.ID                                        Term Annotated

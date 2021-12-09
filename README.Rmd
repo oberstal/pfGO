@@ -52,7 +52,7 @@ This is a basic example demonstrating how to run an enrichment analysis:
 library(pfGO)
 ```
 
-```{r example}
+```{r example, warning=FALSE}
 # load included pf GO database and example-data to be tested for functional enrichment
 data("Pfal_geneID2GO")
 data("exampleMydf")
