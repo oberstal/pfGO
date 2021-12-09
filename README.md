@@ -55,6 +55,122 @@ data("exampleMydf")
 
 # run the topGO pipeline on all experimental categories of interest from exampleMydf
 run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
+```
+
+View example console output [here](#example-console-output)
+
+## Key functions and further documentation
+
+### run.topGO.meta
+
+#### description:
+
+Tests for functional enrichment in gene-categories of interest.
+
+#### parameters:
+
+-   *mydf*: data frame with geneIDs in column 1, and interest-category
+    classifications in column 2.
+-   *geneID2GO*: a list of named vectors of GO IDs–one vector of
+    GO-terms for each geneID.
+-   *pval*: p-value threshold for significance. Defaults to 0.05.
+
+#### outputs:
+
+run.topGO.meta creates several output-files, including:
+
+-   enrichment results
+
+-   significant genes per significant term
+
+    -   *note these significant genes per term files have buggy
+        formatting and may require manual editing*
+
+-   plots of the GO-term hierarchy relevant to the analysis
+
+-   thorough log-files for each gene-category of interest tested against
+    the background of all other genes in the analysis
+
+-   system logs recording all package versions, etc.
+
+Primary results from run.topGO.meta will be in
+“Routput/GO/all.combined.GO.results.tab.txt”. Note that run.topGO.meta
+will automatically create the Routput directory (and other required
+output directories nested in ./Routput) in your working directory for
+you if it does not exist.
+
+#### more function details
+
+The **run.topGO.meta** function:
+
+-   defines which genes are “interesting” and which should be defined as
+    background for each category specified in mydf,
+-   makes the GOdata object for topGO,
+-   tests each category of interest for enriched GO-terms against all
+    the other genes included in mydf (the “gene universe”),
+-   and then outputs results to several tables (tab.txt files that can
+    be opened in Excel).
+
+Enrichments are performed by each ontology (molecular function,
+biological process, cellular compartment; MF, BP, and CC, respectively)
+sequentially on all groups of interest. Results are combined in the
+final output-table (“Routput/GO/all.combined.GO.results.tab.txt”).
+
+TopGO automatically accounts for genes that cannot be mapped to GO terms
+(or are mapped to terms with \< 3 genes in the analysis) with “feasible
+genes” indicated in the topGO.log files in the “Routput/GO” folder.
+
+**Concepts for common use-cases**:
+
+*RNAseq*:
+
+In an RNAseq analysis, common interest-categories might be
+“upregulated”, “downregulated”, and “neutral” genes. The gene universe
+would consist of all genes expressed above your threshold cutoffs (*not
+necessarily all genes in the genome*).
+
+*piggyBac screens*:
+
+In pooled *piggyBac*-mutant screening, common categories might be
+“sensitive”, “tolerant”, and “neutral”. The gene universe would consist
+of all genes represented in your screened library of mutants (*again,
+not all genes in the genome*).
+
+See the included data object *exampleMydf* as an example.
+
+**Using your own custom GO database**:
+
+A correctly formatted geneID2GO object is included for *P. falciparum*
+enrichment analyses (*Pfal_geneID2GO*). You may also provide your own,
+so long as it is a named character-vector of GO-terms (each vector named
+by geneID, with GO terms as each element).
+
+You can use the included **formatGOdb.curated()** function to format a
+custom GO database from curated GeneDB annotations for several non-model
+organisms (or the **formatGOdb()** function to include all GO
+annotations, if you aren’t picky about quality of automated electronic
+annotations). If you’re studying a model organism, several annotations
+are already available through the AnnotationDbi bioconductor package
+that loads with topGO.
+
+<!-- @seealso [topGO::topGO()] -->
+
+<a id="example-console-output"></a>
+
+## Example console output
+
+Example console output generated running the quick-start example data
+(*piggyBac* pooled phenotypic screening results to identify processes
+enabling parasite survival of host fever ([as published
+previously](https://doi.org/10.1038/s41467-021-24814-1)):
+
+``` r
+# load included pf GO database and example-data to be tested for functional enrichment
+data("Pfal_geneID2GO")
+data("exampleMydf")
+
+# run the topGO pipeline on all experimental categories of interest from exampleMydf
+run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
 #> 
 #> Building most specific GOs .....
 #>  ( 286 GO terms found. )
@@ -643,7 +759,9 @@ run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
 #> 
 #> All interesting-gene categories have been tested for GO-term enrichment.
 #> 
-#> See ALL TOP 30 enriched terms by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'.
+#> See SIGNIFICANT enrichment by interesting-gene category in 'Routput/GO/significant.GO.results*.tab.txt' and 'Routput/GO/all.combined.significant.GO.results.tab.txt'.
+#> 
+#> See ALL TOP 30 enrichment by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'.
 #> 
 #> See log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/genes_by_GOterm.*.tab.txt'.
 #>          GO.ID                                        Term Annotated
@@ -889,99 +1007,3 @@ run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
 #> 119          14    13.40 0.20200          CC      not.classified
 #> 120           3     2.01 0.30000          CC      not.classified
 ```
-
-## Key functions and further documentation
-
-### run.topGO.meta
-
-#### description:
-
-Tests for functional enrichment in gene-categories of interest.
-
-#### parameters:
-
--   *mydf*: data frame with geneIDs in column 1, and interest-category
-    classifications in column 2.
--   *geneID2GO*: a list of named vectors of GO IDs–one vector of
-    GO-terms for each geneID.
--   *pval*: p-value threshold for significance. Defaults to 0.05.
-
-#### outputs:
-
-run.topGO.meta creates several output-files, including:
-
--   enrichment results
-
--   significant genes per significant term
-
-    -   *note these significant genes per term files have buggy
-        formatting and may require manual editing*
-
--   plots of the GO-term hierarchy relevant to the analysis
-
--   thorough log-files for each gene-category of interest tested against
-    the background of all other genes in the analysis
-
--   system logs recording all package versions, etc.
-
-Primary results from run.topGO.meta will be in
-“Routput/GO/all.combined.GO.results.tab.txt”. Note that run.topGO.meta
-will automatically create the Routput directory (and other required
-output directories nested in ./Routput) in your working directory for
-you if it does not exist.
-
-#### more function details
-
-The **run.topGO.meta** function:
-
--   defines which genes are “interesting” and which should be defined as
-    background for each category specified in mydf,
--   makes the GOdata object for topGO,
--   tests each category of interest for enriched GO-terms against all
-    the other genes included in mydf (the “gene universe”),
--   and then outputs results to several tables (tab.txt files that can
-    be opened in Excel).
-
-Enrichments are performed by each ontology (molecular function,
-biological process, cellular compartment; MF, BP, and CC, respectively)
-sequentially on all groups of interest. Results are combined in the
-final output-table (“Routput/GO/all.combined.GO.results.tab.txt”).
-
-TopGO automatically accounts for genes that cannot be mapped to GO terms
-(or are mapped to terms with \< 3 genes in the analysis) with “feasible
-genes” indicated in the topGO.log files in the “Routput/GO” folder.
-
-**Concepts for common use-cases**:
-
-*RNAseq*:
-
-In an RNAseq analysis, common interest-categories might be
-“upregulated”, “downregulated”, and “neutral” genes. The gene universe
-would consist of all genes expressed above your threshold cutoffs (*not
-necessarily all genes in the genome*).
-
-*piggyBac screens*:
-
-In pooled *piggyBac*-mutant screening, common categories might be
-“sensitive”, “tolerant”, and “neutral”. The gene universe would consist
-of all genes represented in your screened library of mutants (*again,
-not all genes in the genome*).
-
-See the included data object *exampleMydf* as an example.
-
-**Using your own custom GO database**:
-
-A correctly formatted geneID2GO object is included for *P. falciparum*
-enrichment analyses (*Pfal_geneID2GO*). You may also provide your own,
-so long as it is a named character-vector of GO-terms (each vector named
-by geneID, with GO terms as each element).
-
-You can use the included **formatGOdb.curated()** function to format a
-custom GO database from curated GeneDB annotations for several non-model
-organisms (or the **formatGOdb()** function to include all GO
-annotations, if you aren’t picky about quality of automated electronic
-annotations). If you’re studying a model organism, several annotations
-are already available through the AnnotationDbi bioconductor package
-that loads with topGO.
-
-@seealso \[topGO::topGO()\]
