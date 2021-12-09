@@ -5,6 +5,7 @@
 Routput
 notes.R
 data-raw
+*.Rproj
 extra
 tests
 .DS_Store
