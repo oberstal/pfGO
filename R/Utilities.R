@@ -173,7 +173,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     logfile = paste(GO.dir,"/topGO.log.", i, ".txt", sep = "")
     cat(
       paste(
-        "***Genes by GO-term for art-R meta-analysis interest-category ",
+        "***Genes by GO-term per interest-category ",
         i,
         "***\n",
         sep = ""
@@ -229,7 +229,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         annot = annFUN.gene2GO,
         gene2GO = geneID2GO,
         nodeSize = 3,
-        description = 'GO analysis of genes comprising each art-R interest-category against all other genes in the comparison'
+        description = 'GO analysis of genes comprising each interest-category against all other genes in the comparison'
       )
       utils::capture.output(GOdata, file = logfile, append = TRUE)
 
@@ -453,10 +453,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
   # print some progress-messages to screen
   cat("\nAll interesting-gene categories have been tested for GO-term enrichment.")
   cat(
-    "\n\nSee SIGNIFICANT enrichment by interesting-gene category in 'Routput/GO/significant.GO.results*.tab.txt' and 'Routput/GO/all.combined.significant.GO.results.tab.txt'."
-  )
-  cat(
-    "\n\nSee ALL TOP 30 enrichment by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'."
+    "\n\nSee ALL TOP 30 enriched terms by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'."
   )
   cat(
     "\n\nSee log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/genes_by_GOterm.*.tab.txt'."
