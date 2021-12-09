@@ -7,5 +7,6 @@ notes.R
 data-raw
 *.Rproj
 extra
+*.Rproj
 tests
 .DS_Store
