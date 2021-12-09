@@ -160,6 +160,10 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     sep = "\t"
   )
 
+  # create logfile with system info, all loaded packages and version numbers for reproducibility:
+  syslog = "Routput/syslog.txt"
+  utils::capture.output(utils::sessionInfo(), file = syslog)
+
 
   # test enrichment for EACH interesting-genes category against all the other background genes
   geneids = mydf[, 1]
