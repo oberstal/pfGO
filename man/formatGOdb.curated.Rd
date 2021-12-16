@@ -6,7 +6,7 @@
 \usage{
 formatGOdb.curated(
  
-    url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf",
+    url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-55_Pfalciparum3D7_GO.gaf",
   organism = "Pf"
 )
 }
@@ -24,7 +24,7 @@ You will need to run \code{topGO::readmappings()} on the file generated with for
 \section{\strong{Notes on gaf.gz format}}{
 The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 
-A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed Nov 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 }
 
 \seealso{

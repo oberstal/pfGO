@@ -512,7 +512,7 @@ get.value <- function(id, lookupvector){
 #' @seealso [formatGOdb.curated()]
 #'
 #' @export
-formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf",
+formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-55_Pfalciparum3D7_GO.gaf",
            organism = "Pf") {
     # make connection to gaf file without downloading it, then read it in.
     con = gzcon(url(url))
@@ -596,12 +596,12 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #' @details # \strong{Notes on gaf.gz format}
 #' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#' A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed Nov 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
 #' @seealso [formatGOdb()]
 #' @export
 formatGOdb.curated <-
-  function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf",
+  function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-55_Pfalciparum3D7_GO.gaf",
            organism = "Pf"){
 
 #  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
@@ -731,20 +731,20 @@ get.annot <- function(x) {
 #' @description
 #' Extracts and formats annotations from a gff file from PlasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the .gff file from PlasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
 #'
-#' @param gff_url connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff}
+#' @param gff_url connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-55_Pfalciparum3D7.gff}
 
 
 #' @details # \strong{Notes on gff format}
 #' The .gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' an annotation created from PlasmoDB's latest \emph{P. falciparum} gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#' an annotation created from PlasmoDB's latest \emph{P. falciparum} gff file (accessed December 16, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
 #'
 #' You \emph{will} need to update the gff url accordingly to the latest version when PlasmoDB is updated.
 #'
 #' @seealso [get.annot()]
 #' @export
 get.pfannot <-
-  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff") {
+  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-55_Pfalciparum3D7.gff") {
     # make connection to gff file without downloading it, then read it in.
     con = gzcon(url(gff_url))
     input = readLines(con)
