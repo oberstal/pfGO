@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Oberstaller
+    given-names: J
+    orcid: https://orcid.org/0000-0002-3033-2212
+title: "pfGO"
+version: 1.1.0
+doi: 10.5281/zenodo.5931520
+date-released: 2022-01-31
