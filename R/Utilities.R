@@ -334,6 +334,14 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
 
       # for testing
       genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind, .id = "GO.ID")
+      print(str(genes.in.terms.df))
+      print("")
+      print(genes.in.terms.df)
+      print("")
+      if (length(genes.in.terms.df)>0) {
+        genes.in.terms.df$go.category = o
+        genes.in.terms.df$interest.category = i
+      }
       # current output is is a df with unnecessary empty NA values in columns to preserve spacing (prob from writing from a list of lists to a table row by row?? )
         # output should ideally just be a long list--column 1 = GO ids, column 2 = geneID mapped to that term. One geneID/GO pair per row. Then for each GO term, add column for term definition, and for each geneID, add column for annotation.
 
@@ -385,14 +393,34 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         combined.significant.GO.output = rbind.data.frame(combined.significant.GO.output, res.significant)
         #        combined.sig.per.term.output = rbind.data.frame(combined.sig.per.term.output, genes.in.terms.df)
         # try using bind_rows instead to get around problem of joining dataframes with uneven number of columns. IT WORKS!
-        combined.sig.per.term.output = dplyr::bind_rows(combined.sig.per.term.output, genes.in.terms.df)
+#        combined.sig.per.term.output = dplyr::bind_rows(combined.sig.per.term.output, genes.in.terms.df)
+        sig.per.term.output = genes.in.terms.df
 
       } else {
         combined.GO.output = res
         combined.significant.GO.output = res.significant
-        combined.sig.per.term.output = genes.in.terms.df
+#        combined.sig.per.term.output = genes.in.terms.df
+        sig.per.term.output = genes.in.terms.df
       }
-    } ### ONTOLOGY LOOP ENDS HERE
+
+      ##### output a table with all GO (MF, BP, CC) significant-genes-per-term analyses in one for each interest category
+      if (length(genes.in.terms.df)>0) {
+        utils::write.table(
+          sig.per.term.output,
+          file = paste(
+            "Routput/GO/sig.genes.by.term/",
+            i,
+            "_",
+            o,
+            "_sig.genes.per.term.txt",
+            sep = ""
+            ),
+          sep = "\t",
+          quote = FALSE,
+          row.names = FALSE
+          )
+      }
+        } ### ONTOLOGY LOOP ENDS HERE
 
     # print status-messages to indicate end of interest-category log-file
     cat(
@@ -423,18 +451,18 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     )
 
     ##### output a table with all GO (MF, BP, CC) significant-genes-per-term analyses in one for each interest category
-    utils::write.table(
-      combined.sig.per.term.output,
-      file = paste(
-        "Routput/GO/sig.genes.by.term/",
-        i,
-        "_sig.genes.per.term.txt",
-        sep = ""
-      ),
-      sep = "\t",
-      quote = FALSE,
-      row.names = FALSE
-    )
+    # utils::write.table(
+    #   combined.sig.per.term.output,
+    #   file = paste(
+    #     "Routput/GO/sig.genes.by.term/",
+    #     i,
+    #     "_sig.genes.per.term.txt",
+    #     sep = ""
+    #   ),
+    #   sep = "\t",
+    #   quote = FALSE,
+    #   row.names = FALSE
+    # )
     #    build on to the results-tables for each interest-category (1 loop for each of the interest categories)
     if (interesting.category.counter != 1) {
       all.bin.combined.GO.output = rbind.data.frame(all.bin.combined.GO.output, combined.GO.output)
