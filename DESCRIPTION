@@ -19,8 +19,9 @@ Imports:
     stringr,
     magrittr,
     utils,
-    methods
-Remotes: bioc::release/topGO, bioc::release/Biobase
+    methods,
+    Rgraphviz
+Remotes: bioc::release/topGO, bioc::release/Biobase, bioc::release/Rgraphviz
 Depends: 
     R (>= 2.10),
     topGO
