@@ -540,7 +540,7 @@ get.value <- function(id, lookupvector){
 #' @seealso [formatGOdb.curated()]
 #'
 #' @export
-formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-55_Pfalciparum3D7_GO.gaf",
+formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
            organism = "Pf") {
     # make connection to gaf file without downloading it, then read it in.
     con = gzcon(url(url))
@@ -629,7 +629,7 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #' @seealso [formatGOdb()]
 #' @export
 formatGOdb.curated <-
-  function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-55_Pfalciparum3D7_GO.gaf",
+  function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
            organism = "Pf"){
 
 #  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
