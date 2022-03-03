@@ -619,7 +619,11 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #'@param organism optional string to include in your output file-name. Defaults to "Pf".
 #'
 #' @details
-#' You will need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
+#' Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist.
+#'
+#' You will need to run `topGO::readmappings()` on the file generated with formatGOdb to use it as the geneID2GO parameter.
+#'
+#' Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
 #'
 #' @details # \strong{Notes on gaf.gz format}
 #' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
@@ -772,7 +776,7 @@ get.annot <- function(x) {
 #' @seealso [get.annot()]
 #' @export
 get.pfannot <-
-  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-55_Pfalciparum3D7.gff") {
+  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-56_Pfalciparum3D7.gff") {
     # make connection to gff file without downloading it, then read it in.
     con = gzcon(url(gff_url))
     input = readLines(con)

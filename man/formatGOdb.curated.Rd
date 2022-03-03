@@ -6,7 +6,7 @@
 \usage{
 formatGOdb.curated(
  
-    url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-55_Pfalciparum3D7_GO.gaf",
+    url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
   organism = "Pf"
 )
 }
@@ -19,7 +19,11 @@ formatGOdb.curated(
 Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
 }
 \details{
-You will need to run \code{topGO::readmappings()} on the file generated with formatGOdb before using it as the geneID2GO parameter.
+Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist.
+
+You will need to run \code{topGO::readmappings()} on the file generated with formatGOdb to use it as the geneID2GO parameter.
+
+Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
 }
 \section{\strong{Notes on gaf.gz format}}{
 The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.

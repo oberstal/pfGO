@@ -6,7 +6,7 @@
 \usage{
 get.pfannot(
  
-    gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-55_Pfalciparum3D7.gff"
+    gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-56_Pfalciparum3D7.gff"
 )
 }
 \arguments{
