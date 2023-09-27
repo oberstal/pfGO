@@ -20,8 +20,9 @@ Imports:
     magrittr,
     utils,
     methods,
-    Rgraphviz
-Remotes: bioc::release/topGO, bioc::release/Biobase, bioc::release/Rgraphviz
+    Rgraphviz,
+    AnnotationDbi
+Remotes: bioc::release/topGO, bioc::release/Biobase, bioc::release/Rgraphviz, bioc::release/AnnotationDbi
 Depends: 
     R (>= 2.10),
     topGO

@@ -37,7 +37,6 @@ NULL
 
 
 #' unlist2 (imported from AnnotationDbi)
-# #' AnnotationDbi should load as a dependency of topGO, have not specified separately
 #'
 #' @name unlist2
 #' @rdname unlist2
