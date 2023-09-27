@@ -36,6 +36,16 @@ NULL
 NULL
 
 
+#' unlist2 (imported from AnnotationDbi)
+# #' AnnotationDbi should load as a dependency of topGO, have not specified separately
+#'
+#' @name unlist2
+#' @rdname unlist2
+#' @keywords internal
+# #' @export
+#' @importFrom AnnotationDbi unlist2
+NULL
+
 # # comment out topGO individual functions, import full package instead
 # #' runTest (imported from topGO)
 # #'
