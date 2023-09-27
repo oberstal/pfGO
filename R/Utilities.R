@@ -328,12 +328,33 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         append = TRUE
       )
 
-      genes.in.term.lists = sapply(goresults.genes,function(x){
-        new.row = unlist(x, recursive = FALSE, use.names = TRUE)
-      })
+      print(str(goresults.genes))
+
+      if(length(goresults.genes)>1 & length(names(goresults.genes))>0){
+      genes.in.term.lists = AnnotationDbi::unlist2(goresults.genes, recursive = FALSE, use.names = TRUE)
+      genes.in.terms.df = data.frame(GO.ID=names(genes.in.term.lists),geneID=genes.in.term.lists)
+      }
+
+      if(length(goresults.genes)>1 & length(names(goresults.genes))==0){
+        genes.in.term.lists = goresults.genes
+        genes.in.terms.df = data.frame(GO.ID=as.character(dimnames(genes.in.term.lists)[2]),
+                                       geneID=genes.in.term.lists)
+      }
+
+      if(length(goresults.genes)==0){
+        genes.in.term.lists = NULL
+        genes.in.terms.df = NULL
+      }
+
+#      genes.in.term.lists = sapply(goresults.genes,function(x){
+#        new.row=unlist(x, recursive = FALSE, use.names = TRUE) # old
+#        new.row = AnnotationDbi::unlist2(x, recursive = FALSE, use.names = TRUE)
+#      })
 
       # for testing
-      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind, .id = "GO.ID")
+      print(str(genes.in.term.lists))
+
+#      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind, .id = "GO.ID")
       print(str(genes.in.terms.df))
       print("")
       print(genes.in.terms.df)
