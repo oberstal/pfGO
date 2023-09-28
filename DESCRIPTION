@@ -8,7 +8,7 @@ Authors@R:
            email = "jobersta@usf.edu",
            comment = c(ORCID = "0000-0002-3033-2212"))
 Description: Handy functions and datasets specifically enabling Plasmodium falciparum functional enrichment analyses.
-License: GPL (>=3)
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

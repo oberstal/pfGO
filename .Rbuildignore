@@ -9,3 +9,4 @@
 ^README\.Rmd$
 ^\.DS_Store$
 ^inst\/CITATION\.cff$
+^LICENSE\.md$
