@@ -99,13 +99,13 @@
 
 ## insertions ----
 #' @title \emph{piggyBac} insertions reported in Zhang et al. 2018 (Science)
-#' @name insertions
+#' @name pf.insertions
 #' @docType data
 #' @description
-#' \emph{P. falciparum} insertion-data as published in Science 2018. Contains 3 of the published supplemental tables (Table S1, Pilot_library; Table S3, Saturation_library; Table S5, GenesbyMIS). Not need to run GO enrichment functions, but useful additional info to have for interpreting output.
+#' \emph{P. falciparum} insertion-data as published in Science 2018. Contains 3 of the published supplemental tables (Table S1, pilot_library; Table S3, saturation_library; Table S5, genesbyMIS). Not needed to run GO enrichment functions, but useful additional info to have for interpreting output.
 #'
-#' @usage data(insertions)
-#' @format A list of 3 dataframes--Pilot_library, corresponding to published table S1; Saturation_library, corresponding to Table S3, and GenesbyMIS, corresponding to Table S5.
+#' @usage data(pf.insertions)
+#' @format A list of 3 dataframes--pilot_library, corresponding to published table S1; saturation_library, corresponding to Table S3, and genesbyMIS, corresponding to Table S5. Column-names have been edited to be R-friendly.
 #' @source <https://www.science.org/doi/10.1126/science.aap7847>
 
-"insertions"
+"pf.insertions"
