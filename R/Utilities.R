@@ -328,8 +328,6 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         append = TRUE
       )
 
-      print(str(goresults.genes))
-
       if(length(goresults.genes)>1 & length(names(goresults.genes))>0){
       genes.in.term.lists = AnnotationDbi::unlist2(goresults.genes, recursive = FALSE, use.names = TRUE)
       genes.in.terms.df = data.frame(GO.ID=names(genes.in.term.lists),geneID=genes.in.term.lists)
@@ -352,10 +350,10 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
 #      })
 
       # for testing
-      print(str(genes.in.term.lists))
+#      print(str(genes.in.term.lists))
 
 #      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind, .id = "GO.ID")
-      print(str(genes.in.terms.df))
+#      print(str(genes.in.terms.df))
       print("")
       print(genes.in.terms.df)
       print("")
@@ -369,7 +367,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       # THIS MAGICAL ONE-LINER TURNS THE WHOLE LIST OF LISTS OF UNEVEN SIZES INTO A BEAUTIFUL DF (this one works)
 #      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind)
       ## 4/26/2021: this is where I would fix the format of the output genes-in-terms file
-      print(utils::str(genes.in.terms.df))
+#      print(utils::str(genes.in.terms.df))
       print(genes.in.terms.df)
 
 

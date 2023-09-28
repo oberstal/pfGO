@@ -5,12 +5,12 @@
 \alias{pf.annot}
 \title{All \emph{P. falciparum} gene-product annotations.}
 \format{
-A data frame of 5562 rows and 9 columns.
+A data frame of 5720 rows and 9 columns.
 
 \describe{
 \item{seqid}{chromosome ID.}
 \item{source}{annotation source.}
-\item{type}{type of annotation. Here only protein-coding genes and ncRNA genes are kept.}
+\item{type}{type of annotation. Here protein-coding genes, ncRNA genes and pseudogenes are kept.}
 \item{feature_start}{gene start coordinate.}
 \item{feature_end}{gene end coordinate.}
 \item{strand}{gene strand.}
@@ -20,7 +20,7 @@ A data frame of 5562 rows and 9 columns.
 }
 }
 \source{
-\url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff}
+\url{https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff}
 }
 \usage{
 data(pf.annot)

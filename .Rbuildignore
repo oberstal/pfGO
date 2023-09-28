@@ -1,10 +1,10 @@
-^pack\.test\.Rproj$
-^pfGO\.Rproj$
+^.*\.Rproj$
 ^\.Rproj\.user$
-^README\.Rmd$
 ^\.github$
 ^Routput$
 ^tests$
 ^extra$
 ^notes\.R$
 ^data-raw$
+^README\.Rmd$
+^\.DS_Store$

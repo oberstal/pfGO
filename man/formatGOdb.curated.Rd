@@ -6,14 +6,17 @@
 \usage{
 formatGOdb.curated(
   url =
-    "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
-  organism = "Pf"
+    "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_Curated_GO.gaf.gzip",
+  organism = "Pf",
+  plasmoDB_version = ""
 )
 }
 \arguments{
-\item{url}{url to a .gaf or .gaf.gz file. Defaults to latest \emph{Pf} consortium .gaf annotation file from PlasmoDB.}
+\item{url}{url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf.gzip annotation file from PlasmoDB. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
 
-\item{organism}{optional string to include in your output file-name. Defaults to "Pf".}
+\item{organism}{optional string to include in your output filename. Defaults to "Pf".}
+
+\item{plasmoDB_version}{= optional string to include the PlasmoDB release version in your output filename (e.g. "v66").}
 }
 \description{
 Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
