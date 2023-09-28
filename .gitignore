@@ -4,9 +4,8 @@
 .Ruserdata
 Routput
 notes.R
-data-raw
+data-raw/*
 *.Rproj
 extra
-*.Rproj
 tests
 .DS_Store
