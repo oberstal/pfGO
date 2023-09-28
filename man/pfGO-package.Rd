@@ -4,9 +4,9 @@
 \name{pfGO-package}
 \alias{pfGO}
 \alias{pfGO-package}
-\title{pfGO: \emph{P. falciparum} functional enrichment analysis tools}
+\title{pfGO: Plasmodium falciparum functional enrichment analysis tools}
 \description{
-Handy functions and datasets specifically enabling \emph{Plasmodium falciparum} functional enrichment analyses.
+Handy functions and datasets specifically enabling Plasmodium falciparum functional enrichment analyses.
 }
 \details{
 See the documentation for the \code{\link[=run.topGO.meta]{run.topGO.meta()}} function for examples and common use-cases. See the "index" link at the bottom of this window for all included datasets and functions.
