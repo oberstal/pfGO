@@ -8,3 +8,4 @@
 ^data-raw$
 ^README\.Rmd$
 ^\.DS_Store$
+^inst\/CITATION\.cff$

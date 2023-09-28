@@ -9,3 +9,4 @@ data-raw/*
 extra
 tests
 .DS_Store
+inst/CITATION.cff
