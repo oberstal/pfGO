@@ -761,7 +761,7 @@ formatGOdb.curated <-
 #' Extracts and formats annotations from a .gff file.
 #'
 #' @description
-#' Extracts and formats annotations from a .gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from PlasmoDB.
+#' Extracts and formats all gene annotations (biotypes "protein_coding_gene", ncRNA_gene", and "pseudogene") from a .gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from PlasmoDB.
 #'
 #' @param x input gff file
 
@@ -769,7 +769,7 @@ formatGOdb.curated <-
 #' *notes on gff format*
 #' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the file at the provided url.
 #'
-#' an annotation created from PlasmoDB's latest \emph{P. falciparum} .gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#' an annotation created from PlasmoDB's latest \emph{P. falciparum} .gff file (from PlasmoDB v66; accessed September 28, 2023) pre-formatted using this function is included in this package (pf.annot).
 #'
 #' @seealso [formatGOdb()]
 #' @export
