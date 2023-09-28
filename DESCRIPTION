@@ -1,5 +1,5 @@
 Package: pfGO
-Title: \emph{P. falciparum} functional enrichment analysis tools
+Title: Plasmodium falciparum functional enrichment analysis tools
 Version: 1.2
 Authors@R: 
     person(given = "J",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut","cre"),
            email = "jobersta@usf.edu",
            comment = c(ORCID = "0000-0002-3033-2212"))
-Description: Handy functions and datasets specifically enabling \emph{Plasmodium falciparum} functional enrichment analyses.
+Description: Handy functions and datasets specifically enabling Plasmodium falciparum functional enrichment analyses.
 License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
@@ -20,9 +20,8 @@ Imports:
     magrittr,
     utils,
     methods,
-    Rgraphviz,
     AnnotationDbi
-Remotes: bioc::release/topGO, bioc::release/Biobase, bioc::release/Rgraphviz, bioc::release/AnnotationDbi
+Remotes: bioc::release/topGO, bioc::release/Biobase, bioc::release/AnnotationDbi
 Depends: 
     R (>= 2.10),
     topGO
