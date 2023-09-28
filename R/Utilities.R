@@ -775,8 +775,8 @@ formatGOdb.curated <-
 #' @export
 get.annot <- function(x) {
   # "type" column is standard third column from .gff file
-  # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
-  x = x %>% dplyr::filter(type == "protein_coding_gene" | type == "ncRNA_gene")
+  # keep only entries for "protein_coding_gene","ncRNA_gene" and "pseudogene" types
+  x = x %>% dplyr::filter(type == "protein_coding_gene" | type == "ncRNA_gene" | type == "pseudogene")
   # Keep only informative columns
   x = x[, c(1:5, 7, 9)]
 
