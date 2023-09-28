@@ -5,8 +5,8 @@
 \title{Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.}
 \usage{
 formatGOdb.curated(
- 
-    url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
+  url =
+    "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
   organism = "Pf"
 )
 }
