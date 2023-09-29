@@ -416,6 +416,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     }
   }### THIS ENDS THE LOOP FOR EACH INTERESTING-GENE CATEGORY (counter incremented at beginning of loop)
 
+  ## sort final output table by interest category, go category, and pvalue (from most to least significant)
+  all.bin.combined.GO.output = all.bin.combined.GO.output %>% dplyr::arrange(interest.category,go.category,topGO)
+
   # output a table with ALL interest-category GO analyses in one with an added column for interest-category
   utils::write.table(
     all.bin.combined.GO.output,
@@ -428,6 +431,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
 
   # and output a table with ALL interest-category sig genes per sig term results in one with gene annotations and GOterm annotations:
   all.bin.combined.sig.per.term.output = dplyr::right_join(all.bin.combined.GO.output,all.bin.combined.sig.per.term.output)
+
+  ## also sort final output table by interest category, go category, GO.ID, and pvalue (from most to least significant)
+  all.bin.combined.sig.per.term.output = all.bin.combined.sig.per.term.output %>% dplyr::arrange(interest.category,go.category,GO.ID,topGO)
 
   utils::write.table(
     all.bin.combined.sig.per.term.output,
