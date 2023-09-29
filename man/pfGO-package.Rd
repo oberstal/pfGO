@@ -6,7 +6,7 @@
 \alias{pfGO-package}
 \title{pfGO: Plasmodium falciparum functional enrichment analysis tools}
 \description{
-Handy functions and datasets specifically enabling Plasmodium falciparum functional enrichment analyses.
+Handy functions and datasets specifically enabling Plasmodium falciparum functional enrichment analyses. You provide a single list of all genes included with your experiment and how you categorized them (e.g. upregulated, downregulated,neutral); then pfGO will test each category for functional enrichment. pfGO acts as a wrapper around the topGO package for much of its enrichment functionality, while also providing several functions for incorporating latest gene-ontology and functional annotations directly from PlasmoDB.org. pfGO enables chaining together many parallel enrichment-analyses at once, generating thorough logs and outputs supporting reproducible analyses.
 }
 \details{
 See the documentation for the \code{\link[=run.topGO.meta]{run.topGO.meta()}} function for examples and common use-cases. See the "index" link at the bottom of this window for all included datasets and functions.
