@@ -2,8 +2,11 @@
 .Rhistory
 .RData
 .Ruserdata
+.github
+.github/*
 Routput
 notes.R
+data-raw
 data-raw/*
 *.Rproj
 extra
