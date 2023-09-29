@@ -130,7 +130,6 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
   # make required directories for output if they don't exist. each one evaluates to that path, so can save the paths as variables
   R.dir = makeRoutput.dir()
   GO.dir = makeGOoutput.dir()
-  sigGO.dir = makeGOsig.genes.dir()
   hier.dir = makeGOhierarchy.dir()
 
   # go ahead and write the input-df to file in the run-folder so you don't have to wonder later:
@@ -309,11 +308,15 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         append = TRUE
       )
 
+      ## grab gene annotations to add to output tables later
+      pf.annot = get.pfannot()
 
-
-      if(length(goresults.genes)>1){
+      if(length(goresults.genes)>0){
       genes.in.term.lists = AnnotationDbi::unlist2(goresults.genes, use.names = TRUE)
       genes.in.terms.df = data.frame(GO.ID=names(genes.in.term.lists),geneID=genes.in.term.lists)
+      genes.in.terms.df$go.category = o
+      genes.in.terms.df$interest.category = i
+      genes.in.terms.df = dplyr::left_join(genes.in.terms.df,pf.annot)
       }
 
       if(length(goresults.genes)==0){
@@ -321,10 +324,6 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         genes.in.terms.df = NULL
       }
 
-      if (length(genes.in.terms.df)>0) {
-        genes.in.terms.df$go.category = o
-        genes.in.terms.df$interest.category = i
-      }
         # output (genes.in.terms.df) is a long df--column 1 = GO ids, column 2 = geneID mapped to that term. One geneID/GO pair per row. Then for each GO term, add column for term definition, and for each geneID, add column for annotation.
 
       ## write sig genes in sig terms df to logfile:

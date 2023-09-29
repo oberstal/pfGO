@@ -22,10 +22,10 @@ The \strong{run.topGO.meta} function:
 \item defines which genes are "interesting" and which should be defined as background for each category specified in mydf,
 \item makes the GOdata object for topGO,
 \item tests each category of interest for enriched GO-terms against all the other genes included in mydf (the "gene universe"),
-\item and then outputs results to several tables (tab.txt files that can be opened in Excel).
+\item and then outputs results to table (.tsv files that can be opened in Excel).
 }
 
-Enrichments are performed by each ontology (molecular function, biological process, cellular compartment) sequentially on all groups of interest. Results are combined in the final output-table ("Routput/GO/all.combined.GO.results.tab.txt").
+Enrichments are performed by each ontology (molecular function, biological process, cellular compartment) sequentially on all groups of interest. Results are combined in the final output-table ("Routput/GO/all.combined.GO.results.tsv").
 
 TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < 3 genes in the analysis) with "feasible genes" indicated in the topGO.log files in the "Routput/GO" folder.
 }
@@ -39,7 +39,7 @@ run.topGO.meta creates several output-files, including:
 \item thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
 }
 
-Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
+Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tsv".
 }
 
 \section{\strong{Concepts for common use-cases}}{
@@ -58,7 +58,7 @@ See the included \link{exampleMydf} as an example.
 
 A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses (\link{Pfal_geneID2GO}). You may also provide your own, so long as it is a named character-vector of GO-terms (each vector named by geneID, with GO terms as each element).
 
-You can use the included \code{\link[=formatGOdb.curated]{formatGOdb.curated()}} function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the \code{\link[=formatGOdb]{formatGOdb()}} function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
+You can use the included \code{\link[=formatGOdb.curated]{formatGOdb.curated()}} function to format a custom GO database from curated GeneDB/PlasmoDB annotations for several non-model organisms (or the \code{\link[=formatGOdb]{formatGOdb()}} function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available and can be downloaded through the AnnotationDbi bioconductor package that loads with topGO.
 }
 
 \examples{
