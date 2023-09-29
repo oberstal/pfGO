@@ -309,8 +309,8 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         sapply(genes, function(x) {
           genes.in.term.test = x[x %in% sig.genes]
           genes.in.term.test
-        } )
-      })
+        }, simplify = FALSE )
+      }, simplify = FALSE ) # do not simplify as some will be returned as vector and others as matrix
 
       cat(
         paste(
@@ -328,26 +328,21 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         append = TRUE
       )
 
-      if(length(goresults.genes)>1 & length(names(goresults.genes))>0){
-      genes.in.term.lists = AnnotationDbi::unlist2(goresults.genes, recursive = FALSE, use.names = TRUE)
+      if(length(goresults.genes)>1){
+      genes.in.term.lists = AnnotationDbi::unlist2(goresults.genes, use.names = TRUE)
       genes.in.terms.df = data.frame(GO.ID=names(genes.in.term.lists),geneID=genes.in.term.lists)
       }
 
-      if(length(goresults.genes)>1 & length(names(goresults.genes))==0){
-        genes.in.term.lists = goresults.genes
-        genes.in.terms.df = data.frame(GO.ID=as.character(dimnames(genes.in.term.lists)[2]),
-                                       geneID=genes.in.term.lists)
-      }
+      # if(length(goresults.genes)>1 & length(names(goresults.genes))==0){
+      #   genes.in.term.lists = goresults.genes
+      #   genes.in.terms.df = data.frame(GO.ID=as.character(dimnames(genes.in.term.lists)[2]),
+      #                                  geneID=genes.in.term.lists)
+      # }
 
       if(length(goresults.genes)==0){
         genes.in.term.lists = NULL
         genes.in.terms.df = NULL
       }
-
-#      genes.in.term.lists = sapply(goresults.genes,function(x){
-#        new.row=unlist(x, recursive = FALSE, use.names = TRUE) # old
-#        new.row = AnnotationDbi::unlist2(x, recursive = FALSE, use.names = TRUE)
-#      })
 
       # for testing
 #      print(str(genes.in.term.lists))
