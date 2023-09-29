@@ -4,15 +4,12 @@
 \alias{makeDirs}
 \alias{makeRoutput.dir}
 \alias{makeGOoutput.dir}
-\alias{makeGOsig.genes.dir}
 \alias{makeGOhierarchy.dir}
 \title{Creating directory-structure}
 \usage{
 makeRoutput.dir()
 
 makeGOoutput.dir()
-
-makeGOsig.genes.dir()
 
 makeGOhierarchy.dir()
 }
