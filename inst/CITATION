@@ -1,0 +1,9 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "pfGO: Tools for Plasmodium falciparum functional enrichment analysis",
+  author   = person(given = "J", family = "Oberstaller", role = c("aut","cre"), email = "jobersta@usf.edu", comment = c(ORCID = "0000-0002-3033-2212")),
+  year     = 2023,
+  note     = "R package version 1.2.0",
+  doi      = "10.5281/zenodo.5931520",
+  url      = "https://github.com/oberstal/pfGO"
+)

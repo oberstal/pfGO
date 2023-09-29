@@ -328,8 +328,6 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         append = TRUE
       )
 
-      print(str(goresults.genes))
-
       if(length(goresults.genes)>1 & length(names(goresults.genes))>0){
       genes.in.term.lists = AnnotationDbi::unlist2(goresults.genes, recursive = FALSE, use.names = TRUE)
       genes.in.terms.df = data.frame(GO.ID=names(genes.in.term.lists),geneID=genes.in.term.lists)
@@ -352,10 +350,10 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
 #      })
 
       # for testing
-      print(str(genes.in.term.lists))
+#      print(str(genes.in.term.lists))
 
 #      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind, .id = "GO.ID")
-      print(str(genes.in.terms.df))
+#      print(str(genes.in.terms.df))
       print("")
       print(genes.in.terms.df)
       print("")
@@ -369,7 +367,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       # THIS MAGICAL ONE-LINER TURNS THE WHOLE LIST OF LISTS OF UNEVEN SIZES INTO A BEAUTIFUL DF (this one works)
 #      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind)
       ## 4/26/2021: this is where I would fix the format of the output genes-in-terms file
-      print(utils::str(genes.in.terms.df))
+#      print(utils::str(genes.in.terms.df))
       print(genes.in.terms.df)
 
 
@@ -544,25 +542,33 @@ get.value <- function(id, lookupvector){
 #' @description
 #' Fetches \emph{P. falciparum} annotations from PlasmoDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
 #'
-#' @param url = url to a .gaf or .gaf.gz file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: /url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf}
+#' @param url = url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: /url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip}. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 #' @param organism = optional string to include in your output file-name. Defaults to "Pf".
+#' @param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v66").
 #'
 #' @details
+#'Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist. Note that the PlasmoDB release version isn't recorded automatically in the filename, so it is good practice to include the current PlasmoDB release number in the filename via the 'organism' parameter for your records.
 #'
 #' You will need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
+#'
+#' Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
+#'
 #'
 #' @details # \strong{Notes on .gaf format}
 #' The .gaf file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, inferred-from-electronic-annotation assignments is also included in this package (evidence code IEA; see \code{\link{formatGOdb.curated}})
+#' Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, Inferred-from-Electronic-Annotation assignments, Inferred from Biological aspect of Ancestor, or Nontraceable Author Statements is also included in this package (evidence codes IEA,IBA,NAS; see \code{\link{formatGOdb.curated}})
 #'
 #' a GOdb from PlasmoDB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
 #' @seealso [formatGOdb.curated()]
 #'
 #' @export
-formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
-           organism = "Pf") {
+formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip",
+           organism = "Pf",
+           plasmoDB_version = "") {
+
+  # old pre-v65 plasmoDB link: "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf"
     # make connection to gaf file without downloading it, then read it in.
     con = gzcon(url(url))
     input = readLines(con)
@@ -596,7 +602,14 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
     today = format(today, format = "%b%d%Y")
 
     # create output file
-    GOdb.file = paste("Routput/", organism, "_", today, "_GOdb.out", sep = "")
+    GOdb.file = paste("Routput/",
+                      organism,
+                      "_",
+                      plasmoDB_version,
+                      "_",
+                      today,
+                      "_GOdb.out",
+                      sep = "")
 
     for (i in id_list) {
       cat(paste(i),
@@ -636,8 +649,9 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #' @description
 #' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
 #'
-#' @param url url to a .gaf or .gaf.gz file. Defaults to latest \emph{Pf} consortium .gaf annotation file from PlasmoDB.
-#'@param organism optional string to include in your output file-name. Defaults to "Pf".
+#' @param url url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf.gzip annotation file from PlasmoDB. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
+#'@param organism optional string to include in your output filename. Defaults to "Pf".
+#'@param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v66").
 #'
 #' @details
 #' Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist.
@@ -654,13 +668,14 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #' @seealso [formatGOdb()]
 #' @export
 formatGOdb.curated <-
-  function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf",
-           organism = "Pf"){
+  function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_Curated_GO.gaf.gzip",
+           organism = "Pf",
+           plasmoDB_version = ""){
 
-#  function(gaf.gz_url = "ftp://ftp.sanger.ac.uk/pub/genedb/releases/latest/Pfalciparum/Pfalciparum.gaf.gz",
-#           organism = "Pf") {
+    # old plasmoDB gaf link structure (up until release 65): "https://plasmodb.org/common/downloads/release-56/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf"
+      ## NOTE: seems plasmoDB is not following a consistent convention yet after release 64; v65 uses zip archives while v66 switches to gzip files (up until v65 files were not compressed). The method here will work to extract gzip and noncompressed files. Zip archives are more complicated and won't work with this function. Zip files need to be downloaded and unzipped, then update the 'url' argument to the local unzipped file path.
+
     # make connection to .gaf or .gaf.gz file without downloading it, then read it in.
-
     con = gzcon(url(url))
 
     input = readLines(con)
@@ -671,7 +686,8 @@ formatGOdb.curated <-
                    stringsAsFactors = TRUE)
 
     # weed out any electronically-inferred evidence-codes (only want curated GO terms)
-    x = x[x[,7]!="IEA",]
+#    x = x[x[,7]!="IEA",]
+    ## NOTE: don't need to filter manually anymore, PlasmoDB offers their own curated gaf file with IEA,NAS and IBA codes filtered
 
     # Keep only the 2nd and 5th columns (geneID, GO)
     x = x[, c(2, 5)]
@@ -698,7 +714,14 @@ formatGOdb.curated <-
     today = format(today, format = "%b%d%Y")
 
     # create output file
-    GOdb.file = paste("Routput/", organism, "_curated", today, "_GOdb.out", sep = "")
+    GOdb.file = paste("Routput/",
+                      organism,
+                      "_",
+                      plasmoDB_version,
+                      "_curated",
+                      today,
+                      "_GOdb.out",
+                      sep = "")
 
     for (i in id_list) {
       cat(paste(i),
@@ -731,12 +754,47 @@ formatGOdb.curated <-
     return(GO.db)
     }
 
+
+## get.GOdef
+#' @title
+#' Get GO terms and definitions
+#'
+#' @description
+#' Extracts the term, term-definition, and ontology for all GOIDs (e.g. GO:0000027) in a geneID2GO object into a dataframe. Output also includes a column for all geneIDs mapping to each term as a comma-separated list. Not required presently for the GO enrichment pipeline, but provides useful context for results--very handy to use as a lookup-table for both GO terms and individual geneIDs.
+#'
+#'
+#' @param geneID2GO  geneID2GO object. Defaults to Pfal_geneID2GO (if using the default, you must first load the data-object \link{Pfal_geneID2GO} ).
+#'
+#' @export
+#'
+#' @examples
+#' # example code
+#' data(Pfal_geneID2GO)  ## load Pfal_geneID2GO object
+#' go2genesLookup.df <- get.GOdef(Pfal_geneID2GO)
+#'
+get.GOdef <- function(geneID2GO = "Pfal_geneID2GO"){
+  # get go2genes
+  go2genes = topGO::inverseList(geneID2GO)
+  go2genes.df = data.frame(sapply(go2genes,stringr::str_flatten_comma))
+  go2genes.df$GOID = rownames(go2genes.df)
+  rownames(go2genes.df) = NULL
+  colnames(go2genes.df) = c("geneIDsList","GOID")
+  # grab all GO terms in GOdb
+  terms = names(go2genes)
+  # extract all relevant term definitions from GO.db package
+  GOdef.df = AnnotationDbi::select(x = GO.db, keys = terms, columns = as.character(AnnotationDbi::columns(GO.db)), keytype = "GOID")
+  # join GO term definitions with all genes mapping to each term (geneIDs in a comma-separated string for each GOterm)
+  GOdef.df = dplyr::left_join(GOdef.df,go2genes.df)
+  GOdef.df
+}
+
+
 ## get.annot
 #' @title
 #' Extracts and formats annotations from a .gff file.
 #'
 #' @description
-#' Extracts and formats annotations from a .gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from PlasmoDB.
+#' Extracts and formats all gene annotations (biotypes "protein_coding_gene", ncRNA_gene", and "pseudogene") from a .gff file. Not required presently for the GO enrichment pipeline, but provides useful context for results. Can be used as-is with a provided gff file as input, or is called by get_pfannot to get the gff file from PlasmoDB.
 #'
 #' @param x input gff file
 
@@ -744,14 +802,14 @@ formatGOdb.curated <-
 #' *notes on gff format*
 #' The gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the file at the provided url.
 #'
-#' an annotation created from PlasmoDB's latest \emph{P. falciparum} .gff file (accessed November 1, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#' an annotation created from PlasmoDB's latest \emph{P. falciparum} .gff file (from PlasmoDB v66; accessed September 28, 2023) pre-formatted using this function is included in this package (pf.annot).
 #'
 #' @seealso [formatGOdb()]
 #' @export
 get.annot <- function(x) {
   # "type" column is standard third column from .gff file
-  # keep only entries for "protein_coding_gene" or "ncRNA_gene" types
-  x = x %>% dplyr::filter(type == "protein_coding_gene" | type == "ncRNA_gene")
+  # keep only entries for "protein_coding_gene","ncRNA_gene" and "pseudogene" types
+  x = x %>% dplyr::filter(type == "protein_coding_gene" | type == "ncRNA_gene" | type == "pseudogene")
   # Keep only informative columns
   x = x[, c(1:5, 7, 9)]
 
@@ -760,10 +818,13 @@ get.annot <- function(x) {
   x$geneID = stringr::str_replace(x$attributes, ";.+", "")
   x$geneID = stringr::str_replace(x$geneID, "ID=", "")
 
-  # description is always last field in attributes column
+  # description is always last or next-to last field in attributes column
   x$description = stringr::str_replace(x$attributes, ".+description=", "")
-  # and replace the "%2C" misformattings with comma
-  x$description = stringr::str_replace(x$description, "\\%2C", ",")
+  # remove any trailing fields
+  x$description = stringr::str_replace(x$description, ";.+", "")
+  # and replace the "%2C" ascii formatting with comma
+  x$description = stringr::str_replace_all(x$description, "\\%2C", ",")
+
 
   # some entries have "Name=" entries; others only have "description=". use names for the genes that have a genesymbol, and for the others set name = to what's left (the geneID)
   x$geneName = "blank"
@@ -784,7 +845,7 @@ get.annot <- function(x) {
 #' @description
 #' Extracts and formats annotations from a gff file from PlasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the .gff file from PlasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
 #'
-#' @param gff_url connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-55_Pfalciparum3D7.gff}
+#' @param gff_url connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff}
 
 
 #' @details # \strong{Notes on gff format}
@@ -797,7 +858,7 @@ get.annot <- function(x) {
 #' @seealso [get.annot()]
 #' @export
 get.pfannot <-
-  function(gff_url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-56_Pfalciparum3D7.gff") {
+  function(gff_url = "https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff") {
     # make connection to gff file without downloading it, then read it in.
     con = gzcon(url(gff_url))
     input = readLines(con)

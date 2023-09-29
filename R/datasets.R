@@ -4,11 +4,11 @@
 #' @name Pfal_geneID2GO
 #' @docType data
 #' @description
-#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (accessed from PlasmoDB Nov 5, 2021).
+#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 66; accessed Sep 28, 2023).
 #'
 #' @usage data(Pfal_geneID2GO)
-#' @format A list of 3878 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
-#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-54_Pfalciparum3D7_GO.gaf>
+#' @format A list of 3454 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_GO.gaf.gzip>
 #' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
@@ -46,12 +46,12 @@
 #'
 #' @usage data(pf.annot)
 #'
-#' @format A data frame of 5562 rows and 9 columns.
+#' @format A data frame of 5720 rows and 9 columns.
 #'
 #' \describe{
 #'   \item{seqid}{chromosome ID.}
 #'   \item{source}{annotation source.}
-#'   \item{type}{type of annotation. Here only protein-coding genes and ncRNA genes are kept.}
+#'   \item{type}{type of annotation. Here protein-coding genes, ncRNA genes and pseudogenes are kept.}
 #'   \item{feature_start}{gene start coordinate.}
 #'   \item{feature_end}{gene end coordinate.}
 #'   \item{strand}{gene strand.}
@@ -61,7 +61,7 @@
 
 #' }
 #'
-#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gff/data/PlasmoDB-54_Pfalciparum3D7.gff>
+#' @source <https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff>
 #'
 #' @keywords dataset
 #' @details ## Keep in mind:
@@ -99,13 +99,13 @@
 
 ## insertions ----
 #' @title \emph{piggyBac} insertions reported in Zhang et al. 2018 (Science)
-#' @name insertions
+#' @name pf.insertions
 #' @docType data
 #' @description
-#' \emph{P. falciparum} insertion-data as published in Science 2018. Contains 3 of the published supplemental tables (Table S1, Pilot_library; Table S3, Saturation_library; Table S5, GenesbyMIS). Not need to run GO enrichment functions, but useful additional info to have for interpreting output.
+#' \emph{P. falciparum} insertion-data as published in Science 2018. Contains 3 of the published supplemental tables (Table S1, pilot_library; Table S3, saturation_library; Table S5, genesbyMIS). Not needed to run GO enrichment functions, but useful additional info to have for interpreting output.
 #'
-#' @usage data(insertions)
-#' @format A list of 3 dataframes--Pilot_library, corresponding to published table S1; Saturation_library, corresponding to Table S3, and GenesbyMIS, corresponding to Table S5.
+#' @usage data(pf.insertions)
+#' @format A list of 3 dataframes--pilot_library, corresponding to published table S1; saturation_library, corresponding to Table S3, and genesbyMIS, corresponding to Table S5. Column-names have been edited to be R-friendly.
 #' @source <https://www.science.org/doi/10.1126/science.aap7847>
 
-"insertions"
+"pf.insertions"
