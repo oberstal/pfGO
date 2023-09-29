@@ -426,7 +426,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     row.names = FALSE
   )
 
-  # and output a table with ALL interest-category sig genes per sig term results in one with an added column for interest-category
+  # and output a table with ALL interest-category sig genes per sig term results in one with gene annotations and GOterm annotations:
+  all.bin.combined.sig.per.term.output = dplyr::right_join(all.bin.combined.GO.output,all.bin.combined.sig.per.term.output)
+
   utils::write.table(
     all.bin.combined.sig.per.term.output,
     paste("Routput/GO/all.combined.sig.genes.per.sig.terms.tsv",
