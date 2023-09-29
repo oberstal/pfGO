@@ -361,17 +361,14 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         genes.in.terms.df$go.category = o
         genes.in.terms.df$interest.category = i
       }
-      # current output is is a df with unnecessary empty NA values in columns to preserve spacing (prob from writing from a list of lists to a table row by row?? )
-        # output should ideally just be a long list--column 1 = GO ids, column 2 = geneID mapped to that term. One geneID/GO pair per row. Then for each GO term, add column for term definition, and for each geneID, add column for annotation.
+        # output should be a long df--column 1 = GO ids, column 2 = geneID mapped to that term. One geneID/GO pair per row. Then for each GO term, add column for term definition, and for each geneID, add column for annotation.
 
-      # THIS MAGICAL ONE-LINER TURNS THE WHOLE LIST OF LISTS OF UNEVEN SIZES INTO A BEAUTIFUL DF (this one works)
-#      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind)
       ## 4/26/2021: this is where I would fix the format of the output genes-in-terms file
 #      print(utils::str(genes.in.terms.df))
       print(genes.in.terms.df)
 
 
-      # # goresults.genes is a list of lists, one for each GO term. Reformat to df and write to file:
+      ## write sig genes in sig terms df to file:
 
       cat(
         paste(
@@ -535,7 +532,7 @@ get.value <- function(id, lookupvector){
   return(value)
 }
 
-## formatGOdb
+## formatGOdb ----
 #' @title
 #' Creates a GO database compatible with topGO from .gaf file retrieved from PlasmoDB.
 #'
@@ -642,7 +639,7 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
     return(GO.db)
   }
 
-## formatGOdb.curated
+## formatGOdb.curated----
 #' @title
 #' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
 #'
@@ -755,7 +752,7 @@ formatGOdb.curated <-
     }
 
 
-## get.GOdef
+## get.GOdef -----
 #' @title
 #' Get GO terms and definitions
 #'
@@ -789,7 +786,7 @@ get.GOdef <- function(geneID2GO = "Pfal_geneID2GO"){
 }
 
 
-## get.annot
+## get.annot ----
 #' @title
 #' Extracts and formats annotations from a .gff file.
 #'
@@ -838,7 +835,7 @@ get.annot <- function(x) {
   x
 }
 
-## get.pfannot
+## get.pfannot ----
 #' @title
 #' Extracts and formats annotations from a gff file from PlasmoDB.
 #'
