@@ -125,7 +125,6 @@ makeGOhierarchy.dir <- function() {
 run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0.05) {
 #  require(topGO)
 #  require(tidyverse)
- # require(plyr)
 
   # make required directories for output if they don't exist. each one evaluates to that path, so can save the paths as variables
   R.dir = makeRoutput.dir()
@@ -711,7 +710,7 @@ get.GOdef <- function(geneID2GO = "Pfal_geneID2GO"){
   # grab all GO terms in GOdb
   terms = names(go2genes)
   # extract all relevant term definitions from GO.db package
-  GOdef.df = AnnotationDbi::select(x = GO.db, keys = terms, columns = as.character(AnnotationDbi::columns(GO.db)), keytype = "GOID")
+  GOdef.df = AnnotationDbi::select(x = GO.db::GO.db, keys = terms, columns = as.character(AnnotationDbi::columns(GO.db::GO.db)), keytype = "GOID")
   # join GO term definitions with all genes mapping to each term (geneIDs in a comma-separated string for each GOterm)
   GOdef.df = dplyr::left_join(GOdef.df,go2genes.df)
   GOdef.df
