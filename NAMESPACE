@@ -2,6 +2,7 @@
 
 export(formatGOdb)
 export(formatGOdb.curated)
+export(get.GOdef)
 export(get.annot)
 export(get.pfannot)
 export(get.value)

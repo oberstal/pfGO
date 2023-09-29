@@ -754,6 +754,41 @@ formatGOdb.curated <-
     return(GO.db)
     }
 
+
+## get.GOdef
+#' @title
+#' Get GO terms and definitions
+#'
+#' @description
+#' Extracts the term, term-definition, and ontology for all GOIDs (e.g. GO:0000027) in a geneID2GO object into a dataframe. Output also includes a column for all geneIDs mapping to each term as a comma-separated list. Not required presently for the GO enrichment pipeline, but provides useful context for results--very handy to use as a lookup-table for both GO terms and individual geneIDs.
+#'
+#'
+#' @param geneID2GO  geneID2GO object. Defaults to Pfal_geneID2GO (if using the default, you must first load the data-object \link{Pfal_geneID2GO} ).
+#'
+#' @export
+#'
+#' @examples
+#' # example code
+#' data(Pfal_geneID2GO)  ## load Pfal_geneID2GO object
+#' go2genesLookup.df <- get.GOdef(Pfal_geneID2GO)
+#'
+get.GOdef <- function(geneID2GO = "Pfal_geneID2GO"){
+  # get go2genes
+  go2genes = topGO::inverseList(geneID2GO)
+  go2genes.df = data.frame(sapply(go2genes,stringr::str_flatten_comma))
+  go2genes.df$GOID = rownames(go2genes.df)
+  rownames(go2genes.df) = NULL
+  colnames(go2genes.df) = c("geneIDsList","GOID")
+  # grab all GO terms in GOdb
+  terms = names(go2genes)
+  # extract all relevant term definitions from GO.db package
+  GOdef.df = AnnotationDbi::select(x = GO.db, keys = terms, columns = as.character(AnnotationDbi::columns(GO.db)), keytype = "GOID")
+  # join GO term definitions with all genes mapping to each term (geneIDs in a comma-separated string for each GOterm)
+  GOdef.df = dplyr::left_join(GOdef.df,go2genes.df)
+  GOdef.df
+}
+
+
 ## get.annot
 #' @title
 #' Extracts and formats annotations from a .gff file.
