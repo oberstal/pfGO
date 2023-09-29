@@ -800,9 +800,12 @@ get.pfannot <-
                    header = FALSE,
                    stringsAsFactors = TRUE)
     # set column names for standard gff file
-    colnames(x) = c("seqid","source","type","feature_start","feature_end","score","strand","phase","attributes")
+    colnames(x) = c("seqid","source","type","geneStart","geneEnd","score","strand","phase","attributes")
 
     annot = get.annot(x) # then the get.annot function formats the gff file for non-redundancy and readability
+    # get.annot keeps columns 1:5,7,9 and output is slightly different. rearrange columns to make it easier to get in bed format should that be needed downstream
+    annot = annot[,c(1,4:6,3,7:9,2)]
+    # final column order will be c("seqid","geneStart","geneEnd","strand","type","geneID","description","geneName","source")
     annot
   }
 
