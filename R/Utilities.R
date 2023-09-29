@@ -402,33 +402,32 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       if (ontology.counter != 1) {
         combined.GO.output = rbind.data.frame(combined.GO.output, res)
         combined.significant.GO.output = rbind.data.frame(combined.significant.GO.output, res.significant)
-        #        combined.sig.per.term.output = rbind.data.frame(combined.sig.per.term.output, genes.in.terms.df)
-        # try using bind_rows instead to get around problem of joining dataframes with uneven number of columns. IT WORKS!
-#        combined.sig.per.term.output = dplyr::bind_rows(combined.sig.per.term.output, genes.in.terms.df)
-        sig.per.term.output = genes.in.terms.df
+        combined.sig.per.term.output = rbind.data.frame(combined.sig.per.term.output, genes.in.terms.df)
+#        sig.per.term.output = genes.in.terms.df
 
       } else {
         combined.GO.output = res
         combined.significant.GO.output = res.significant
-#        combined.sig.per.term.output = genes.in.terms.df
+        combined.sig.per.term.output = genes.in.terms.df
         sig.per.term.output = genes.in.terms.df
       }
 
-      ##### output a table with all GO (MF, BP, CC) significant-genes-per-term analyses in one for each interest category
+      ##### output a table with all GO (MF, BP, CC) significant-genes-per-significant-terms analyses in one for each interest category
       if (length(genes.in.terms.df)>0) {
         utils::write.table(
-          sig.per.term.output,
+          combined.sig.per.term.output,
           file = paste(
             "Routput/GO/sig.genes.by.term/",
             i,
             "_",
-            o,
+#            o,
             "_sig.genes.per.term.txt",
             sep = ""
             ),
           sep = "\t",
           quote = FALSE,
-          row.names = FALSE
+          row.names = FALSE,
+          append = TRUE
           )
       }
         } ### ONTOLOGY LOOP ENDS HERE
