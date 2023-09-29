@@ -49,18 +49,6 @@ makeGOoutput.dir <- function() {
 #' @rdname makeDirs
 #' @keywords internal
 #' @export
-makeGOsig.genes.dir <- function() {
-  file.path = getwd()
-  mainDir = "/Routput/GO"
-  subDir = "/sig.genes.by.term"
-  newDir = paste(file.path, mainDir, subDir, sep = "")
-  dir.create(newDir, showWarnings = FALSE)
-  newDir
-}
-
-#' @rdname makeDirs
-#' @keywords internal
-#' @export
 makeGOhierarchy.dir <- function() {
   file.path = getwd()
   mainDir = "/Routput/GO"
@@ -72,12 +60,6 @@ makeGOhierarchy.dir <- function() {
   dir.create(newDir, showWarnings = FALSE)
   newDir
 }
-
-
-
-
-
-
 
 
 ############### run.topGO.meta ----
@@ -100,7 +82,7 @@ makeGOhierarchy.dir <- function() {
 #' * plots of the GO-term hierarchy relevant to the analysis, and
 #' * thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
 #'
-#' Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tab.txt".
+#' Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tsv".
 #'
 #'
 #' @details
@@ -108,9 +90,9 @@ makeGOhierarchy.dir <- function() {
 #' * defines which genes are "interesting" and which should be defined as background for each category specified in mydf,
 #' * makes the GOdata object for topGO,
 #' * tests each category of interest for enriched GO-terms against all the other genes included in mydf (the "gene universe"),
-#' * and then outputs results to several tables (tab.txt files that can be opened in Excel).
+#' * and then outputs results to table (.tsv files that can be opened in Excel).
 #'
-#' Enrichments are performed by each ontology (molecular function, biological process, cellular compartment) sequentially on all groups of interest. Results are combined in the final output-table ("Routput/GO/all.combined.GO.results.tab.txt").
+#' Enrichments are performed by each ontology (molecular function, biological process, cellular compartment) sequentially on all groups of interest. Results are combined in the final output-table ("Routput/GO/all.combined.GO.results.tsv").
 
 #'
 #'
@@ -131,7 +113,7 @@ makeGOhierarchy.dir <- function() {
 #'
 #' A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses ([Pfal_geneID2GO]). You may also provide your own, so long as it is a named character-vector of GO-terms (each vector named by geneID, with GO terms as each element).
 #'
-#' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available through the AnnotationDbi bioconductor package that loads with topGO.
+#' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB/PlasmoDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available and can be downloaded through the AnnotationDbi bioconductor package that loads with topGO.
 #'
 #' @seealso [topGO::topGO()]
 #'
@@ -300,8 +282,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       res.significant = res[which(res$topGO <= pval),]
       #                                    & res$FDR <= 0.05),]
 
-      # # to output ONLY the significant genes from enriched GO terms, not every gene in a significant GO term in the gene universe(this seems to be the part where things go wrong and pipeline breaks--when it comes to converting to a df):
-      # goresults.genes works when tested step by step
+      # # to output ONLY the significant genes from enriched GO terms, not every gene in a significant GO term in the gene universe:
       goresults.genes = sapply(res.significant$GO.ID, function(x) {
         # get all genes for each GO term (will be list of geneIDs named for GO id)
         genes = topGO::genesInTerm(GOdata, x)
@@ -328,42 +309,25 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         append = TRUE
       )
 
+
+
       if(length(goresults.genes)>1){
       genes.in.term.lists = AnnotationDbi::unlist2(goresults.genes, use.names = TRUE)
       genes.in.terms.df = data.frame(GO.ID=names(genes.in.term.lists),geneID=genes.in.term.lists)
       }
-
-      # if(length(goresults.genes)>1 & length(names(goresults.genes))==0){
-      #   genes.in.term.lists = goresults.genes
-      #   genes.in.terms.df = data.frame(GO.ID=as.character(dimnames(genes.in.term.lists)[2]),
-      #                                  geneID=genes.in.term.lists)
-      # }
 
       if(length(goresults.genes)==0){
         genes.in.term.lists = NULL
         genes.in.terms.df = NULL
       }
 
-      # for testing
-#      print(str(genes.in.term.lists))
-
-#      genes.in.terms.df = plyr::ldply(genes.in.term.lists, rbind, .id = "GO.ID")
-#      print(str(genes.in.terms.df))
-      print("")
-      print(genes.in.terms.df)
-      print("")
       if (length(genes.in.terms.df)>0) {
         genes.in.terms.df$go.category = o
         genes.in.terms.df$interest.category = i
       }
-        # output should be a long df--column 1 = GO ids, column 2 = geneID mapped to that term. One geneID/GO pair per row. Then for each GO term, add column for term definition, and for each geneID, add column for annotation.
+        # output (genes.in.terms.df) is a long df--column 1 = GO ids, column 2 = geneID mapped to that term. One geneID/GO pair per row. Then for each GO term, add column for term definition, and for each geneID, add column for annotation.
 
-      ## 4/26/2021: this is where I would fix the format of the output genes-in-terms file
-#      print(utils::str(genes.in.terms.df))
-      print(genes.in.terms.df)
-
-
-      ## write sig genes in sig terms df to file:
+      ## write sig genes in sig terms df to logfile:
 
       cat(
         paste(
@@ -409,27 +373,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         combined.GO.output = res
         combined.significant.GO.output = res.significant
         combined.sig.per.term.output = genes.in.terms.df
-        sig.per.term.output = genes.in.terms.df
+#        sig.per.term.output = genes.in.terms.df
       }
 
-      ##### output a table with all GO (MF, BP, CC) significant-genes-per-significant-terms analyses in one for each interest category
-      if (length(genes.in.terms.df)>0) {
-        utils::write.table(
-          combined.sig.per.term.output,
-          file = paste(
-            "Routput/GO/sig.genes.by.term/",
-            i,
-            "_",
-#            o,
-            "_sig.genes.per.term.txt",
-            sep = ""
-            ),
-          sep = "\t",
-          quote = FALSE,
-          row.names = FALSE,
-          append = TRUE
-          )
-      }
         } ### ONTOLOGY LOOP ENDS HERE
 
     # print status-messages to indicate end of interest-category log-file
@@ -460,32 +406,31 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       append = TRUE
     )
 
-    ##### output a table with all GO (MF, BP, CC) significant-genes-per-term analyses in one for each interest category
-    # utils::write.table(
-    #   combined.sig.per.term.output,
-    #   file = paste(
-    #     "Routput/GO/sig.genes.by.term/",
-    #     i,
-    #     "_sig.genes.per.term.txt",
-    #     sep = ""
-    #   ),
-    #   sep = "\t",
-    #   quote = FALSE,
-    #   row.names = FALSE
-    # )
-    #    build on to the results-tables for each interest-category (1 loop for each of the interest categories)
+    #    build on to the results-tables and sig genes per sig term table for each interest-category (1 loop for each of the interest categories)
     if (interesting.category.counter != 1) {
       all.bin.combined.GO.output = rbind.data.frame(all.bin.combined.GO.output, combined.GO.output)
+      all.bin.combined.sig.per.term.output = rbind.data.frame(all.bin.combined.sig.per.term.output, combined.sig.per.term.output)
 
     } else {
       all.bin.combined.GO.output = combined.GO.output
+      all.bin.combined.sig.per.term.output = combined.sig.per.term.output
     }
   }### THIS ENDS THE LOOP FOR EACH INTERESTING-GENE CATEGORY (counter incremented at beginning of loop)
 
   # output a table with ALL interest-category GO analyses in one with an added column for interest-category
   utils::write.table(
     all.bin.combined.GO.output,
-    paste("Routput/GO/all.combined.GO.results.tab.txt",
+    paste("Routput/GO/all.combined.GO.results.tsv",
+          sep = ""),
+    quote = FALSE,
+    sep = "\t",
+    row.names = FALSE
+  )
+
+  # and output a table with ALL interest-category sig genes per sig term results in one with an added column for interest-category
+  utils::write.table(
+    all.bin.combined.sig.per.term.output,
+    paste("Routput/GO/all.combined.sig.genes.per.sig.terms.tsv",
           sep = ""),
     quote = FALSE,
     sep = "\t",
@@ -495,18 +440,14 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
   # print some progress-messages to screen
   cat("\nAll interesting-gene categories have been tested for GO-term enrichment.")
   cat(
-    "\n\nSee ALL TOP 30 enriched terms by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'."
+    "\n\nSee ALL TOP 30 enriched terms by interesting-gene category in 'Routput/GO/all.combined.GO.results.tsv'."
   )
   cat(
-    "\n\nSee log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/genes_by_GOterm.*.tab.txt'."
+    "\n\nSee log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/topGO.log.*.txt'."
   )
-
-  # sig genes per term doesn't work with creating runGOdata object yet. But option for the future to store multiple outputs from single run. returns major output as R object (does not interfere with created output files)
-#  setClass("runGOdata", slots = c(enrichmentResult = "ANY", sigGenes = "ANY"))
-
-#  myrunGOdata <- new("runGOdata", enrichmentResult = all.bin.combined.GO.output, sigGenes = combined.sig.per.term.output)
-
-#  myrunGOdata
+  cat(
+    "\n\nTable of all significant genes mapped to all significant GO terms in 'Routput/GO/all.combined.sig.genes.per.sig.terms.tsv'."
+  )
   all.bin.combined.GO.output
 }
 
