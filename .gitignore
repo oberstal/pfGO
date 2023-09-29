@@ -2,12 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
-.github
-.github/*
-Routput
+.github/
+Routput/
 notes.R
-data-raw
-data-raw/*
+data-raw/
 *.Rproj
 extra
 tests
