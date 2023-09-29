@@ -180,28 +180,15 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       # print some notes to logfile
       cat(
         paste(
-          "\n\n\n====================================================================================\n"
+          "\n\n\n====================================================================================\n",
+          "Gene-category of interest: ",
+          i,
+          "\nOntology: ",
+          o,
+          "\n====================================================================================\n",
+          "\n*** Begin topGO results summary ***\n",
+          sep = ""
         ),
-        file = logfile,
-        append = TRUE
-      )
-      cat(
-        paste("Gene-category of interest: ", i, sep = ""),
-        file = logfile,
-        append = TRUE
-      )
-      cat(paste("\nOntology: ", o, sep = ""),
-          file = logfile,
-          append = TRUE)
-      cat(
-        paste(
-          "\n====================================================================================\n"
-        ),
-        file = logfile,
-        append = TRUE
-      )
-      cat(
-        paste("\n*** Begin topGO results summary ***\n"),
         file = logfile,
         append = TRUE
       )
@@ -233,14 +220,6 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         append = TRUE
       )
       utils::capture.output(sig.genes, file = logfile, append = TRUE)
-
-      cat(
-        paste(
-          "\n==============================================================================\n"
-        ),
-        file = logfile,
-        append = TRUE
-      )
 
       # generate a plot of the GO hierarchy highlighting the most significant terms (can help demonstrate how terms were collapsed) and output to .pdf
       topGO::printGraph(
@@ -276,10 +255,45 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       # next convert the topGO column to numeric (this way no "NA's" will be introduced)
       res$topGO = as.numeric(res$topGO)
 
+      res$go.category = o
+      res$interest.category = i
+
+      #### print results for go category to screen
+      cat(
+        paste(
+          "\n==============================================================================\n",
+          "GO enrichment results for interest category: ",
+          i,
+          "\nOntology: ",
+          o,
+          sep = ""
+          )
+      )
+
+      print(res)
+
+      cat(
+        paste(
+          "\n==============================================================================\n",
+          "\ninterest-category ",
+          interesting.category.counter,
+          " of ",
+          length(interesting_genes),
+          "\nontology ",
+          ontology.counter +1,
+          " of 3\n",
+          sep = ""
+          )
+      )
+      ####
+
+
       # do a p. adjust for FDR on the entire dataset (NOT NECESSARY for topGO method):
       #        res$FDR = p.adjust(res$topGO, method = "fdr")
       res.significant = res[which(res$topGO <= pval),]
       #                                    & res$FDR <= 0.05),]
+
+
 
       # # to output ONLY the significant genes from enriched GO terms, not every gene in a significant GO term in the gene universe:
       goresults.genes = sapply(res.significant$GO.ID, function(x) {
@@ -292,22 +306,6 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
         }, simplify = FALSE )
       }, simplify = FALSE ) # do not simplify as some will be returned as vector and others as matrix
 
-      cat(
-        paste(
-          "\n*** SIGNIFICANT genes in significant GO terms: ***\n\n\n"
-        ),
-        file = logfile,
-        append = TRUE
-      )
-      utils::capture.output(goresults.genes, file = logfile, append = TRUE)
-      cat(
-        paste(
-          "\n\n--------------------------------------------------------------------------------\n\n\n"
-        ),
-        file = logfile,
-        append = TRUE
-      )
-
       ## grab gene annotations to add to output tables later
       pf.annot = get.pfannot()
 
@@ -316,7 +314,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
       genes.in.terms.df = data.frame(GO.ID=names(genes.in.term.lists),geneID=genes.in.term.lists)
       genes.in.terms.df$go.category = o
       genes.in.terms.df$interest.category = i
-      genes.in.terms.df = dplyr::left_join(genes.in.terms.df,pf.annot)
+      genes.in.terms.df = suppressMessages(dplyr::left_join(genes.in.terms.df,
+                                           pf.annot,
+                                           na_matches ="never"))
       }
 
       if(length(goresults.genes)==0){
@@ -330,7 +330,10 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
 
       cat(
         paste(
-          "\n*** Significant genes in significant GO-terms (table output) ***\n\n\n"
+          "\n==============================================================================\n",
+          "\n*** SIGNIFICANT genes in significant (i.e. enriched) GO-terms ***\n",
+          "pval parameter: ", pval,
+          "\n\n"
         ),
         file = logfile,
         append = TRUE
@@ -343,17 +346,11 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
           "\nontology-category counter is ",
           ontology.counter,
           " of 3",
-          sep = ""
-        ),
-        file = logfile,
-        append = TRUE
-      )
-      cat(
-        paste(
           "\ninteresting-category counter is ",
           interesting.category.counter,
           " of ",
           length(interesting_genes),
+          "\n",
           sep = ""
         ),
         file = logfile,
@@ -380,30 +377,17 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     # print status-messages to indicate end of interest-category log-file
     cat(
       paste(
-        "\n--------------------------------------------------------------------------------\n"
-      ),
+        "\n--------------------------------------------------------------------------------\n",
+        "************************************************************************************\n",
+        "***END category ", i, " enrichment results***\n",
+        "************************************************************************************\n",
+        "\n\nSee TOP 30 enriched terms for all interesting-gene categories in 'Routput/GO/all.combined.GO.results.tsv'.",
+        "\n\nSee all significant genes mapped to all enriched GO terms in 'Routput/GO/all.combined.sig.genes.per.sig.terms.tsv'.\n",
+        sep = ""
+        ),
       file = logfile,
       append = TRUE
-    )
-    cat(
-      paste(
-        "************************************************************************************\n"
-      ),
-      file = logfile,
-      append = TRUE
-    )
-    cat(
-      paste("***END category ", i, " enrichment results***\n"),
-      file = logfile,
-      append = TRUE
-    )
-    cat(
-      paste(
-        "************************************************************************************\n"
-      ),
-      file = logfile,
-      append = TRUE
-    )
+      )
 
     #    build on to the results-tables and sig genes per sig term table for each interest-category (1 loop for each of the interest categories)
     if (interesting.category.counter != 1) {
@@ -430,7 +414,7 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
   )
 
   # and output a table with ALL interest-category sig genes per sig term results in one with gene annotations and GOterm annotations:
-  all.bin.combined.sig.per.term.output = dplyr::right_join(all.bin.combined.GO.output,all.bin.combined.sig.per.term.output)
+  all.bin.combined.sig.per.term.output = dplyr::right_join(all.bin.combined.GO.output,all.bin.combined.sig.per.term.output,na_matches ="never")
 
   ## also sort final output table by interest category, go category, GO.ID, and pvalue (from most to least significant)
   all.bin.combined.sig.per.term.output = all.bin.combined.sig.per.term.output %>% dplyr::arrange(interest.category,go.category,GO.ID,topGO)
@@ -444,7 +428,13 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     row.names = FALSE
   )
 
+  # print final GO results table to screen
+  cat("\n==============================================================================\n")
+  cat("Final GO enrichment results table (saved to 'Routput/GO/all.combined.GO.results.tsv':\n")
+  print(all.bin.combined.GO.output)
+
   # print some progress-messages to screen
+  cat("\n==============================================================================\n\n\n")
   cat("\nAll interesting-gene categories have been tested for GO-term enrichment.")
   cat(
     "\n\nSee ALL TOP 30 enriched terms by interesting-gene category in 'Routput/GO/all.combined.GO.results.tsv'."
@@ -453,9 +443,9 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     "\n\nSee log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/topGO.log.*.txt'."
   )
   cat(
-    "\n\nTable of all significant genes mapped to all significant GO terms in 'Routput/GO/all.combined.sig.genes.per.sig.terms.tsv'."
+    "\n\nSee all significant genes mapped to all significant GO terms in 'Routput/GO/all.combined.sig.genes.per.sig.terms.tsv'."
   )
-  all.bin.combined.GO.output
+  cat("\n\n==============================================================================\n\n")
 }
 
 #' @title get.value
