@@ -4,15 +4,10 @@
 \alias{formatGOdb.curated}
 \title{Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.}
 \usage{
-formatGOdb.curated(
-  url =
-    "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_Curated_GO.gaf.gzip",
-  organism = "Pf",
-  plasmoDB_version = ""
-)
+formatGOdb.curated(url, organism = "Pf", plasmoDB_version = "")
 }
 \arguments{
-\item{url}{url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf.gzip annotation file from PlasmoDB. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
+\item{url}{url or filepath to a .gaf or gz-compressed gaf file. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
 
 \item{organism}{optional string to include in your output filename. Defaults to "Pf".}
 
@@ -31,7 +26,7 @@ Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
 \section{\strong{Notes on gaf.gz format}}{
 The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 
-A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed Nov 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 }
 
 \seealso{
