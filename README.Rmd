@@ -25,7 +25,7 @@ pfGO enables chaining together many parallel enrichment-analyses at once, genera
 
 ## Installation
 
-You can install the development version of pfGO from [GitHub](https://github.com/) with:
+You can install pfGO from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -134,10 +134,17 @@ Example console output generated running the quick-start example data (*piggyBac
 
 ```{r example_console_output, warning=FALSE}
 # load included pf GO database and example-data to be tested for functional enrichment
-data(Pfal_geneID2GO)
+data(Pfal_geneID2GO_curated)
 data(exampleMydf)
 
 # run the topGO pipeline on all experimental categories of interest from exampleMydf
-run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.1)
+run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated, pval = 0.1)
+
+```
+
+```{r example_sig_genes, warning=FALSE}
+
+# if you've run the pipeline, your significant genes in significant terms per category of interest can be loaded:
+sig.genes <- read.delim("Routput/GO/all.combined.sig.genes.per.sig.terms.tsv")
 
 ```

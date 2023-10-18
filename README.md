@@ -4,7 +4,6 @@
 # pfGO
 
 <!-- badges: start -->
-[![DOI](https://zenodo.org/badge/362281358.svg)](https://zenodo.org/badge/latestdoi/362281358)
 <!-- badges: end -->
 
 The goal of pfGO is to package handy functions and datasets specifically
@@ -19,8 +18,7 @@ analyses.
 
 ## Installation
 
-You can install the development version of pfGO from
-[GitHub](https://github.com/) with:
+You can install pfGO from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -51,8 +49,8 @@ library(pfGO)
 
 ``` r
 # load included pf GO database and example-data to be tested for functional enrichment
-data("Pfal_geneID2GO")
-data("exampleMydf")
+data(Pfal_geneID2GO)
+data(exampleMydf)
 
 # run the topGO pipeline on all experimental categories of interest from exampleMydf
 run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
@@ -70,52 +68,51 @@ Tests for functional enrichment in gene-categories of interest.
 
 #### parameters:
 
--   *mydf*: data frame with geneIDs in column 1, and interest-category
-    classifications in column 2.
--   *geneID2GO*: a list of named vectors of GO IDs–one vector of
-    GO-terms for each geneID.
--   *pval*: p-value threshold for significance. Defaults to 0.05.
+- *mydf*: data frame with geneIDs in column 1, and interest-category
+  classifications in column 2.
+- *geneID2GO*: a list of named vectors of GO IDs–one vector of GO-terms
+  for each geneID.
+- *pval*: p-value threshold for significance. Defaults to 0.05.
 
 #### outputs:
 
 run.topGO.meta creates several output-files, including:
 
--   enrichment results
+- enrichment results
 
--   significant genes per significant term
+- significant genes per significant term
 
-    -   *note these significant genes per term files have buggy
-        formatting and may require manual editing*
+  - available in “Routput/GO/all.combined.sig.genes.per.sig.terms.tsv”
 
--   plots of the GO-term hierarchy relevant to the analysis
+- plots of the GO-term hierarchy relevant to the analysis
 
--   thorough log-files for each gene-category of interest tested against
-    the background of all other genes in the analysis
+- thorough log-files for each gene-category of interest tested against
+  the background of all other genes in the analysis
 
--   system logs recording all package versions, etc.
+- system logs recording all package versions, etc.
 
 Primary results from run.topGO.meta will be in
-“Routput/GO/all.combined.GO.results.tab.txt”. Note that run.topGO.meta
-will automatically create the Routput directory (and other required
-output directories nested in ./Routput) in your working directory for
-you if it does not exist.
+“Routput/GO/all.combined.GO.results.tsv”. Note that run.topGO.meta will
+automatically create the Routput directory (and other required output
+directories nested in ./Routput) in your working directory for you if it
+does not exist.
 
 #### more function details
 
 The **run.topGO.meta** function:
 
--   defines which genes are “interesting” and which should be defined as
-    background for each category specified in mydf,
--   makes the GOdata object for topGO,
--   tests each category of interest for enriched GO-terms against all
-    the other genes included in mydf (the “gene universe”),
--   and then outputs results to several tables (tab.txt files that can
-    be opened in Excel).
+- defines which genes are “interesting” and which should be defined as
+  background for each category specified in mydf,
+- makes the GOdata object for topGO,
+- tests each category of interest for enriched GO-terms against all the
+  other genes included in mydf (the “gene universe”),
+- and then outputs results to several tables (.tsv files that can be
+  opened in Excel).
 
 Enrichments are performed by each ontology (molecular function,
 biological process, cellular compartment; MF, BP, and CC, respectively)
 sequentially on all groups of interest. Results are combined in the
-final output-table (“Routput/GO/all.combined.GO.results.tab.txt”).
+final output-table (“Routput/GO/all.combined.GO.results.tsv”).
 
 TopGO automatically accounts for genes that cannot be mapped to GO terms
 (or are mapped to terms with \< 3 genes in the analysis) with “feasible
@@ -149,7 +146,7 @@ by geneID, with GO terms as each element).
 You can use the included **formatGOdb.curated()** function to format a
 custom GO database from curated GeneDB annotations for several non-model
 organisms (or the **formatGOdb()** function to include all GO
-annotations, if you aren’t picky about quality of automated electronic
+annotations, if you aren’t picky about including automated electronic
 annotations). If you’re studying a model organism, several annotations
 are already available through the AnnotationDbi bioconductor package
 that loads with topGO.
@@ -162,53 +159,47 @@ that loads with topGO.
 
 Example console output generated running the quick-start example data
 (*piggyBac* pooled phenotypic screening results to identify processes
-enabling parasite survival of host fever ([as published
+enabling parasite survival of host fever ([similar to as published
 previously](https://doi.org/10.1038/s41467-021-24814-1)):
 
 ``` r
 # load included pf GO database and example-data to be tested for functional enrichment
-data("Pfal_geneID2GO")
-data("exampleMydf")
+data(Pfal_geneID2GO_curated)
+data(exampleMydf)
 
 # run the topGO pipeline on all experimental categories of interest from exampleMydf
-run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
+run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated, pval = 0.1)
 #> 
 #> Building most specific GOs .....
-#>  ( 286 GO terms found. )
+#>  ( 128 GO terms found. )
 #> 
 #> Build GO DAG topology ..........
-#>  ( 558 GO terms and 720 relations. )
+#>  ( 335 GO terms and 438 relations. )
 #> 
 #> Annotating nodes ...............
-#>  ( 339 genes annotated to the GO terms. )
+#>  ( 193 genes annotated to the GO terms. )
 #> 
 #>           -- Weight01 Algorithm -- 
 #> 
-#>       the algorithm is scoring 119 nontrivial nodes
+#>       the algorithm is scoring 58 nontrivial nodes
 #>       parameters: 
 #>           test statistic: fisher
 #> 
-#>   Level 11:  1 nodes to be scored    (0 eliminated genes)
+#>   Level 8:   3 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 10:  2 nodes to be scored    (0 eliminated genes)
+#>   Level 7:   3 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 9:   6 nodes to be scored    (3 eliminated genes)
+#>   Level 6:   10 nodes to be scored   (10 eliminated genes)
 #> 
-#>   Level 8:   9 nodes to be scored    (8 eliminated genes)
+#>   Level 5:   11 nodes to be scored   (10 eliminated genes)
 #> 
-#>   Level 7:   12 nodes to be scored   (32 eliminated genes)
+#>   Level 4:   10 nodes to be scored   (42 eliminated genes)
 #> 
-#>   Level 6:   20 nodes to be scored   (56 eliminated genes)
+#>   Level 3:   15 nodes to be scored   (76 eliminated genes)
 #> 
-#>   Level 5:   21 nodes to be scored   (86 eliminated genes)
+#>   Level 2:   5 nodes to be scored    (93 eliminated genes)
 #> 
-#>   Level 4:   23 nodes to be scored   (130 eliminated genes)
-#> 
-#>   Level 3:   18 nodes to be scored   (195 eliminated genes)
-#> 
-#>   Level 2:   6 nodes to be scored    (239 eliminated genes)
-#> 
-#>   Level 1:   1 nodes to be scored    (324 eliminated genes)
+#>   Level 1:   1 nodes to be scored    (183 eliminated genes)
 #> Loading required package: Rgraphviz
 #> Loading required package: grid
 #> 
@@ -224,362 +215,114 @@ run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
 #> The following objects are masked from 'package:S4Vectors':
 #> 
 #>     from, to
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.A.HS.Sensitive.MF_weight01_5_all  --- no of nodes:  21 
-#> 'data.frame':    0 obs. of  0 variables
-#> NULL
-#> data frame with 0 columns and 0 rows
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.A.HS.Sensitive.MF_weight01_5_all  --- no of nodes:  16 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: A.HS.Sensitive
+#> Ontology: MF        GO.ID                                    Term Annotated Significant
+#> 1  GO:0003924                         GTPase activity         3           2
+#> 2  GO:0016791                    phosphatase activity         7           3
+#> 3  GO:0003735      structural constituent of ribosome         7           3
+#> 4  GO:0140096 catalytic activity, acting on a protein        17           4
+#> 5  GO:0016887                 ATP hydrolysis activity         6           2
+#> 6  GO:0016787                      hydrolase activity        29          10
+#> 7  GO:0003729                            mRNA binding        13           3
+#> 8  GO:0022857      transmembrane transporter activity         8           2
+#> 9  GO:0016740                    transferase activity        26           5
+#> 10 GO:0016301                         kinase activity         8           2
+#>    Expected topGO go.category interest.category
+#> 1      0.48 0.068          MF    A.HS.Sensitive
+#> 2      1.12 0.084          MF    A.HS.Sensitive
+#> 3      1.12 0.084          MF    A.HS.Sensitive
+#> 4      2.73 0.244          MF    A.HS.Sensitive
+#> 5      0.96 0.247          MF    A.HS.Sensitive
+#> 6      4.66 0.248          MF    A.HS.Sensitive
+#> 7      2.09 0.348          MF    A.HS.Sensitive
+#> 8      1.28 0.377          MF    A.HS.Sensitive
+#> 9      4.18 0.395          MF    A.HS.Sensitive
+#> 10     1.28 0.408          MF    A.HS.Sensitive
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 1 of 4
+#> ontology 1 of 3
 #> 
 #> Building most specific GOs .....
-#>  ( 384 GO terms found. )
+#>  ( 115 GO terms found. )
 #> 
 #> Build GO DAG topology ..........
-#>  ( 1342 GO terms and 2675 relations. )
+#>  ( 551 GO terms and 1041 relations. )
 #> 
 #> Annotating nodes ...............
-#>  ( 347 genes annotated to the GO terms. )
+#>  ( 177 genes annotated to the GO terms. )
 #> 
 #>           -- Weight01 Algorithm -- 
 #> 
-#>       the algorithm is scoring 313 nontrivial nodes
+#>       the algorithm is scoring 107 nontrivial nodes
 #>       parameters: 
 #>           test statistic: fisher
 #> 
-#>   Level 12:  2 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 11:  7 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 10:  11 nodes to be scored   (14 eliminated genes)
-#> 
-#>   Level 9:   26 nodes to be scored   (48 eliminated genes)
-#> 
-#>   Level 8:   33 nodes to be scored   (81 eliminated genes)
-#> 
-#>   Level 7:   39 nodes to be scored   (129 eliminated genes)
-#> 
-#>   Level 6:   60 nodes to be scored   (199 eliminated genes)
-#> 
-#>   Level 5:   61 nodes to be scored   (234 eliminated genes)
-#> 
-#>   Level 4:   39 nodes to be scored   (278 eliminated genes)
-#> 
-#>   Level 3:   27 nodes to be scored   (314 eliminated genes)
-#> 
-#>   Level 2:   7 nodes to be scored    (336 eliminated genes)
-#> 
-#>   Level 1:   1 nodes to be scored    (344 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.A.HS.Sensitive.BP_weight01_5_all  --- no of nodes:  57 
-#> 'data.frame':    6 obs. of  2 variables:
-#>  $ GO.ID: Factor w/ 6 levels "PF3D7_0623100",..: 1 2 3 4 5 6
-#>  $ 1    : chr  "PF3D7_0623100" "PF3D7_0804000" "PF3D7_1314900" "PF3D7_1316000" ...
-#> NULL
-#>           GO.ID             1
-#> 1 PF3D7_0623100 PF3D7_0623100
-#> 2 PF3D7_0804000 PF3D7_0804000
-#> 3 PF3D7_1314900 PF3D7_1314900
-#> 4 PF3D7_1316000 PF3D7_1316000
-#> 5 PF3D7_1445500 PF3D7_1445500
-#> 6 PF3D7_1468200 PF3D7_1468200
-#> 
-#> Building most specific GOs .....
-#>  ( 200 GO terms found. )
-#> 
-#> Build GO DAG topology ..........
-#>  ( 380 GO terms and 646 relations. )
-#> 
-#> Annotating nodes ...............
-#>  ( 518 genes annotated to the GO terms. )
-#> 
-#>           -- Weight01 Algorithm -- 
-#> 
-#>       the algorithm is scoring 134 nontrivial nodes
-#>       parameters: 
-#>           test statistic: fisher
-#> 
-#>   Level 11:  3 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 10:  6 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 9:   11 nodes to be scored   (26 eliminated genes)
-#> 
-#>   Level 8:   17 nodes to be scored   (80 eliminated genes)
-#> 
-#>   Level 7:   18 nodes to be scored   (122 eliminated genes)
-#> 
-#>   Level 6:   21 nodes to be scored   (184 eliminated genes)
-#> 
-#>   Level 5:   21 nodes to be scored   (247 eliminated genes)
-#> 
-#>   Level 4:   16 nodes to be scored   (419 eliminated genes)
-#> 
-#>   Level 3:   18 nodes to be scored   (452 eliminated genes)
-#> 
-#>   Level 2:   2 nodes to be scored    (497 eliminated genes)
-#> 
-#>   Level 1:   1 nodes to be scored    (518 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.A.HS.Sensitive.CC_weight01_5_all  --- no of nodes:  36 
-#> 'data.frame':    0 obs. of  0 variables
-#> NULL
-#> data frame with 0 columns and 0 rows
-#> 
-#> Building most specific GOs .....
-#>  ( 286 GO terms found. )
-#> 
-#> Build GO DAG topology ..........
-#>  ( 558 GO terms and 720 relations. )
-#> 
-#> Annotating nodes ...............
-#>  ( 339 genes annotated to the GO terms. )
-#> 
-#>           -- Weight01 Algorithm -- 
-#> 
-#>       the algorithm is scoring 59 nontrivial nodes
-#>       parameters: 
-#>           test statistic: fisher
-#> 
-#>   Level 9:   3 nodes to be scored    (0 eliminated genes)
+#>   Level 9:   1 nodes to be scored    (0 eliminated genes)
 #> 
 #>   Level 8:   3 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 7:   5 nodes to be scored    (22 eliminated genes)
+#>   Level 7:   6 nodes to be scored    (4 eliminated genes)
 #> 
-#>   Level 6:   11 nodes to be scored   (38 eliminated genes)
+#>   Level 6:   16 nodes to be scored   (19 eliminated genes)
 #> 
-#>   Level 5:   11 nodes to be scored   (62 eliminated genes)
+#>   Level 5:   29 nodes to be scored   (47 eliminated genes)
 #> 
-#>   Level 4:   10 nodes to be scored   (87 eliminated genes)
+#>   Level 4:   25 nodes to be scored   (89 eliminated genes)
 #> 
-#>   Level 3:   12 nodes to be scored   (157 eliminated genes)
+#>   Level 3:   19 nodes to be scored   (127 eliminated genes)
 #> 
-#>   Level 2:   3 nodes to be scored    (181 eliminated genes)
+#>   Level 2:   7 nodes to be scored    (159 eliminated genes)
 #> 
-#>   Level 1:   1 nodes to be scored    (301 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.and.CG.phenotype.MF_weight01_5_all  --- no of nodes:  19 
-#> 'data.frame':    11 obs. of  4 variables:
-#>  $ GO.ID     : Factor w/ 3 levels "GO:0008094","GO:0003677",..: 1 1 1 2 2 2 2 2 2 3 ...
-#>  $ GO:0008094: chr  "PF3D7_0706700" "PF3D7_0818700" "PF3D7_1211300" NA ...
-#>  $ GO:0003677: chr  NA NA NA "PF3D7_0110800" ...
-#>  $ GO:1990837: chr  NA NA NA NA ...
-#> NULL
-#>         GO.ID    GO:0008094    GO:0003677    GO:1990837
-#> 1  GO:0008094 PF3D7_0706700          <NA>          <NA>
-#> 2  GO:0008094 PF3D7_0818700          <NA>          <NA>
-#> 3  GO:0008094 PF3D7_1211300          <NA>          <NA>
-#> 4  GO:0003677          <NA> PF3D7_0110800          <NA>
-#> 5  GO:0003677          <NA> PF3D7_0706700          <NA>
-#> 6  GO:0003677          <NA> PF3D7_0714000          <NA>
-#> 7  GO:0003677          <NA> PF3D7_0818700          <NA>
-#> 8  GO:0003677          <NA> PF3D7_1211300          <NA>
-#> 9  GO:0003677          <NA> PF3D7_1363200          <NA>
-#> 10 GO:1990837          <NA>          <NA> PF3D7_0110800
-#> 11 GO:1990837          <NA>          <NA> PF3D7_1211300
+#>   Level 1:   1 nodes to be scored    (166 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.A.HS.Sensitive.BP_weight01_5_all  --- no of nodes:  23 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: A.HS.Sensitive
+#> Ontology: BP        GO.ID                                        Term Annotated Significant
+#> 1  GO:0016311                           dephosphorylation         3           2
+#> 2  GO:0009410             response to xenobiotic stimulus        22           6
+#> 3  GO:1901135 carbohydrate derivative metabolic proces...         5           2
+#> 4  GO:0015031                           protein transport         5           2
+#> 5  GO:0044237                  cellular metabolic process        63          10
+#> 6  GO:0006996                      organelle organization         8           2
+#> 7  GO:0007049                                  cell cycle         3           1
+#> 8  GO:0048519 negative regulation of biological proces...         3           1
+#> 9  GO:0030522    intracellular receptor signaling pathway         3           1
+#> 10 GO:0044265    cellular macromolecule catabolic process         3           1
+#>    Expected topGO go.category interest.category
+#> 1      0.42 0.053          BP    A.HS.Sensitive
+#> 2      3.11 0.066          BP    A.HS.Sensitive
+#> 3      0.71 0.139          BP    A.HS.Sensitive
+#> 4      0.71 0.139          BP    A.HS.Sensitive
+#> 5      8.90 0.258          BP    A.HS.Sensitive
+#> 6      1.13 0.315          BP    A.HS.Sensitive
+#> 7      0.42 0.368          BP    A.HS.Sensitive
+#> 8      0.42 0.368          BP    A.HS.Sensitive
+#> 9      0.42 0.368          BP    A.HS.Sensitive
+#> 10     0.42 0.368          BP    A.HS.Sensitive
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 1 of 4
+#> ontology 2 of 3
 #> 
 #> Building most specific GOs .....
-#>  ( 384 GO terms found. )
+#>  ( 100 GO terms found. )
 #> 
 #> Build GO DAG topology ..........
-#>  ( 1342 GO terms and 2675 relations. )
+#>  ( 246 GO terms and 418 relations. )
 #> 
 #> Annotating nodes ...............
-#>  ( 347 genes annotated to the GO terms. )
+#>  ( 434 genes annotated to the GO terms. )
 #> 
 #>           -- Weight01 Algorithm -- 
 #> 
-#>       the algorithm is scoring 127 nontrivial nodes
-#>       parameters: 
-#>           test statistic: fisher
-#> 
-#>   Level 11:  1 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 10:  3 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 9:   6 nodes to be scored    (5 eliminated genes)
-#> 
-#>   Level 8:   13 nodes to be scored   (32 eliminated genes)
-#> 
-#>   Level 7:   14 nodes to be scored   (65 eliminated genes)
-#> 
-#>   Level 6:   19 nodes to be scored   (121 eliminated genes)
-#> 
-#>   Level 5:   30 nodes to be scored   (185 eliminated genes)
-#> 
-#>   Level 4:   20 nodes to be scored   (229 eliminated genes)
-#> 
-#>   Level 3:   15 nodes to be scored   (266 eliminated genes)
-#> 
-#>   Level 2:   5 nodes to be scored    (282 eliminated genes)
-#> 
-#>   Level 1:   1 nodes to be scored    (295 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.and.CG.phenotype.BP_weight01_5_all  --- no of nodes:  22 
-#> 'data.frame':    0 obs. of  0 variables
-#> NULL
-#> data frame with 0 columns and 0 rows
-#> 
-#> Building most specific GOs .....
-#>  ( 200 GO terms found. )
-#> 
-#> Build GO DAG topology ..........
-#>  ( 380 GO terms and 646 relations. )
-#> 
-#> Annotating nodes ...............
-#>  ( 518 genes annotated to the GO terms. )
-#> 
-#>           -- Weight01 Algorithm -- 
-#> 
-#>       the algorithm is scoring 96 nontrivial nodes
-#>       parameters: 
-#>           test statistic: fisher
-#> 
-#>   Level 11:  3 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 10:  5 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 9:   7 nodes to be scored    (26 eliminated genes)
-#> 
-#>   Level 8:   11 nodes to be scored   (71 eliminated genes)
-#> 
-#>   Level 7:   10 nodes to be scored   (98 eliminated genes)
-#> 
-#>   Level 6:   14 nodes to be scored   (136 eliminated genes)
-#> 
-#>   Level 5:   15 nodes to be scored   (215 eliminated genes)
-#> 
-#>   Level 4:   12 nodes to be scored   (396 eliminated genes)
-#> 
-#>   Level 3:   16 nodes to be scored   (448 eliminated genes)
-#> 
-#>   Level 2:   2 nodes to be scored    (489 eliminated genes)
-#> 
-#>   Level 1:   1 nodes to be scored    (509 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.and.CG.phenotype.CC_weight01_5_all  --- no of nodes:  15 
-#> 'data.frame':    3 obs. of  2 variables:
-#>  $ GO.ID: Factor w/ 3 levels "PF3D7_0110800",..: 1 2 3
-#>  $ 1    : chr  "PF3D7_0110800" "PF3D7_0714000" "PF3D7_1211300"
-#> NULL
-#>           GO.ID             1
-#> 1 PF3D7_0110800 PF3D7_0110800
-#> 2 PF3D7_0714000 PF3D7_0714000
-#> 3 PF3D7_1211300 PF3D7_1211300
-#> 
-#> Building most specific GOs .....
-#>  ( 286 GO terms found. )
-#> 
-#> Build GO DAG topology ..........
-#>  ( 558 GO terms and 720 relations. )
-#> 
-#> Annotating nodes ...............
-#>  ( 339 genes annotated to the GO terms. )
-#> 
-#>           -- Weight01 Algorithm -- 
-#> 
-#>       the algorithm is scoring 117 nontrivial nodes
-#>       parameters: 
-#>           test statistic: fisher
-#> 
-#>   Level 10:  1 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 9:   6 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 8:   6 nodes to be scored    (3 eliminated genes)
-#> 
-#>   Level 7:   9 nodes to be scored    (29 eliminated genes)
-#> 
-#>   Level 6:   20 nodes to be scored   (50 eliminated genes)
-#> 
-#>   Level 5:   22 nodes to be scored   (75 eliminated genes)
-#> 
-#>   Level 4:   25 nodes to be scored   (129 eliminated genes)
-#> 
-#>   Level 3:   22 nodes to be scored   (201 eliminated genes)
-#> 
-#>   Level 2:   5 nodes to be scored    (251 eliminated genes)
-#> 
-#>   Level 1:   1 nodes to be scored    (324 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.Neutral.MF_weight01_5_all  --- no of nodes:  22 
-#> 'data.frame':    2 obs. of  2 variables:
-#>  $ GO.ID: Factor w/ 2 levels "PF3D7_1221000",..: 1 2
-#>  $ 1    : chr  "PF3D7_1221000" "PF3D7_1322100"
-#> NULL
-#>           GO.ID             1
-#> 1 PF3D7_1221000 PF3D7_1221000
-#> 2 PF3D7_1322100 PF3D7_1322100
-#> 
-#> Building most specific GOs .....
-#>  ( 384 GO terms found. )
-#> 
-#> Build GO DAG topology ..........
-#>  ( 1342 GO terms and 2675 relations. )
-#> 
-#> Annotating nodes ...............
-#>  ( 347 genes annotated to the GO terms. )
-#> 
-#>           -- Weight01 Algorithm -- 
-#> 
-#>       the algorithm is scoring 357 nontrivial nodes
-#>       parameters: 
-#>           test statistic: fisher
-#> 
-#>   Level 12:  4 nodes to be scored    (0 eliminated genes)
-#> 
-#>   Level 11:  11 nodes to be scored   (0 eliminated genes)
-#> 
-#>   Level 10:  17 nodes to be scored   (25 eliminated genes)
-#> 
-#>   Level 9:   27 nodes to be scored   (49 eliminated genes)
-#> 
-#>   Level 8:   34 nodes to be scored   (100 eliminated genes)
-#> 
-#>   Level 7:   42 nodes to be scored   (137 eliminated genes)
-#> 
-#>   Level 6:   68 nodes to be scored   (218 eliminated genes)
-#> 
-#>   Level 5:   69 nodes to be scored   (251 eliminated genes)
-#> 
-#>   Level 4:   44 nodes to be scored   (294 eliminated genes)
-#> 
-#>   Level 3:   31 nodes to be scored   (321 eliminated genes)
-#> 
-#>   Level 2:   9 nodes to be scored    (338 eliminated genes)
-#> 
-#>   Level 1:   1 nodes to be scored    (340 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.Neutral.BP_weight01_5_all  --- no of nodes:  59 
-#> 'data.frame':    17 obs. of  5 variables:
-#>  $ GO.ID     : Factor w/ 4 levels "GO:0072594","GO:0020033",..: 1 1 1 1 2 2 2 2 2 2 ...
-#>  $ GO:0072594: chr  "PF3D7_0524000" "PF3D7_0808100" "PF3D7_1136400" "PF3D7_1448600" ...
-#>  $ GO:0020033: chr  NA NA NA NA ...
-#>  $ GO:0032268: chr  NA NA NA NA ...
-#>  $ GO:0007034: chr  NA NA NA NA ...
-#> NULL
-#>         GO.ID    GO:0072594    GO:0020033    GO:0032268    GO:0007034
-#> 1  GO:0072594 PF3D7_0524000          <NA>          <NA>          <NA>
-#> 2  GO:0072594 PF3D7_0808100          <NA>          <NA>          <NA>
-#> 3  GO:0072594 PF3D7_1136400          <NA>          <NA>          <NA>
-#> 4  GO:0072594 PF3D7_1448600          <NA>          <NA>          <NA>
-#> 5  GO:0020033          <NA> PF3D7_0500100          <NA>          <NA>
-#> 6  GO:0020033          <NA> PF3D7_0632800          <NA>          <NA>
-#> 7  GO:0020033          <NA> PF3D7_0808700          <NA>          <NA>
-#> 8  GO:0020033          <NA> PF3D7_1040800          <NA>          <NA>
-#> 9  GO:0020033          <NA> PF3D7_1200600          <NA>          <NA>
-#> 10 GO:0020033          <NA> PF3D7_1219300          <NA>          <NA>
-#> 11 GO:0020033          <NA> PF3D7_1221000          <NA>          <NA>
-#> 12 GO:0020033          <NA> PF3D7_1322100          <NA>          <NA>
-#> 13 GO:0032268          <NA>          <NA> PF3D7_0811300          <NA>
-#> 14 GO:0032268          <NA>          <NA> PF3D7_0907700          <NA>
-#> 15 GO:0032268          <NA>          <NA> PF3D7_1108000          <NA>
-#> 16 GO:0007034          <NA>          <NA>          <NA> PF3D7_0808100
-#> 17 GO:0007034          <NA>          <NA>          <NA> PF3D7_1448600
-#> 
-#> Building most specific GOs .....
-#>  ( 200 GO terms found. )
-#> 
-#> Build GO DAG topology ..........
-#>  ( 380 GO terms and 646 relations. )
-#> 
-#> Annotating nodes ...............
-#>  ( 518 genes annotated to the GO terms. )
-#> 
-#>           -- Weight01 Algorithm -- 
-#> 
-#>       the algorithm is scoring 110 nontrivial nodes
+#>       the algorithm is scoring 80 nontrivial nodes
 #>       parameters: 
 #>           test statistic: fisher
 #> 
@@ -587,424 +330,906 @@ run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO, pval = 0.05)
 #> 
 #>   Level 10:  4 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 9:   7 nodes to be scored    (23 eliminated genes)
+#>   Level 9:   5 nodes to be scored    (23 eliminated genes)
 #> 
-#>   Level 8:   12 nodes to be scored   (82 eliminated genes)
+#>   Level 8:   8 nodes to be scored    (70 eliminated genes)
 #> 
-#>   Level 7:   12 nodes to be scored   (100 eliminated genes)
+#>   Level 7:   9 nodes to be scored    (93 eliminated genes)
 #> 
-#>   Level 6:   18 nodes to be scored   (149 eliminated genes)
+#>   Level 6:   13 nodes to be scored   (115 eliminated genes)
 #> 
-#>   Level 5:   18 nodes to be scored   (234 eliminated genes)
+#>   Level 5:   10 nodes to be scored   (171 eliminated genes)
 #> 
-#>   Level 4:   17 nodes to be scored   (420 eliminated genes)
+#>   Level 4:   11 nodes to be scored   (342 eliminated genes)
 #> 
-#>   Level 3:   17 nodes to be scored   (457 eliminated genes)
+#>   Level 3:   15 nodes to be scored   (358 eliminated genes)
 #> 
-#>   Level 2:   2 nodes to be scored    (500 eliminated genes)
+#>   Level 2:   2 nodes to be scored    (404 eliminated genes)
 #> 
-#>   Level 1:   1 nodes to be scored    (517 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.Neutral.CC_weight01_5_all  --- no of nodes:  38 
-#> 'data.frame':    2 obs. of  2 variables:
-#>  $ GO.ID: Factor w/ 2 levels "PF3D7_0808100",..: 1 2
-#>  $ 1    : chr  "PF3D7_0808100" "PF3D7_1448600"
-#> NULL
-#>           GO.ID             1
-#> 1 PF3D7_0808100 PF3D7_0808100
-#> 2 PF3D7_1448600 PF3D7_1448600
+#>   Level 1:   1 nodes to be scored    (432 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.A.HS.Sensitive.CC_weight01_5_all  --- no of nodes:  23 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: A.HS.Sensitive
+#> Ontology: CC        GO.ID                               Term Annotated Significant Expected
+#> 1  GO:0005739                      mitochondrion        46          13     7.63
+#> 2  GO:0031966             mitochondrial membrane         3           2     0.50
+#> 3  GO:0140513 nuclear protein-containing complex        12           4     1.99
+#> 4  GO:0034399                  nuclear periphery         8           3     1.33
+#> 5  GO:0005737                          cytoplasm       176          39    29.20
+#> 6  GO:0005840                           ribosome         8           3     1.33
+#> 7  GO:0005783              endoplasmic reticulum        19           5     3.15
+#> 8  GO:0020011                         apicoplast        42           9     6.97
+#> 9  GO:0005794                    Golgi apparatus         6           2     1.00
+#> 10 GO:0031981                      nuclear lumen        15           5     2.49
+#>    topGO go.category interest.category
+#> 1  0.068          CC    A.HS.Sensitive
+#> 2  0.073          CC    A.HS.Sensitive
+#> 3  0.121          CC    A.HS.Sensitive
+#> 4  0.132          CC    A.HS.Sensitive
+#> 5  0.163          CC    A.HS.Sensitive
+#> 6  0.164          CC    A.HS.Sensitive
+#> 7  0.192          CC    A.HS.Sensitive
+#> 8  0.245          CC    A.HS.Sensitive
+#> 9  0.261          CC    A.HS.Sensitive
+#> 10 0.297          CC    A.HS.Sensitive
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 1 of 4
+#> ontology 3 of 3
 #> 
 #> Building most specific GOs .....
-#>  ( 286 GO terms found. )
+#>  ( 128 GO terms found. )
 #> 
 #> Build GO DAG topology ..........
-#>  ( 558 GO terms and 720 relations. )
+#>  ( 335 GO terms and 438 relations. )
 #> 
 #> Annotating nodes ...............
-#>  ( 339 genes annotated to the GO terms. )
+#>  ( 193 genes annotated to the GO terms. )
 #> 
 #>           -- Weight01 Algorithm -- 
 #> 
-#>       the algorithm is scoring 180 nontrivial nodes
+#>       the algorithm is scoring 16 nontrivial nodes
+#>       parameters: 
+#>           test statistic: fisher
+#> 
+#>   Level 6:   1 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 5:   2 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 4:   4 nodes to be scored    (7 eliminated genes)
+#> 
+#>   Level 3:   5 nodes to be scored    (42 eliminated genes)
+#> 
+#>   Level 2:   3 nodes to be scored    (64 eliminated genes)
+#> 
+#>   Level 1:   1 nodes to be scored    (143 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.and.CG.phenotype.MF_weight01_5_all  --- no of nodes:  16 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: HS.and.CG.phenotype
+#> Ontology: MF        GO.ID                                        Term Annotated Significant
+#> 1  GO:0019899                              enzyme binding         3           1
+#> 2  GO:0022804 active transmembrane transporter activit...         3           1
+#> 3  GO:0016791                        phosphatase activity         7           1
+#> 4  GO:0003723                                 RNA binding        35           1
+#> 5  GO:0005515                             protein binding        79           2
+#> 6  GO:0003674                          molecular_function       193           4
+#> 7  GO:0003676                        nucleic acid binding        47           1
+#> 8  GO:0005488                                     binding       128           3
+#> 9  GO:0005215                        transporter activity        11           1
+#> 10 GO:0042578         phosphoric ester hydrolase activity         7           1
+#>    Expected topGO go.category   interest.category
+#> 1      0.06 0.061          MF HS.and.CG.phenotype
+#> 2      0.06 0.061          MF HS.and.CG.phenotype
+#> 3      0.15 0.138          MF HS.and.CG.phenotype
+#> 4      0.73 0.554          MF HS.and.CG.phenotype
+#> 5      1.64 0.786          MF HS.and.CG.phenotype
+#> 6      4.00 1.000          MF HS.and.CG.phenotype
+#> 7      0.97 1.000          MF HS.and.CG.phenotype
+#> 8      2.65 1.000          MF HS.and.CG.phenotype
+#> 9      0.23 1.000          MF HS.and.CG.phenotype
+#> 10     0.15 1.000          MF HS.and.CG.phenotype
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 2 of 4
+#> ontology 1 of 3
+#> 
+#> Building most specific GOs .....
+#>  ( 115 GO terms found. )
+#> 
+#> Build GO DAG topology ..........
+#>  ( 551 GO terms and 1041 relations. )
+#> 
+#> Annotating nodes ...............
+#>  ( 177 genes annotated to the GO terms. )
+#> 
+#>           -- Weight01 Algorithm -- 
+#> 
+#>       the algorithm is scoring 55 nontrivial nodes
+#>       parameters: 
+#>           test statistic: fisher
+#> 
+#>   Level 10:  1 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 9:   2 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 8:   3 nodes to be scored    (6 eliminated genes)
+#> 
+#>   Level 7:   3 nodes to be scored    (9 eliminated genes)
+#> 
+#>   Level 6:   5 nodes to be scored    (14 eliminated genes)
+#> 
+#>   Level 5:   13 nodes to be scored   (29 eliminated genes)
+#> 
+#>   Level 4:   12 nodes to be scored   (37 eliminated genes)
+#> 
+#>   Level 3:   10 nodes to be scored   (70 eliminated genes)
+#> 
+#>   Level 2:   5 nodes to be scored    (101 eliminated genes)
+#> 
+#>   Level 1:   1 nodes to be scored    (114 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.and.CG.phenotype.BP_weight01_5_all  --- no of nodes:  38 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: HS.and.CG.phenotype
+#> Ontology: BP        GO.ID                                        Term Annotated Significant
+#> 1  GO:0045454                      cell redox homeostasis         3           1
+#> 2  GO:0034470                            ncRNA processing         3           1
+#> 3  GO:0006457                             protein folding         4           1
+#> 4  GO:0006888 endoplasmic reticulum to Golgi vesicle-m...         4           1
+#> 5  GO:0065003         protein-containing complex assembly         5           1
+#> 6  GO:0042254                         ribosome biogenesis         6           1
+#> 7  GO:0006351                 DNA-templated transcription         6           1
+#> 8  GO:0006259                       DNA metabolic process         8           1
+#> 9  GO:0065007                       biological regulation        22           1
+#> 10 GO:0016070                       RNA metabolic process        17           2
+#>    Expected topGO go.category   interest.category
+#> 1      0.10 0.099          BP HS.and.CG.phenotype
+#> 2      0.10 0.099          BP HS.and.CG.phenotype
+#> 3      0.14 0.130          BP HS.and.CG.phenotype
+#> 4      0.14 0.130          BP HS.and.CG.phenotype
+#> 5      0.17 0.160          BP HS.and.CG.phenotype
+#> 6      0.20 0.189          BP HS.and.CG.phenotype
+#> 7      0.20 0.189          BP HS.and.CG.phenotype
+#> 8      0.27 0.245          BP HS.and.CG.phenotype
+#> 9      0.75 0.555          BP HS.and.CG.phenotype
+#> 10     0.58 1.000          BP HS.and.CG.phenotype
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 2 of 4
+#> ontology 2 of 3
+#> 
+#> Building most specific GOs .....
+#>  ( 100 GO terms found. )
+#> 
+#> Build GO DAG topology ..........
+#>  ( 246 GO terms and 418 relations. )
+#> 
+#> Annotating nodes ...............
+#>  ( 434 genes annotated to the GO terms. )
+#> 
+#>           -- Weight01 Algorithm -- 
+#> 
+#>       the algorithm is scoring 68 nontrivial nodes
+#>       parameters: 
+#>           test statistic: fisher
+#> 
+#>   Level 11:  2 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 10:  4 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 9:   5 nodes to be scored    (23 eliminated genes)
+#> 
+#>   Level 8:   7 nodes to be scored    (70 eliminated genes)
+#> 
+#>   Level 7:   7 nodes to be scored    (90 eliminated genes)
+#> 
+#>   Level 6:   12 nodes to be scored   (101 eliminated genes)
+#> 
+#>   Level 5:   8 nodes to be scored    (165 eliminated genes)
+#> 
+#>   Level 4:   10 nodes to be scored   (335 eliminated genes)
+#> 
+#>   Level 3:   10 nodes to be scored   (352 eliminated genes)
+#> 
+#>   Level 2:   2 nodes to be scored    (389 eliminated genes)
+#> 
+#>   Level 1:   1 nodes to be scored    (416 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.and.CG.phenotype.CC_weight01_5_all  --- no of nodes:  34 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: HS.and.CG.phenotype
+#> Ontology: CC        GO.ID                                 Term Annotated Significant
+#> 1  GO:0032993                  protein-DNA complex         3           2
+#> 2  GO:0005730                            nucleolus         5           2
+#> 3  GO:0030684                          preribosome         3           1
+#> 4  GO:0030660    Golgi-associated vesicle membrane         3           1
+#> 5  GO:1903561                extracellular vesicle        17           2
+#> 6  GO:0000785                            chromatin         4           1
+#> 7  GO:0030120                         vesicle coat         4           1
+#> 8  GO:0005794                      Golgi apparatus         6           1
+#> 9  GO:0005634                              nucleus       176           9
+#> 10 GO:0020005 symbiont-containing vacuole membrane         9           1
+#>    Expected  topGO go.category   interest.category
+#> 1      0.11 0.0037          CC HS.and.CG.phenotype
+#> 2      0.18 0.0120          CC HS.and.CG.phenotype
+#> 3      0.11 0.1068          CC HS.and.CG.phenotype
+#> 4      0.11 0.1068          CC HS.and.CG.phenotype
+#> 5      0.63 0.1255          CC HS.and.CG.phenotype
+#> 6      0.15 0.1400          CC HS.and.CG.phenotype
+#> 7      0.15 0.1400          CC HS.and.CG.phenotype
+#> 8      0.22 0.2029          CC HS.and.CG.phenotype
+#> 9      6.49 0.2353          CC HS.and.CG.phenotype
+#> 10     0.33 0.2891          CC HS.and.CG.phenotype
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 2 of 4
+#> ontology 3 of 3
+#> 
+#> Building most specific GOs .....
+#>  ( 128 GO terms found. )
+#> 
+#> Build GO DAG topology ..........
+#>  ( 335 GO terms and 438 relations. )
+#> 
+#> Annotating nodes ...............
+#>  ( 193 genes annotated to the GO terms. )
+#> 
+#>           -- Weight01 Algorithm -- 
+#> 
+#>       the algorithm is scoring 49 nontrivial nodes
+#>       parameters: 
+#>           test statistic: fisher
+#> 
+#>   Level 8:   1 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 7:   1 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 6:   6 nodes to be scored    (6 eliminated genes)
+#> 
+#>   Level 5:   9 nodes to be scored    (8 eliminated genes)
+#> 
+#>   Level 4:   14 nodes to be scored   (36 eliminated genes)
+#> 
+#>   Level 3:   13 nodes to be scored   (71 eliminated genes)
+#> 
+#>   Level 2:   4 nodes to be scored    (118 eliminated genes)
+#> 
+#>   Level 1:   1 nodes to be scored    (169 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.Neutral.MF_weight01_5_all  --- no of nodes:  19 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: HS.Neutral
+#> Ontology: MF        GO.ID                                        Term Annotated Significant
+#> 1  GO:0043565               sequence-specific DNA binding         3           2
+#> 2  GO:0008757 S-adenosylmethionine-dependent methyltra...         3           2
+#> 3  GO:0016853                          isomerase activity         3           2
+#> 4  GO:0008094       ATP-dependent activity, acting on DNA         3           2
+#> 5  GO:0016779             nucleotidyltransferase activity         4           2
+#> 6  GO:0050839              cell adhesion molecule binding        17           5
+#> 7  GO:0003677                                 DNA binding         8           4
+#> 8  GO:0046872                           metal ion binding         5           2
+#> 9  GO:0003729                                mRNA binding        13           3
+#> 10 GO:0016409               palmitoyltransferase activity         3           1
+#>    Expected topGO go.category interest.category
+#> 1      0.51 0.076          MF        HS.Neutral
+#> 2      0.51 0.076          MF        HS.Neutral
+#> 3      0.51 0.076          MF        HS.Neutral
+#> 4      0.51 0.076          MF        HS.Neutral
+#> 5      0.68 0.136          MF        HS.Neutral
+#> 6      2.91 0.142          MF        HS.Neutral
+#> 7      1.37 0.188          MF        HS.Neutral
+#> 8      0.85 0.203          MF        HS.Neutral
+#> 9      2.22 0.389          MF        HS.Neutral
+#> 10     0.51 0.432          MF        HS.Neutral
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 3 of 4
+#> ontology 1 of 3
+#> 
+#> Building most specific GOs .....
+#>  ( 115 GO terms found. )
+#> 
+#> Build GO DAG topology ..........
+#>  ( 551 GO terms and 1041 relations. )
+#> 
+#> Annotating nodes ...............
+#>  ( 177 genes annotated to the GO terms. )
+#> 
+#>           -- Weight01 Algorithm -- 
+#> 
+#>       the algorithm is scoring 149 nontrivial nodes
 #>       parameters: 
 #>           test statistic: fisher
 #> 
 #>   Level 11:  1 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 10:  3 nodes to be scored    (0 eliminated genes)
+#>   Level 10:  4 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 9:   7 nodes to be scored    (3 eliminated genes)
+#>   Level 9:   7 nodes to be scored    (5 eliminated genes)
 #> 
-#>   Level 8:   9 nodes to be scored    (11 eliminated genes)
+#>   Level 8:   10 nodes to be scored   (34 eliminated genes)
 #> 
-#>   Level 7:   13 nodes to be scored   (36 eliminated genes)
+#>   Level 7:   16 nodes to be scored   (40 eliminated genes)
 #> 
-#>   Level 6:   33 nodes to be scored   (56 eliminated genes)
+#>   Level 6:   25 nodes to be scored   (53 eliminated genes)
 #> 
-#>   Level 5:   39 nodes to be scored   (91 eliminated genes)
+#>   Level 5:   33 nodes to be scored   (82 eliminated genes)
 #> 
-#>   Level 4:   41 nodes to be scored   (165 eliminated genes)
+#>   Level 4:   24 nodes to be scored   (107 eliminated genes)
 #> 
-#>   Level 3:   25 nodes to be scored   (235 eliminated genes)
+#>   Level 3:   21 nodes to be scored   (130 eliminated genes)
 #> 
-#>   Level 2:   8 nodes to be scored    (281 eliminated genes)
+#>   Level 2:   7 nodes to be scored    (159 eliminated genes)
 #> 
-#>   Level 1:   1 nodes to be scored    (335 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.not.classified.MF_weight01_5_all  --- no of nodes:  16 
-#> 'data.frame':    0 obs. of  0 variables
-#> NULL
-#> data frame with 0 columns and 0 rows
+#>   Level 1:   1 nodes to be scored    (167 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.Neutral.BP_weight01_5_all  --- no of nodes:  79 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: HS.Neutral
+#> Ontology: BP        GO.ID                                        Term Annotated Significant
+#> 1  GO:0006355 regulation of DNA-templated transcriptio...         5           4
+#> 2  GO:0020033                         antigenic variation        27           8
+#> 3  GO:0006913                 nucleocytoplasmic transport         3           2
+#> 4  GO:0051276                     chromosome organization         3           2
+#> 5  GO:0020013 modulation by symbiont of host erythrocy...        20           5
+#> 6  GO:0020035    adhesion of symbiont to microvasculature        22           5
+#> 7  GO:0051701 biological process involved in interacti...        53          10
+#> 8  GO:0071705                 nitrogen compound transport         7           2
+#> 9  GO:0006259                       DNA metabolic process         8           2
+#> 10 GO:0006508                                 proteolysis         8           2
+#>    Expected topGO go.category interest.category
+#> 1      0.65 0.001          BP        HS.Neutral
+#> 2      3.51 0.011          BP        HS.Neutral
+#> 3      0.39 0.045          BP        HS.Neutral
+#> 4      0.39 0.045          BP        HS.Neutral
+#> 5      2.60 0.095          BP        HS.Neutral
+#> 6      2.86 0.134          BP        HS.Neutral
+#> 7      6.89 0.211          BP        HS.Neutral
+#> 8      0.91 0.240          BP        HS.Neutral
+#> 9      1.04 0.241          BP        HS.Neutral
+#> 10     1.04 0.278          BP        HS.Neutral
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 3 of 4
+#> ontology 2 of 3
 #> 
 #> Building most specific GOs .....
-#>  ( 384 GO terms found. )
+#>  ( 100 GO terms found. )
 #> 
 #> Build GO DAG topology ..........
-#>  ( 1342 GO terms and 2675 relations. )
+#>  ( 246 GO terms and 418 relations. )
 #> 
 #> Annotating nodes ...............
-#>  ( 347 genes annotated to the GO terms. )
+#>  ( 434 genes annotated to the GO terms. )
 #> 
 #>           -- Weight01 Algorithm -- 
 #> 
-#>       the algorithm is scoring 484 nontrivial nodes
+#>       the algorithm is scoring 68 nontrivial nodes
 #>       parameters: 
 #>           test statistic: fisher
 #> 
-#>   Level 14:  1 nodes to be scored    (0 eliminated genes)
+#>   Level 11:  2 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 13:  1 nodes to be scored    (0 eliminated genes)
+#>   Level 10:  4 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 12:  5 nodes to be scored    (3 eliminated genes)
+#>   Level 9:   3 nodes to be scored    (23 eliminated genes)
 #> 
-#>   Level 11:  15 nodes to be scored   (3 eliminated genes)
+#>   Level 8:   4 nodes to be scored    (82 eliminated genes)
 #> 
-#>   Level 10:  28 nodes to be scored   (28 eliminated genes)
+#>   Level 7:   7 nodes to be scored    (86 eliminated genes)
 #> 
-#>   Level 9:   43 nodes to be scored   (64 eliminated genes)
+#>   Level 6:   10 nodes to be scored   (100 eliminated genes)
 #> 
-#>   Level 8:   56 nodes to be scored   (137 eliminated genes)
+#>   Level 5:   8 nodes to be scored    (164 eliminated genes)
 #> 
-#>   Level 7:   66 nodes to be scored   (175 eliminated genes)
+#>   Level 4:   12 nodes to be scored   (341 eliminated genes)
 #> 
-#>   Level 6:   88 nodes to be scored   (254 eliminated genes)
+#>   Level 3:   15 nodes to be scored   (364 eliminated genes)
 #> 
-#>   Level 5:   82 nodes to be scored   (283 eliminated genes)
+#>   Level 2:   2 nodes to be scored    (413 eliminated genes)
 #> 
-#>   Level 4:   52 nodes to be scored   (314 eliminated genes)
+#>   Level 1:   1 nodes to be scored    (432 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.HS.Neutral.CC_weight01_5_all  --- no of nodes:  19 
 #> 
-#>   Level 3:   36 nodes to be scored   (326 eliminated genes)
+#> ==============================================================================
+#> GO enrichment results for interest category: HS.Neutral
+#> Ontology: CC        GO.ID                                     Term Annotated Significant
+#> 1  GO:0020030          infected host cell surface knob        18           5
+#> 2  GO:0020002                host cell plasma membrane        28           6
+#> 3  GO:0030430                      host cell cytoplasm        80          15
+#> 4  GO:0020036                           Maurer's cleft        43           8
+#> 5  GO:0005634                                  nucleus       176          27
+#> 6  GO:0020008                                  rhoptry         8           2
+#> 7  GO:0034399                        nuclear periphery         8           2
+#> 8  GO:0140535 intracellular protein-containing complex         8           2
+#> 9  GO:0043657                                host cell       105          19
+#> 10 GO:0020005     symbiont-containing vacuole membrane         9           2
+#>    Expected topGO go.category interest.category
+#> 1      2.49 0.087          CC        HS.Neutral
+#> 2      3.87 0.175          CC        HS.Neutral
+#> 3     11.06 0.228          CC        HS.Neutral
+#> 4      5.94 0.228          CC        HS.Neutral
+#> 5     24.33 0.258          CC        HS.Neutral
+#> 6      1.11 0.305          CC        HS.Neutral
+#> 7      1.11 0.305          CC        HS.Neutral
+#> 8      1.11 0.305          CC        HS.Neutral
+#> 9     14.52 0.334          CC        HS.Neutral
+#> 10     1.24 0.360          CC        HS.Neutral
 #> 
-#>   Level 2:   10 nodes to be scored   (340 eliminated genes)
+#> ==============================================================================
 #> 
-#>   Level 1:   1 nodes to be scored    (346 eliminated genes)
-#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.not.classified.BP_weight01_5_all  --- no of nodes:  47 
-#> 'data.frame':    0 obs. of  0 variables
-#> NULL
-#> data frame with 0 columns and 0 rows
+#> interest-category 3 of 4
+#> ontology 3 of 3
 #> 
 #> Building most specific GOs .....
-#>  ( 200 GO terms found. )
+#>  ( 128 GO terms found. )
 #> 
 #> Build GO DAG topology ..........
-#>  ( 380 GO terms and 646 relations. )
+#>  ( 335 GO terms and 438 relations. )
 #> 
 #> Annotating nodes ...............
-#>  ( 518 genes annotated to the GO terms. )
+#>  ( 193 genes annotated to the GO terms. )
 #> 
 #>           -- Weight01 Algorithm -- 
 #> 
-#>       the algorithm is scoring 175 nontrivial nodes
+#>       the algorithm is scoring 84 nontrivial nodes
 #>       parameters: 
 #>           test statistic: fisher
 #> 
-#>   Level 11:  4 nodes to be scored    (0 eliminated genes)
+#>   Level 8:   3 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 10:  9 nodes to be scored    (0 eliminated genes)
+#>   Level 7:   4 nodes to be scored    (0 eliminated genes)
 #> 
-#>   Level 9:   16 nodes to be scored   (29 eliminated genes)
+#>   Level 6:   12 nodes to be scored   (10 eliminated genes)
 #> 
-#>   Level 8:   25 nodes to be scored   (101 eliminated genes)
+#>   Level 5:   17 nodes to be scored   (14 eliminated genes)
 #> 
-#>   Level 7:   23 nodes to be scored   (133 eliminated genes)
+#>   Level 4:   21 nodes to be scored   (50 eliminated genes)
 #> 
-#>   Level 6:   27 nodes to be scored   (200 eliminated genes)
+#>   Level 3:   19 nodes to be scored   (93 eliminated genes)
 #> 
-#>   Level 5:   26 nodes to be scored   (261 eliminated genes)
+#>   Level 2:   7 nodes to be scored    (135 eliminated genes)
 #> 
-#>   Level 4:   20 nodes to be scored   (424 eliminated genes)
+#>   Level 1:   1 nodes to be scored    (187 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.not.classified.MF_weight01_5_all  --- no of nodes:  11 
 #> 
-#>   Level 3:   22 nodes to be scored   (458 eliminated genes)
+#> ==============================================================================
+#> GO enrichment results for interest category: not.classified
+#> Ontology: MF        GO.ID                                        Term Annotated Significant
+#> 1  GO:0042393                             histone binding         6           6
+#> 2  GO:0016874                             ligase activity         4           4
+#> 3  GO:0008289                               lipid binding         4           4
+#> 4  GO:0140101        catalytic activity, acting on a tRNA         4           4
+#> 5  GO:0140030      modification-dependent protein binding         4           4
+#> 6  GO:0003743      translation initiation factor activity         4           4
+#> 7  GO:0005515                             protein binding        79          55
+#> 8  GO:0008233                          peptidase activity         6           5
+#> 9  GO:0016765 transferase activity, transferring alkyl...         3           3
+#> 10 GO:0140097           catalytic activity, acting on DNA         6           4
+#>    Expected topGO go.category interest.category
+#> 1      3.89 0.071          MF    not.classified
+#> 2      2.59 0.173          MF    not.classified
+#> 3      2.59 0.173          MF    not.classified
+#> 4      2.59 0.173          MF    not.classified
+#> 5      2.59 0.173          MF    not.classified
+#> 6      2.59 0.173          MF    not.classified
+#> 7     51.17 0.262          MF    not.classified
+#> 8      3.89 0.269          MF    not.classified
+#> 9      1.94 0.269          MF    not.classified
+#> 10     3.89 0.276          MF    not.classified
 #> 
-#>   Level 2:   2 nodes to be scored    (501 eliminated genes)
+#> ==============================================================================
 #> 
-#>   Level 1:   1 nodes to be scored    (518 eliminated genes)
+#> interest-category 4 of 4
+#> ontology 1 of 3
+#> 
+#> Building most specific GOs .....
+#>  ( 115 GO terms found. )
+#> 
+#> Build GO DAG topology ..........
+#>  ( 551 GO terms and 1041 relations. )
+#> 
+#> Annotating nodes ...............
+#>  ( 177 genes annotated to the GO terms. )
+#> 
+#>           -- Weight01 Algorithm -- 
+#> 
+#>       the algorithm is scoring 203 nontrivial nodes
+#>       parameters: 
+#>           test statistic: fisher
+#> 
+#>   Level 11:  1 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 10:  5 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 9:   11 nodes to be scored   (5 eliminated genes)
+#> 
+#>   Level 8:   13 nodes to be scored   (37 eliminated genes)
+#> 
+#>   Level 7:   21 nodes to be scored   (54 eliminated genes)
+#> 
+#>   Level 6:   36 nodes to be scored   (68 eliminated genes)
+#> 
+#>   Level 5:   43 nodes to be scored   (101 eliminated genes)
+#> 
+#>   Level 4:   33 nodes to be scored   (130 eliminated genes)
+#> 
+#>   Level 3:   29 nodes to be scored   (140 eliminated genes)
+#> 
+#>   Level 2:   10 nodes to be scored   (166 eliminated genes)
+#> 
+#>   Level 1:   1 nodes to be scored    (177 eliminated genes)
+#> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.not.classified.BP_weight01_5_all  --- no of nodes:  36 
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: not.classified
+#> Ontology: BP        GO.ID                                        Term Annotated Significant
+#> 1  GO:0048870                               cell motility         5           5
+#> 2  GO:0006413                    translational initiation         4           4
+#> 3  GO:0020035    adhesion of symbiont to microvasculature        22          17
+#> 4  GO:0044409                             entry into host        11           9
+#> 5  GO:0035891                         exit from host cell         7           6
+#> 6  GO:0032502                       developmental process         3           3
+#> 7  GO:0002377                   immunoglobulin production         3           3
+#> 8  GO:0030003 intracellular monoatomic cation homeosta...         3           3
+#> 9  GO:0050776               regulation of immune response         3           3
+#> 10 GO:0051301                               cell division         3           3
+#>    Expected topGO go.category interest.category
+#> 1      3.47  0.16          BP    not.classified
+#> 2      2.78  0.23          BP    not.classified
+#> 3     15.29  0.28          BP    not.classified
+#> 4      7.64  0.29          BP    not.classified
+#> 5      4.86  0.31          BP    not.classified
+#> 6      2.08  0.33          BP    not.classified
+#> 7      2.08  0.33          BP    not.classified
+#> 8      2.08  0.33          BP    not.classified
+#> 9      2.08  0.33          BP    not.classified
+#> 10     2.08  0.33          BP    not.classified
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 4 of 4
+#> ontology 2 of 3
+#> 
+#> Building most specific GOs .....
+#>  ( 100 GO terms found. )
+#> 
+#> Build GO DAG topology ..........
+#>  ( 246 GO terms and 418 relations. )
+#> 
+#> Annotating nodes ...............
+#>  ( 434 genes annotated to the GO terms. )
+#> 
+#>           -- Weight01 Algorithm -- 
+#> 
+#>       the algorithm is scoring 105 nontrivial nodes
+#>       parameters: 
+#>           test statistic: fisher
+#> 
+#>   Level 11:  2 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 10:  6 nodes to be scored    (0 eliminated genes)
+#> 
+#>   Level 9:   7 nodes to be scored    (23 eliminated genes)
+#> 
+#>   Level 8:   13 nodes to be scored   (90 eliminated genes)
+#> 
+#>   Level 7:   12 nodes to be scored   (97 eliminated genes)
+#> 
+#>   Level 6:   16 nodes to be scored   (122 eliminated genes)
+#> 
+#>   Level 5:   13 nodes to be scored   (182 eliminated genes)
+#> 
+#>   Level 4:   15 nodes to be scored   (346 eliminated genes)
+#> 
+#>   Level 3:   18 nodes to be scored   (364 eliminated genes)
+#> 
+#>   Level 2:   2 nodes to be scored    (413 eliminated genes)
+#> 
+#>   Level 1:   1 nodes to be scored    (433 eliminated genes)
 #> /Users/Jenna/Library/CloudStorage/Box-Box/Genomics/omicshub/projects/pfGO/Routput/GO/hierarchy.plots/tGO.not.classified.CC_weight01_5_all  --- no of nodes:  25 
-#> 'data.frame':    14 obs. of  2 variables:
-#>  $ GO.ID: Factor w/ 14 levels "PF3D7_0104100",..: 1 2 3 4 5 6 7 8 9 10 ...
-#>  $ 1    : chr  "PF3D7_0104100" "PF3D7_0104200" "PF3D7_0207500" "PF3D7_0207600" ...
-#> NULL
-#>            GO.ID             1
-#> 1  PF3D7_0104100 PF3D7_0104100
-#> 2  PF3D7_0104200 PF3D7_0104200
-#> 3  PF3D7_0207500 PF3D7_0207500
-#> 4  PF3D7_0207600 PF3D7_0207600
-#> 5  PF3D7_0511300 PF3D7_0511300
-#> 6  PF3D7_0732500 PF3D7_0732500
-#> 7  PF3D7_1021800 PF3D7_1021800
-#> 8  PF3D7_1041000 PF3D7_1041000
-#> 9  PF3D7_1101100 PF3D7_1101100
-#> 10 PF3D7_1116800 PF3D7_1116800
-#> 11 PF3D7_1135400 PF3D7_1135400
-#> 12 PF3D7_1300200 PF3D7_1300200
-#> 13 PF3D7_1334800 PF3D7_1334800
-#> 14 PF3D7_1418100 PF3D7_1418100
+#> 
+#> ==============================================================================
+#> GO enrichment results for interest category: not.classified
+#> Ontology: CC        GO.ID                                        Term Annotated Significant
+#> 1  GO:0020003                 symbiont-containing vacuole        18          14
+#> 2  GO:0009986                                cell surface        24          20
+#> 3  GO:0020009                                   microneme         6           6
+#> 4  GO:0071944                              cell periphery        19          14
+#> 5  GO:0020002                   host cell plasma membrane        28          22
+#> 6  GO:0032991                  protein-containing complex        54          35
+#> 7  GO:0044228                           host cell surface         4           4
+#> 8  GO:0031982                                     vesicle        41          29
+#> 9  GO:0020026                     merozoite dense granule         3           3
+#> 10 GO:0005852 eukaryotic translation initiation factor...         3           3
+#>    Expected topGO go.category interest.category
+#> 1     11.86 0.023          CC    not.classified
+#> 2     15.82 0.046          CC    not.classified
+#> 3      3.95 0.080          CC    not.classified
+#> 4     12.52 0.081          CC    not.classified
+#> 5     18.45 0.102          CC    not.classified
+#> 6     35.59 0.128          CC    not.classified
+#> 7      2.64 0.187          CC    not.classified
+#> 8     27.02 0.282          CC    not.classified
+#> 9      1.98 0.285          CC    not.classified
+#> 10     1.98 0.285          CC    not.classified
+#> 
+#> ==============================================================================
+#> 
+#> interest-category 4 of 4
+#> ontology 3 of 3
+#> Joining with `by = join_by(GO.ID, go.category, interest.category)`
+#> 
+#> ==============================================================================
+#> Final GO enrichment results table (saved to 'Routput/GO/all.combined.GO.results.tsv':
+#>          GO.ID                                        Term Annotated
+#> 1   GO:0016311                           dephosphorylation         3
+#> 2   GO:0009410             response to xenobiotic stimulus        22
+#> 3   GO:1901135 carbohydrate derivative metabolic proces...         5
+#> 4   GO:0015031                           protein transport         5
+#> 5   GO:0044237                  cellular metabolic process        63
+#> 6   GO:0006996                      organelle organization         8
+#> 7   GO:0007049                                  cell cycle         3
+#> 8   GO:0048519 negative regulation of biological proces...         3
+#> 9   GO:0030522    intracellular receptor signaling pathway         3
+#> 10  GO:0044265    cellular macromolecule catabolic process         3
+#> 11  GO:0005739                               mitochondrion        46
+#> 12  GO:0031966                      mitochondrial membrane         3
+#> 13  GO:0140513          nuclear protein-containing complex        12
+#> 14  GO:0034399                           nuclear periphery         8
+#> 15  GO:0005737                                   cytoplasm       176
+#> 16  GO:0005840                                    ribosome         8
+#> 17  GO:0005783                       endoplasmic reticulum        19
+#> 18  GO:0020011                                  apicoplast        42
+#> 19  GO:0005794                             Golgi apparatus         6
+#> 20  GO:0031981                               nuclear lumen        15
+#> 21  GO:0003924                             GTPase activity         3
+#> 22  GO:0016791                        phosphatase activity         7
+#> 23  GO:0003735          structural constituent of ribosome         7
+#> 24  GO:0140096     catalytic activity, acting on a protein        17
+#> 25  GO:0016887                     ATP hydrolysis activity         6
+#> 26  GO:0016787                          hydrolase activity        29
+#> 27  GO:0003729                                mRNA binding        13
+#> 28  GO:0022857          transmembrane transporter activity         8
+#> 29  GO:0016740                        transferase activity        26
+#> 30  GO:0016301                             kinase activity         8
+#> 31  GO:0006355 regulation of DNA-templated transcriptio...         5
+#> 32  GO:0020033                         antigenic variation        27
+#> 33  GO:0006913                 nucleocytoplasmic transport         3
+#> 34  GO:0051276                     chromosome organization         3
+#> 35  GO:0020013 modulation by symbiont of host erythrocy...        20
+#> 36  GO:0020035    adhesion of symbiont to microvasculature        22
+#> 37  GO:0051701 biological process involved in interacti...        53
+#> 38  GO:0071705                 nitrogen compound transport         7
+#> 39  GO:0006259                       DNA metabolic process         8
+#> 40  GO:0006508                                 proteolysis         8
+#> 41  GO:0020030             infected host cell surface knob        18
+#> 42  GO:0020002                   host cell plasma membrane        28
+#> 43  GO:0030430                         host cell cytoplasm        80
+#> 44  GO:0020036                              Maurer's cleft        43
+#> 45  GO:0005634                                     nucleus       176
+#> 46  GO:0020008                                     rhoptry         8
+#> 47  GO:0034399                           nuclear periphery         8
+#> 48  GO:0140535    intracellular protein-containing complex         8
+#> 49  GO:0043657                                   host cell       105
+#> 50  GO:0020005        symbiont-containing vacuole membrane         9
+#> 51  GO:0043565               sequence-specific DNA binding         3
+#> 52  GO:0008757 S-adenosylmethionine-dependent methyltra...         3
+#> 53  GO:0016853                          isomerase activity         3
+#> 54  GO:0008094       ATP-dependent activity, acting on DNA         3
+#> 55  GO:0016779             nucleotidyltransferase activity         4
+#> 56  GO:0050839              cell adhesion molecule binding        17
+#> 57  GO:0003677                                 DNA binding         8
+#> 58  GO:0046872                           metal ion binding         5
+#> 59  GO:0003729                                mRNA binding        13
+#> 60  GO:0016409               palmitoyltransferase activity         3
+#> 61  GO:0045454                      cell redox homeostasis         3
+#> 62  GO:0034470                            ncRNA processing         3
+#> 63  GO:0006457                             protein folding         4
+#> 64  GO:0006888 endoplasmic reticulum to Golgi vesicle-m...         4
+#> 65  GO:0065003         protein-containing complex assembly         5
+#> 66  GO:0042254                         ribosome biogenesis         6
+#> 67  GO:0006351                 DNA-templated transcription         6
+#> 68  GO:0006259                       DNA metabolic process         8
+#> 69  GO:0065007                       biological regulation        22
+#> 70  GO:0016070                       RNA metabolic process        17
+#> 71  GO:0032993                         protein-DNA complex         3
+#> 72  GO:0005730                                   nucleolus         5
+#> 73  GO:0030684                                 preribosome         3
+#> 74  GO:0030660           Golgi-associated vesicle membrane         3
+#> 75  GO:1903561                       extracellular vesicle        17
+#> 76  GO:0000785                                   chromatin         4
+#> 77  GO:0030120                                vesicle coat         4
+#> 78  GO:0005794                             Golgi apparatus         6
+#> 79  GO:0005634                                     nucleus       176
+#> 80  GO:0020005        symbiont-containing vacuole membrane         9
+#> 81  GO:0019899                              enzyme binding         3
+#> 82  GO:0022804 active transmembrane transporter activit...         3
+#> 83  GO:0016791                        phosphatase activity         7
+#> 84  GO:0003723                                 RNA binding        35
+#> 85  GO:0005515                             protein binding        79
+#> 86  GO:0003674                          molecular_function       193
+#> 87  GO:0003676                        nucleic acid binding        47
+#> 88  GO:0005488                                     binding       128
+#> 89  GO:0005215                        transporter activity        11
+#> 90  GO:0042578         phosphoric ester hydrolase activity         7
+#> 91  GO:0048870                               cell motility         5
+#> 92  GO:0006413                    translational initiation         4
+#> 93  GO:0020035    adhesion of symbiont to microvasculature        22
+#> 94  GO:0044409                             entry into host        11
+#> 95  GO:0035891                         exit from host cell         7
+#> 96  GO:0032502                       developmental process         3
+#> 97  GO:0002377                   immunoglobulin production         3
+#> 98  GO:0030003 intracellular monoatomic cation homeosta...         3
+#> 99  GO:0050776               regulation of immune response         3
+#> 100 GO:0051301                               cell division         3
+#> 101 GO:0020003                 symbiont-containing vacuole        18
+#> 102 GO:0009986                                cell surface        24
+#> 103 GO:0020009                                   microneme         6
+#> 104 GO:0071944                              cell periphery        19
+#> 105 GO:0020002                   host cell plasma membrane        28
+#> 106 GO:0032991                  protein-containing complex        54
+#> 107 GO:0044228                           host cell surface         4
+#> 108 GO:0031982                                     vesicle        41
+#> 109 GO:0020026                     merozoite dense granule         3
+#> 110 GO:0005852 eukaryotic translation initiation factor...         3
+#> 111 GO:0042393                             histone binding         6
+#> 112 GO:0016874                             ligase activity         4
+#> 113 GO:0008289                               lipid binding         4
+#> 114 GO:0140101        catalytic activity, acting on a tRNA         4
+#> 115 GO:0140030      modification-dependent protein binding         4
+#> 116 GO:0003743      translation initiation factor activity         4
+#> 117 GO:0005515                             protein binding        79
+#> 118 GO:0008233                          peptidase activity         6
+#> 119 GO:0016765 transferase activity, transferring alkyl...         3
+#> 120 GO:0140097           catalytic activity, acting on DNA         6
+#>     Significant Expected  topGO go.category   interest.category
+#> 1             2     0.42 0.0530          BP      A.HS.Sensitive
+#> 2             6     3.11 0.0660          BP      A.HS.Sensitive
+#> 3             2     0.71 0.1390          BP      A.HS.Sensitive
+#> 4             2     0.71 0.1390          BP      A.HS.Sensitive
+#> 5            10     8.90 0.2580          BP      A.HS.Sensitive
+#> 6             2     1.13 0.3150          BP      A.HS.Sensitive
+#> 7             1     0.42 0.3680          BP      A.HS.Sensitive
+#> 8             1     0.42 0.3680          BP      A.HS.Sensitive
+#> 9             1     0.42 0.3680          BP      A.HS.Sensitive
+#> 10            1     0.42 0.3680          BP      A.HS.Sensitive
+#> 11           13     7.63 0.0680          CC      A.HS.Sensitive
+#> 12            2     0.50 0.0730          CC      A.HS.Sensitive
+#> 13            4     1.99 0.1210          CC      A.HS.Sensitive
+#> 14            3     1.33 0.1320          CC      A.HS.Sensitive
+#> 15           39    29.20 0.1630          CC      A.HS.Sensitive
+#> 16            3     1.33 0.1640          CC      A.HS.Sensitive
+#> 17            5     3.15 0.1920          CC      A.HS.Sensitive
+#> 18            9     6.97 0.2450          CC      A.HS.Sensitive
+#> 19            2     1.00 0.2610          CC      A.HS.Sensitive
+#> 20            5     2.49 0.2970          CC      A.HS.Sensitive
+#> 21            2     0.48 0.0680          MF      A.HS.Sensitive
+#> 22            3     1.12 0.0840          MF      A.HS.Sensitive
+#> 23            3     1.12 0.0840          MF      A.HS.Sensitive
+#> 24            4     2.73 0.2440          MF      A.HS.Sensitive
+#> 25            2     0.96 0.2470          MF      A.HS.Sensitive
+#> 26           10     4.66 0.2480          MF      A.HS.Sensitive
+#> 27            3     2.09 0.3480          MF      A.HS.Sensitive
+#> 28            2     1.28 0.3770          MF      A.HS.Sensitive
+#> 29            5     4.18 0.3950          MF      A.HS.Sensitive
+#> 30            2     1.28 0.4080          MF      A.HS.Sensitive
+#> 31            4     0.65 0.0010          BP          HS.Neutral
+#> 32            8     3.51 0.0110          BP          HS.Neutral
+#> 33            2     0.39 0.0450          BP          HS.Neutral
+#> 34            2     0.39 0.0450          BP          HS.Neutral
+#> 35            5     2.60 0.0950          BP          HS.Neutral
+#> 36            5     2.86 0.1340          BP          HS.Neutral
+#> 37           10     6.89 0.2110          BP          HS.Neutral
+#> 38            2     0.91 0.2400          BP          HS.Neutral
+#> 39            2     1.04 0.2410          BP          HS.Neutral
+#> 40            2     1.04 0.2780          BP          HS.Neutral
+#> 41            5     2.49 0.0870          CC          HS.Neutral
+#> 42            6     3.87 0.1750          CC          HS.Neutral
+#> 43           15    11.06 0.2280          CC          HS.Neutral
+#> 44            8     5.94 0.2280          CC          HS.Neutral
+#> 45           27    24.33 0.2580          CC          HS.Neutral
+#> 46            2     1.11 0.3050          CC          HS.Neutral
+#> 47            2     1.11 0.3050          CC          HS.Neutral
+#> 48            2     1.11 0.3050          CC          HS.Neutral
+#> 49           19    14.52 0.3340          CC          HS.Neutral
+#> 50            2     1.24 0.3600          CC          HS.Neutral
+#> 51            2     0.51 0.0760          MF          HS.Neutral
+#> 52            2     0.51 0.0760          MF          HS.Neutral
+#> 53            2     0.51 0.0760          MF          HS.Neutral
+#> 54            2     0.51 0.0760          MF          HS.Neutral
+#> 55            2     0.68 0.1360          MF          HS.Neutral
+#> 56            5     2.91 0.1420          MF          HS.Neutral
+#> 57            4     1.37 0.1880          MF          HS.Neutral
+#> 58            2     0.85 0.2030          MF          HS.Neutral
+#> 59            3     2.22 0.3890          MF          HS.Neutral
+#> 60            1     0.51 0.4320          MF          HS.Neutral
+#> 61            1     0.10 0.0990          BP HS.and.CG.phenotype
+#> 62            1     0.10 0.0990          BP HS.and.CG.phenotype
+#> 63            1     0.14 0.1300          BP HS.and.CG.phenotype
+#> 64            1     0.14 0.1300          BP HS.and.CG.phenotype
+#> 65            1     0.17 0.1600          BP HS.and.CG.phenotype
+#> 66            1     0.20 0.1890          BP HS.and.CG.phenotype
+#> 67            1     0.20 0.1890          BP HS.and.CG.phenotype
+#> 68            1     0.27 0.2450          BP HS.and.CG.phenotype
+#> 69            1     0.75 0.5550          BP HS.and.CG.phenotype
+#> 70            2     0.58 1.0000          BP HS.and.CG.phenotype
+#> 71            2     0.11 0.0037          CC HS.and.CG.phenotype
+#> 72            2     0.18 0.0120          CC HS.and.CG.phenotype
+#> 73            1     0.11 0.1068          CC HS.and.CG.phenotype
+#> 74            1     0.11 0.1068          CC HS.and.CG.phenotype
+#> 75            2     0.63 0.1255          CC HS.and.CG.phenotype
+#> 76            1     0.15 0.1400          CC HS.and.CG.phenotype
+#> 77            1     0.15 0.1400          CC HS.and.CG.phenotype
+#> 78            1     0.22 0.2029          CC HS.and.CG.phenotype
+#> 79            9     6.49 0.2353          CC HS.and.CG.phenotype
+#> 80            1     0.33 0.2891          CC HS.and.CG.phenotype
+#> 81            1     0.06 0.0610          MF HS.and.CG.phenotype
+#> 82            1     0.06 0.0610          MF HS.and.CG.phenotype
+#> 83            1     0.15 0.1380          MF HS.and.CG.phenotype
+#> 84            1     0.73 0.5540          MF HS.and.CG.phenotype
+#> 85            2     1.64 0.7860          MF HS.and.CG.phenotype
+#> 86            4     4.00 1.0000          MF HS.and.CG.phenotype
+#> 87            1     0.97 1.0000          MF HS.and.CG.phenotype
+#> 88            3     2.65 1.0000          MF HS.and.CG.phenotype
+#> 89            1     0.23 1.0000          MF HS.and.CG.phenotype
+#> 90            1     0.15 1.0000          MF HS.and.CG.phenotype
+#> 91            5     3.47 0.1600          BP      not.classified
+#> 92            4     2.78 0.2300          BP      not.classified
+#> 93           17    15.29 0.2800          BP      not.classified
+#> 94            9     7.64 0.2900          BP      not.classified
+#> 95            6     4.86 0.3100          BP      not.classified
+#> 96            3     2.08 0.3300          BP      not.classified
+#> 97            3     2.08 0.3300          BP      not.classified
+#> 98            3     2.08 0.3300          BP      not.classified
+#> 99            3     2.08 0.3300          BP      not.classified
+#> 100           3     2.08 0.3300          BP      not.classified
+#> 101          14    11.86 0.0230          CC      not.classified
+#> 102          20    15.82 0.0460          CC      not.classified
+#> 103           6     3.95 0.0800          CC      not.classified
+#> 104          14    12.52 0.0810          CC      not.classified
+#> 105          22    18.45 0.1020          CC      not.classified
+#> 106          35    35.59 0.1280          CC      not.classified
+#> 107           4     2.64 0.1870          CC      not.classified
+#> 108          29    27.02 0.2820          CC      not.classified
+#> 109           3     1.98 0.2850          CC      not.classified
+#> 110           3     1.98 0.2850          CC      not.classified
+#> 111           6     3.89 0.0710          MF      not.classified
+#> 112           4     2.59 0.1730          MF      not.classified
+#> 113           4     2.59 0.1730          MF      not.classified
+#> 114           4     2.59 0.1730          MF      not.classified
+#> 115           4     2.59 0.1730          MF      not.classified
+#> 116           4     2.59 0.1730          MF      not.classified
+#> 117          55    51.17 0.2620          MF      not.classified
+#> 118           5     3.89 0.2690          MF      not.classified
+#> 119           3     1.94 0.2690          MF      not.classified
+#> 120           4     3.89 0.2760          MF      not.classified
+#> 
+#> ==============================================================================
+#> 
+#> 
 #> 
 #> All interesting-gene categories have been tested for GO-term enrichment.
 #> 
-#> See SIGNIFICANT enrichment by interesting-gene category in 'Routput/GO/significant.GO.results*.tab.txt' and 'Routput/GO/all.combined.significant.GO.results.tab.txt'.
+#> See ALL TOP 30 enriched terms by interesting-gene category in 'Routput/GO/all.combined.GO.results.tsv'.
 #> 
-#> See ALL TOP 30 enrichment by interesting-gene category in 'Routput/GO/results*.tab.txt' and 'Routput/GO/all.combined.GO.results.tab.txt'.
+#> See log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/topGO.log.*.txt'.
 #> 
-#> See log files for topGO-analyses by each interesting-gene category, including all genes in the analysis by GO term in 'Routput/GO/genes_by_GOterm.*.tab.txt'.
-#>          GO.ID                                        Term Annotated
-#> 1   GO:0042802                   identical protein binding         3
-#> 2   GO:0008569 ATP-dependent microtubule motor activity...         3
-#> 3   GO:0045505           dynein intermediate chain binding         3
-#> 4   GO:0051959     dynein light intermediate chain binding         4
-#> 5   GO:0008170                N-methyltransferase activity         4
-#> 6   GO:0008173              RNA methyltransferase activity         4
-#> 7   GO:0036094                      small molecule binding        18
-#> 8   GO:0004540                       ribonuclease activity         5
-#> 9   GO:0003924                             GTPase activity         5
-#> 10  GO:0005319                  lipid transporter activity         5
-#> 11  GO:0010468               regulation of gene expression        27
-#> 12  GO:0006401                       RNA catabolic process         8
-#> 13  GO:0019682 glyceraldehyde-3-phosphate metabolic pro...         3
-#> 14  GO:0060627    regulation of vesicle-mediated transport         3
-#> 15  GO:0046394        carboxylic acid biosynthetic process         3
-#> 16  GO:0044262     cellular carbohydrate metabolic process         3
-#> 17  GO:0019751                    polyol metabolic process         3
-#> 18  GO:0007007 inner mitochondrial membrane organizatio...         3
-#> 19  GO:0009132    nucleoside diphosphate metabolic process         3
-#> 20  GO:0140053               mitochondrial gene expression         3
-#> 21  GO:0005930                                     axoneme         3
-#> 22  GO:0030286                              dynein complex         3
-#> 23  GO:0005768                                    endosome         8
-#> 24  GO:0019866                    organelle inner membrane        10
-#> 25  GO:0031966                      mitochondrial membrane        10
-#> 26  GO:0005856                                cytoskeleton         9
-#> 27  GO:0012505                         endomembrane system        51
-#> 28  GO:0030139                           endocytic vesicle        15
-#> 29  GO:0020011                                  apicoplast        42
-#> 30  GO:0016021              integral component of membrane        47
-#> 31  GO:0008094               DNA-dependent ATPase activity         7
-#> 32  GO:0003677                                 DNA binding        25
-#> 33  GO:1990837 sequence-specific double-stranded DNA bi...         6
-#> 34  GO:0003690                 double-stranded DNA binding         8
-#> 35  GO:0031072                  heat shock protein binding         3
-#> 36  GO:0022853 active ion transmembrane transporter act...         3
-#> 37  GO:1901505 carbohydrate derivative transmembrane tr...         3
-#> 38  GO:0015932 nucleobase-containing compound transmemb...         3
-#> 39  GO:0015291 secondary active transmembrane transport...         4
-#> 40  GO:0019899                              enzyme binding         4
-#> 41  GO:0006457                             protein folding        11
-#> 42  GO:0043933 protein-containing complex subunit organ...        31
-#> 43  GO:0065004                protein-DNA complex assembly         6
-#> 44  GO:0006898               receptor-mediated endocytosis         3
-#> 45  GO:0051336            regulation of hydrolase activity         3
-#> 46  GO:0006334                         nucleosome assembly         3
-#> 47  GO:0045454                      cell redox homeostasis         3
-#> 48  GO:0046939                  nucleotide phosphorylation         3
-#> 49  GO:0022411              cellular component disassembly         3
-#> 50  GO:0051276                     chromosome organization        21
-#> 51  GO:0032993                         protein-DNA complex         5
-#> 52  GO:0031982                                     vesicle        50
-#> 53  GO:0005667             transcription regulator complex         3
-#> 54  GO:0000785                                   chromatin         3
-#> 55  GO:0042555                                 MCM complex         3
-#> 56  GO:0030126                           COPI vesicle coat         3
-#> 57  GO:0000139                              Golgi membrane         3
-#> 58  GO:0005634                                     nucleus       237
-#> 59  GO:0005730                                   nucleolus        16
-#> 60  GO:1903561                       extracellular vesicle        17
-#> 61  GO:0018024 histone-lysine N-methyltransferase activ...         3
-#> 62  GO:0050839              cell adhesion molecule binding        17
-#> 63  GO:0016779             nucleotidyltransferase activity         4
-#> 64  GO:0005048                     signal sequence binding         4
-#> 65  GO:0016853                          isomerase activity         4
-#> 66  GO:1901681                     sulfur compound binding         4
-#> 67  GO:0042277                             peptide binding         5
-#> 68  GO:0004722 protein serine/threonine phosphatase act...         5
-#> 69  GO:0003729                                mRNA binding        16
-#> 70  GO:0008270                            zinc ion binding         7
-#> 71  GO:0072594 establishment of protein localization to...         6
-#> 72  GO:0020033                         antigenic variation        27
-#> 73  GO:0032268 regulation of cellular protein metabolic...        10
-#> 74  GO:0007034                          vacuolar transport         3
-#> 75  GO:0006605                           protein targeting         8
-#> 76  GO:0020013 modulation by symbiont of host erythrocy...        20
-#> 77  GO:0045892 negative regulation of transcription, DN...         4
-#> 78  GO:0006892       post-Golgi vesicle-mediated transport         4
-#> 79  GO:0034968                  histone lysine methylation         4
-#> 80  GO:0006612               protein targeting to membrane         4
-#> 81  GO:0010008                           endosome membrane         3
-#> 82  GO:0020030             infected host cell surface knob        18
-#> 83  GO:0036464       cytoplasmic ribonucleoprotein granule         4
-#> 84  GO:0020002                   host cell plasma membrane        28
-#> 85  GO:0005654                                 nucleoplasm        11
-#> 86  GO:0043657                                   host cell       105
-#> 87  GO:0020036                              Maurer's cleft        43
-#> 88  GO:0016020                                    membrane       108
-#> 89  GO:0005783                       endoplasmic reticulum        31
-#> 90  GO:0020008                                     rhoptry         8
-#> 91  GO:0004197        cysteine-type endopeptidase activity         6
-#> 92  GO:0042393                             histone binding         8
-#> 93  GO:0004843 thiol-dependent ubiquitin-specific prote...         5
-#> 94  GO:0140096     catalytic activity, acting on a protein        62
-#> 95  GO:0016298                             lipase activity         4
-#> 96  GO:0008080                N-acetyltransferase activity         4
-#> 97  GO:0008047                   enzyme activator activity         7
-#> 98  GO:0005524                                 ATP binding        11
-#> 99  GO:0003743      translation initiation factor activity         7
-#> 100 GO:0003735          structural constituent of ribosome        14
-#> 101 GO:0035891                         exit from host cell         6
-#> 102 GO:0016579                    protein deubiquitination         5
-#> 103 GO:0007165                         signal transduction        23
-#> 104 GO:0051603 proteolysis involved in cellular protein...        17
-#> 105 GO:0043161 proteasome-mediated ubiquitin-dependent ...         4
-#> 106 GO:1903047                  mitotic cell cycle process         9
-#> 107 GO:0000724 double-strand break repair via homologou...         8
-#> 108 GO:0006412                                 translation        27
-#> 109 GO:0020035 cytoadherence to microvasculature, media...        22
-#> 110 GO:0046474    glycerophospholipid biosynthetic process         7
-#> 111 GO:0020003                 symbiont-containing vacuole        18
-#> 112 GO:0020009                                   microneme         6
-#> 113 GO:0009986                                cell surface        25
-#> 114 GO:0020002                   host cell plasma membrane        28
-#> 115 GO:0032991                  protein-containing complex       121
-#> 116 GO:0030176 integral component of endoplasmic reticu...         8
-#> 117 GO:0071944                              cell periphery        27
-#> 118 GO:0044228                           host cell surface         4
-#> 119 GO:0098796                    membrane protein complex        20
-#> 120 GO:0000151                    ubiquitin ligase complex         3
-#>     Significant Expected   topGO go.category   interest.category
-#> 1             2     0.46 0.06300          MF      A.HS.Sensitive
-#> 2             2     0.46 0.06300          MF      A.HS.Sensitive
-#> 3             2     0.46 0.06300          MF      A.HS.Sensitive
-#> 4             2     0.61 0.11300          MF      A.HS.Sensitive
-#> 5             2     0.61 0.15200          MF      A.HS.Sensitive
-#> 6             2     0.61 0.15200          MF      A.HS.Sensitive
-#> 7             3     2.76 0.15500          MF      A.HS.Sensitive
-#> 8             2     0.77 0.17000          MF      A.HS.Sensitive
-#> 9             2     0.77 0.17000          MF      A.HS.Sensitive
-#> 10            2     0.77 0.17000          MF      A.HS.Sensitive
-#> 11            6     4.36 0.00790          BP      A.HS.Sensitive
-#> 12            3     1.29 0.06850          BP      A.HS.Sensitive
-#> 13            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 14            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 15            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 16            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 17            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 18            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 19            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 20            2     0.48 0.06890          BP      A.HS.Sensitive
-#> 21            2     0.48 0.06800          CC      A.HS.Sensitive
-#> 22            2     0.48 0.06800          CC      A.HS.Sensitive
-#> 23            3     1.28 0.12100          CC      A.HS.Sensitive
-#> 24            4     1.60 0.15700          CC      A.HS.Sensitive
-#> 25            4     1.60 0.15700          CC      A.HS.Sensitive
-#> 26            3     1.44 0.15900          CC      A.HS.Sensitive
-#> 27            9     8.17 0.16000          CC      A.HS.Sensitive
-#> 28            3     2.40 0.16100          CC      A.HS.Sensitive
-#> 29            9     6.73 0.21400          CC      A.HS.Sensitive
-#> 30            9     7.53 0.21900          CC      A.HS.Sensitive
-#> 31            3     0.25 0.00110          MF HS.and.CG.phenotype
-#> 32            6     0.88 0.00120          MF HS.and.CG.phenotype
-#> 33            2     0.21 0.03290          MF HS.and.CG.phenotype
-#> 34            3     0.28 0.05920          MF HS.and.CG.phenotype
-#> 35            1     0.11 0.10280          MF HS.and.CG.phenotype
-#> 36            1     0.11 0.10280          MF HS.and.CG.phenotype
-#> 37            1     0.11 0.10280          MF HS.and.CG.phenotype
-#> 38            1     0.11 0.10280          MF HS.and.CG.phenotype
-#> 39            1     0.14 0.13480          MF HS.and.CG.phenotype
-#> 40            1     0.14 0.13480          MF HS.and.CG.phenotype
-#> 41            2     0.41 0.05900          BP HS.and.CG.phenotype
-#> 42            4     1.16 0.06200          BP HS.and.CG.phenotype
-#> 43            2     0.22 0.10100          BP HS.and.CG.phenotype
-#> 44            1     0.11 0.10900          BP HS.and.CG.phenotype
-#> 45            1     0.11 0.10900          BP HS.and.CG.phenotype
-#> 46            1     0.11 0.10900          BP HS.and.CG.phenotype
-#> 47            1     0.11 0.10900          BP HS.and.CG.phenotype
-#> 48            1     0.11 0.10900          BP HS.and.CG.phenotype
-#> 49            1     0.11 0.10900          BP HS.and.CG.phenotype
-#> 50            3     0.79 0.12700          BP HS.and.CG.phenotype
-#> 51            3     0.19 0.00047          CC HS.and.CG.phenotype
-#> 52            5     1.93 0.09869          CC HS.and.CG.phenotype
-#> 53            1     0.12 0.11162          CC HS.and.CG.phenotype
-#> 54            1     0.12 0.11162          CC HS.and.CG.phenotype
-#> 55            1     0.12 0.11162          CC HS.and.CG.phenotype
-#> 56            1     0.12 0.11162          CC HS.and.CG.phenotype
-#> 57            1     0.12 0.11162          CC HS.and.CG.phenotype
-#> 58           13     9.15 0.11629          CC HS.and.CG.phenotype
-#> 59            2     0.62 0.12292          CC HS.and.CG.phenotype
-#> 60            2     0.66 0.13615          CC HS.and.CG.phenotype
-#> 61            2     0.41 0.04900          MF          HS.Neutral
-#> 62            5     2.31 0.06500          MF          HS.Neutral
-#> 63            2     0.54 0.09000          MF          HS.Neutral
-#> 64            2     0.54 0.09000          MF          HS.Neutral
-#> 65            2     0.54 0.09000          MF          HS.Neutral
-#> 66            2     0.54 0.09000          MF          HS.Neutral
-#> 67            3     0.68 0.13100          MF          HS.Neutral
-#> 68            2     0.68 0.13400          MF          HS.Neutral
-#> 69            4     2.17 0.15800          MF          HS.Neutral
-#> 70            2     0.95 0.24300          MF          HS.Neutral
-#> 71            4     0.67 0.00180          BP          HS.Neutral
-#> 72            8     3.03 0.00560          BP          HS.Neutral
-#> 73            3     1.12 0.03400          BP          HS.Neutral
-#> 74            2     0.34 0.03440          BP          HS.Neutral
-#> 75            4     0.90 0.05920          BP          HS.Neutral
-#> 76            5     2.25 0.06010          BP          HS.Neutral
-#> 77            2     0.45 0.06390          BP          HS.Neutral
-#> 78            2     0.45 0.06390          BP          HS.Neutral
-#> 79            2     0.45 0.06390          BP          HS.Neutral
-#> 80            2     0.45 0.06390          BP          HS.Neutral
-#> 81            2     0.39 0.04700          CC          HS.Neutral
-#> 82            5     2.36 0.07300          CC          HS.Neutral
-#> 83            2     0.53 0.08500          CC          HS.Neutral
-#> 84            6     3.68 0.14700          CC          HS.Neutral
-#> 85            3     1.44 0.16500          CC          HS.Neutral
-#> 86           19    13.78 0.16800          CC          HS.Neutral
-#> 87            8     5.64 0.18700          CC          HS.Neutral
-#> 88           14    14.18 0.19000          CC          HS.Neutral
-#> 89            5     4.07 0.23500          CC          HS.Neutral
-#> 90            2     1.05 0.28300          CC          HS.Neutral
-#> 91            6     4.05 0.09300          MF      not.classified
-#> 92            8     5.40 0.13600          MF      not.classified
-#> 93            5     3.38 0.13900          MF      not.classified
-#> 94           45    41.88 0.19700          MF      not.classified
-#> 95            4     2.70 0.20600          MF      not.classified
-#> 96            4     2.70 0.20600          MF      not.classified
-#> 97            6     4.73 0.20700          MF      not.classified
-#> 98            9     7.43 0.24900          MF      not.classified
-#> 99            6     4.73 0.27700          MF      not.classified
-#> 100          11     9.46 0.28000          MF      not.classified
-#> 101           6     4.13 0.10000          BP      not.classified
-#> 102           5     3.44 0.15000          BP      not.classified
-#> 103          15    15.84 0.16000          BP      not.classified
-#> 104          15    11.71 0.22000          BP      not.classified
-#> 105           4     2.76 0.22000          BP      not.classified
-#> 106           6     6.20 0.23000          BP      not.classified
-#> 107           7     5.51 0.23000          BP      not.classified
-#> 108          22    18.60 0.25000          BP      not.classified
-#> 109          17    15.15 0.27000          BP      not.classified
-#> 110           6     4.82 0.30000          BP      not.classified
-#> 111          14    12.06 0.02700          CC      not.classified
-#> 112           6     4.02 0.08900          CC      not.classified
-#> 113          20    16.75 0.09700          CC      not.classified
-#> 114          22    18.76 0.12700          CC      not.classified
-#> 115          84    81.06 0.13000          CC      not.classified
-#> 116           7     5.36 0.13400          CC      not.classified
-#> 117          20    18.09 0.19900          CC      not.classified
-#> 118           4     2.68 0.20000          CC      not.classified
-#> 119          14    13.40 0.20200          CC      not.classified
-#> 120           3     2.01 0.30000          CC      not.classified
+#> See all significant genes mapped to all significant GO terms in 'Routput/GO/all.combined.sig.genes.per.sig.terms.tsv'.
+#> 
+#> ==============================================================================
+```
+
+``` r
+
+# if you've run the pipeline, your significant genes in significant terms per category of interest can be loaded:
+sig.genes <- read.delim("Routput/GO/all.combined.sig.genes.per.sig.terms.tsv")
 ```
