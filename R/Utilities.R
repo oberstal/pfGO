@@ -487,14 +487,15 @@ get.value <- function(id, lookupvector){
 #'
 #' Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, Inferred-from-Electronic-Annotation assignments, Inferred from Biological aspect of Ancestor, or Nontraceable Author Statements is also included in this package (evidence codes IEA,IBA,NAS; see \code{\link{formatGOdb.curated}})
 #'
-#' a GOdb from PlasmoDB's latest \emph{P. falciparum} annotation (accessed November 5, 2021) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#' a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
 #' @seealso [formatGOdb.curated()]
 #'
 #' @export
-formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip",
+formatGOdb <- function(url,
            organism = "Pf",
            plasmoDB_version = "") {
+  # updating to require manual input of URL as PlasmoDB link structure is not yet consistent. Example that will work: https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_Curated_GO.gaf.gzip
 
   # old pre-v65 plasmoDB link: "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf"
     # make connection to gaf file without downloading it, then read it in.
@@ -577,7 +578,7 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #' @description
 #' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
 #'
-#' @param url url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf.gzip annotation file from PlasmoDB. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
+#' @param url url or filepath to a .gaf or gz-compressed gaf file. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 #'@param organism optional string to include in your output filename. Defaults to "Pf".
 #'@param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v66").
 #'
@@ -591,12 +592,12 @@ formatGOdb <- function(url = "https://plasmodb.org/common/downloads/Current_Rele
 #' @details # \strong{Notes on gaf.gz format}
 #' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' A GOdb from Plasmo DB's latest \emph{P. falciparum} annotation (accessed Nov 5, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#' A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
 #'
 #' @seealso [formatGOdb()]
 #' @export
 formatGOdb.curated <-
-  function(url = "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_Curated_GO.gaf.gzip",
+  function(url,
            organism = "Pf",
            plasmoDB_version = ""){
 
@@ -614,7 +615,7 @@ formatGOdb.curated <-
                    stringsAsFactors = TRUE)
 
     # weed out any electronically-inferred evidence-codes (only want curated GO terms)
-#    x = x[x[,7]!="IEA",]
+    x = x[x[,7]!="IEA",]
     ## NOTE: don't need to filter manually anymore, PlasmoDB offers their own curated gaf file with IEA,NAS and IBA codes filtered
 
     # Keep only the 2nd and 5th columns (geneID, GO)
@@ -779,7 +780,7 @@ get.annot <- function(x) {
 #' @details # \strong{Notes on gff format}
 #' The .gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' an annotation created from PlasmoDB's latest \emph{P. falciparum} gff file (accessed December 16, 2021) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+#' an annotation created from PlasmoDB's \emph{P. falciparum} gff file (v. 66, accessed September 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
 #'
 #' You \emph{will} need to update the gff url accordingly to the latest version when PlasmoDB is updated.
 #'
