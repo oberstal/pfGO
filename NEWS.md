@@ -1,3 +1,12 @@
+# pfGO 2.0
+
+This release of pfGO includes several updates to increase utility of output files/remove the need for manual parsing before downstream analyses. Several functions are updated to make automated retrieval/incorporation of latest PlasmoDB annotations for gene products and GO terms easy.
+
+* Output files for significant genes in significant terms now include mapped GO terms, their definitions, enrichment values and interest-category
+* Formatting fixes to all significant-genes-in-significant-terms output-files for easier downstream parsing.
+* Functions pulling data from PlasmoDB.org now require manual URL entry to circumvent inconsistencies in link-structure
+
+
 # pfGO 1.2
 
 * Formatting fixes to all significant-genes-in-significant-terms output-files for easier downstream parsing.

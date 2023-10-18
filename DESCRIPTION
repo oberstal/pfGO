@@ -1,6 +1,6 @@
 Package: pfGO
 Title: Plasmodium falciparum functional enrichment analysis tools
-Version: 1.2
+Version: 2.0
 Authors@R: 
     person(given = "J",
            family = "Oberstaller",
