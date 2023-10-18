@@ -4,6 +4,8 @@
 # pfGO
 
 <!-- badges: start -->
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10019755.svg)](https://doi.org/10.5281/zenodo.10019755)
 <!-- badges: end -->
 
 The goal of pfGO is to package handy functions and datasets specifically
