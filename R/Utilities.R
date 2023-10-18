@@ -113,16 +113,16 @@ makeGOhierarchy.dir <- function() {
 #'
 #' A correctly formatted geneID2GO object is included for P. falciparum enrichment analyses ([Pfal_geneID2GO]). You may also provide your own, so long as it is a named character-vector of GO-terms (each vector named by geneID, with GO terms as each element).
 #'
-#' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB/PlasmoDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about quality of automated electronic annotations). If you're studying a model organism, several annotations are already available and can be downloaded through the AnnotationDbi bioconductor package that loads with topGO.
+#' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB/PlasmoDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about including automated electronic annotations). If you're studying a model organism, several annotations are already available and can be downloaded through the AnnotationDbi bioconductor package that loads with topGO.
 #'
 #' @seealso [topGO::topGO()]
 #'
 #' @examples
 #'
-#' run.topGO.meta(exampleMydf,Pfal_geneID2GO)
+#' run.topGO.meta(exampleMydf,Pfal_geneID2GO_curated)
 #'
 #' @export
-run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0.05) {
+run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO_curated", pval = 0.05) {
 #  require(topGO)
 #  require(tidyverse)
 
@@ -487,7 +487,7 @@ get.value <- function(id, lookupvector){
 #'
 #' Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, Inferred-from-Electronic-Annotation assignments, Inferred from Biological aspect of Ancestor, or Nontraceable Author Statements is also included in this package (evidence codes IEA,IBA,NAS; see \code{\link{formatGOdb.curated}})
 #'
-#' a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#' a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 #'
 #' @seealso [formatGOdb.curated()]
 #'
@@ -592,7 +592,7 @@ formatGOdb <- function(url,
 #' @details # \strong{Notes on gaf.gz format}
 #' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+#' A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 #'
 #' @seealso [formatGOdb()]
 #' @export
@@ -692,16 +692,16 @@ formatGOdb.curated <-
 #' Extracts the term, term-definition, and ontology for all GOIDs (e.g. GO:0000027) in a geneID2GO object into a dataframe. Output also includes a column for all geneIDs mapping to each term as a comma-separated list. Not required presently for the GO enrichment pipeline, but provides useful context for results--very handy to use as a lookup-table for both GO terms and individual geneIDs.
 #'
 #'
-#' @param geneID2GO  geneID2GO object. Defaults to Pfal_geneID2GO (if using the default, you must first load the data-object \link{Pfal_geneID2GO} ).
+#' @param geneID2GO  geneID2GO object. Defaults to Pfal_geneID2GO_curated (if using the default, you must first load the data-object \link{Pfal_geneID2GO_curated} ).
 #'
 #' @export
 #'
 #' @examples
 #' # example code
-#' data(Pfal_geneID2GO)  ## load Pfal_geneID2GO object
-#' go2genesLookup.df <- get.GOdef(Pfal_geneID2GO)
+#' data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
+#' go2genesLookup.df <- get.GOdef(Pfal_geneID2GO_curated)
 #'
-get.GOdef <- function(geneID2GO = "Pfal_geneID2GO"){
+get.GOdef <- function(geneID2GO = "Pfal_geneID2GO_curated"){
   # get go2genes
   go2genes = topGO::inverseList(geneID2GO)
   go2genes.df = data.frame(sapply(go2genes,stringr::str_flatten_comma))

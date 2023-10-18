@@ -4,17 +4,17 @@
 \alias{get.GOdef}
 \title{Get GO terms and definitions}
 \usage{
-get.GOdef(geneID2GO = "Pfal_geneID2GO")
+get.GOdef(geneID2GO = "Pfal_geneID2GO_curated")
 }
 \arguments{
-\item{geneID2GO}{geneID2GO object. Defaults to Pfal_geneID2GO (if using the default, you must first load the data-object \link{Pfal_geneID2GO} ).}
+\item{geneID2GO}{geneID2GO object. Defaults to Pfal_geneID2GO_curated (if using the default, you must first load the data-object \link{Pfal_geneID2GO_curated} ).}
 }
 \description{
 Extracts the term, term-definition, and ontology for all GOIDs (e.g. GO:0000027) in a geneID2GO object into a dataframe. Output also includes a column for all geneIDs mapping to each term as a comma-separated list. Not required presently for the GO enrichment pipeline, but provides useful context for results--very handy to use as a lookup-table for both GO terms and individual geneIDs.
 }
 \examples{
 # example code
-data(Pfal_geneID2GO)  ## load Pfal_geneID2GO object
-go2genesLookup.df <- get.GOdef(Pfal_geneID2GO)
+data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
+go2genesLookup.df <- get.GOdef(Pfal_geneID2GO_curated)
 
 }

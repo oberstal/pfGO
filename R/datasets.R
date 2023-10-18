@@ -15,6 +15,24 @@
 "Pfal_geneID2GO_curated"
 
 
+## Pfal_geneID2GO ----
+#' @title All GO terms mapped to \emph{P. falciparum} genes
+#' @name Pfal_geneID2GO
+#' @docType data
+#' @description
+#' A \emph{P. falciparum} GO database containing all GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 66; accessed October 18, 2023). Includes automated annotations (evidence code "IEA").
+#'
+#' @usage data(Pfal_geneID2GO)
+#' @format A list of 4477 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_GO.gaf.gzip>
+#' @description Can be used as the geneID2GO input for run.topGO.meta.
+#' @examples
+#' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
+"Pfal_geneID2GO"
+
+
+
+
 
 ## exampleMydf ----
 #' @title \emph{piggyBac} mutant classification-data from pooled 1k heat shock screen

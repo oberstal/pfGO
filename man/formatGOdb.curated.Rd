@@ -26,7 +26,7 @@ Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
 \section{\strong{Notes on gaf.gz format}}{
 The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 
-A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 }
 
 \seealso{

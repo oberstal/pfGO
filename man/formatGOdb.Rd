@@ -28,7 +28,7 @@ The .gaf file should be in tabular format with 17 columns, one row for each GO t
 
 Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, Inferred-from-Electronic-Annotation assignments, Inferred from Biological aspect of Ancestor, or Nontraceable Author Statements is also included in this package (evidence codes IEA,IBA,NAS; see \code{\link{formatGOdb.curated}})
 
-a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO).
+a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 }
 
 \seealso{
