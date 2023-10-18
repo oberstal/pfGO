@@ -427,10 +427,10 @@ run.topGO.meta <- function(mydf = "mydf", geneID2GO = "Pfal_geneID2GO", pval = 0
     row.names = FALSE
   )
 
-  # print final GO results table to screen
+  # print final *significant* GO results table to screen
   cat("\n==============================================================================\n")
-  cat("Final GO enrichment results table (saved to 'Routput/GO/all.combined.GO.results.tsv':\n")
-  print(all.bin.combined.GO.output)
+  cat("Significant terms from final GO enrichment results table (saved to 'Routput/GO/all.combined.GO.results.tsv':\n")
+  print(all.bin.combined.GO.output %>% dplyr::filter(topGO<=pval))
 
   # print some progress-messages to screen
   cat("\n==============================================================================\n\n\n")
