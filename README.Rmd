@@ -31,10 +31,13 @@ You can install pfGO from [GitHub](https://github.com/) with:
 ``` r
 # install.packages("devtools")
 devtools::install_github("oberstal/pfGO")
+
+# or if authenticating via ssh:
+devtools::install_git("https://github.com/oberstal/pfGO")
 ```
 
 See individual functions/data objects for further documentation. E.g.:
-``` r 
+``` {r} 
 ?run.topGO.meta
 ?Pfal_geneID2GO
 
