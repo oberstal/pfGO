@@ -34,16 +34,10 @@ See individual functions/data objects for further documentation. E.g.:
 
 ``` r
 ?run.topGO.meta
-#> No documentation for 'run.topGO.meta' in specified packages and libraries:
-#> you could try '??run.topGO.meta'
 ?Pfal_geneID2GO
-#> No documentation for 'Pfal_geneID2GO' in specified packages and libraries:
-#> you could try '??Pfal_geneID2GO'
 
 # for all available functions/data:
 ?pfGO
-#> No documentation for 'pfGO' in specified packages and libraries:
-#> you could try '??pfGO'
 # then scroll to the bottom and click the "index" link.
 ```
 
