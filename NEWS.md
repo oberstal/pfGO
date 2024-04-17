@@ -1,3 +1,7 @@
+# pfGO 2.1
+
+Minor update to remove nonfunctional 'remote' url for dependency that caused some installs to fail
+
 # pfGO 2.0
 
 This release of pfGO includes several updates to increase utility of output files/remove the need for manual parsing before downstream analyses. Several functions are updated to make automated retrieval/incorporation of latest PlasmoDB annotations for gene products and GO terms easy.
