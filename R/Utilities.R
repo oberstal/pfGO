@@ -701,7 +701,7 @@ formatGOdb.curated <-
 #' data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
 #' go2genesLookup.df <- get.GOdef(Pfal_geneID2GO_curated)
 #'
-get.GOdef <- function(geneID2GO = "Pfal_geneID2GO_curated"){
+get.GOdef <- function(geneID2GO = Pfal_geneID2GO_curated){
   # get go2genes
   go2genes = topGO::inverseList(geneID2GO)
   go2genes.df = data.frame(sapply(go2genes,stringr::str_flatten_comma))
@@ -716,6 +716,62 @@ get.GOdef <- function(geneID2GO = "Pfal_geneID2GO_curated"){
   GOdef.df = dplyr::left_join(GOdef.df,go2genes.df)
   GOdef.df
 }
+
+
+## get.GOdef2 -----
+#' @title
+#' Get GO terms and definitions
+#'
+#' @description
+#' Extracts the term, term-definition, and ontology for all GOIDs (e.g. GO:0000027) in a geneID2GO object into a dataframe. If format = "byTerm" is specified, output also includes a column for all geneIDs mapping to each term as a comma-separated list. If format = "byGene", output will have all GO definitions for each gene row by row (will have multiple rows per gene; use this option if reformatting for clusterProfiler)
+#'
+#' Not required presently for the GO enrichment pipeline, but provides useful context for results--very handy to use as a lookup-table for both GO terms and individual geneIDs.
+#'
+#'
+#' @param geneID2GO  geneID2GO object. Defaults to Pfal_geneID2GO_curated (if using the default, you must first load the data-object \link{Pfal_geneID2GO_curated} ).
+#' @param format  one of two options specifying output format: "byTerm" or "byGene".
+#'
+#' @export
+#'
+#' @examples
+#' # example code
+#' data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
+#' go2genesLookup.df <- get.GOdef2(Pfal_geneID2GO_curated, format = "byTerm")
+#'
+get.GOdef2 <- function(geneID2GO = Pfal_geneID2GO_curated,
+                       format = c("byTerm","byGene")){
+
+  # step1: reformat geneID2GO object (lists of GO IDs mapped to each geneID) into go2genes object (lists of geneIDs mapped to each GO ID)
+  go2genes = topGO::inverseList(geneID2GO)
+
+  # process a little differently depending on output format selected
+  format = match.arg(format)
+
+  switch(format,
+         byTerm = {
+           go2genes.df = data.frame(sapply(go2genes,stringr::str_flatten_comma))
+           go2genes.df$GOID = rownames(go2genes.df)
+           rownames(go2genes.df) = NULL
+           colnames(go2genes.df) = c("geneIDsList","GOID")
+         },
+         byGene = {
+           go2genes.df = AnnotationDbi::unlist2(go2genes, recursive = FALSE, use.names = TRUE)
+           go2genes.df = cbind.data.frame(names(go2genes.df), go2genes.df)
+           colnames(go2genes.df) = c("GOID","pf.geneID")
+         },
+         stop("format argument must be one of 'byTerm' or 'byGene'")
+  )
+
+  # step2: get FULL names and descriptions for all included GO terms
+  all.go = AnnotationDbi::select(x = GO.db,
+                                 keys = unique(go2genes.df$GOID),
+                                 columns = as.character(AnnotationDbi::columns(GO.db)),
+                                 keytype = "GOID")
+
+  # step 3: join GO term definitions with all genes mapping to each term
+  GOdef.df = dplyr::left_join(go2genes.df, all.go)
+}
+
 
 
 ## get.annot ----
