@@ -717,7 +717,6 @@ get.GOdef <- function(geneID2GO = Pfal_geneID2GO_curated){
   GOdef.df
 }
 
-
 ## get.annot ----
 #' @title
 #' Extracts and formats annotations from a .gff file.
