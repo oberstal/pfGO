@@ -3,15 +3,17 @@
 #' Reformat sig genes output for clusterProfiler
 #' @description
 #' Reformats significant genes in significant terms output to something more compatible with clusterProfiler/enrichPlot for visualization. Output is a dataframe with the appropriate columns that can be turned into an enrichRes object (see the DOSE package), which can then be plotted with enrichPlot functions.
-#' @params my.sigGenes   a dataframe of pfGO output all.combined.sig.genes.per.sig.term.tsv
+#' @param my.sigGenes   a dataframe of pfGO output all.combined.sig.genes.per.sig.term.tsv
 #'
 #' @export
 #'
 #' @examples
 #' # example code
 #'
+#'\dontrun{
 #' my.sigGenes <- read.delim("Routput/GO/all.combined.sig.genes.per.sig.term.tsv")
 #' my.cp.df <- reformat_sigGenes(my.sigGenes)
+#' }
 #'
 reformat_sigGenes <- function(my.sigGenes){
   my.cpInput <- my.sigGenes %>%
