@@ -33,7 +33,7 @@ Depends:
     topGO
 Suggests: 
     testthat (>= 3.0.0)
-Remotes: bioc::release/topGO,bioc::release/Biobase,bioc::release/AnnotationDbi
+Remotes: bioc::release/topGO,bioc::release/Biobase,bioc::release/AnnotationDbi, bioc::release/qvalue
 Config/testthat/edition: 3
 URL: https://github.com/oberstal/pfGO
 BugReports: https://github.com/oberstal/pfGO/issues
