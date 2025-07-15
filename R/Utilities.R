@@ -470,7 +470,7 @@ get.value <- function(id, lookupvector){
 #' @description
 #' Fetches \emph{P. falciparum} annotations from PlasmoDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
 #'
-#' @param url = url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: /url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip}. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
+#' @param url = url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip}. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 #' @param organism = optional string to include in your output file-name. Defaults to "Pf".
 #' @param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v66").
 #'
