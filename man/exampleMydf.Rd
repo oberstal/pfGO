@@ -16,7 +16,7 @@ data(exampleMydf)
 \description{
 A data frame with \emph{P. falciparum} geneIDs in column 1, and interest-category classifications in column 2. In pooled \emph{piggyBac}-mutant screening, common interest-category classifications may be some form of "sensitive", "tolerant", and "neutral".
 
-All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from /url{https://www.nature.com/articles/s41467-021-24814-1}, Table S2.
+All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from \url{https://www.nature.com/articles/s41467-021-24814-1}, Table S2.
 
 can be used as example mydf input for run.topGO.meta.
 }

@@ -7,7 +7,7 @@
 formatGOdb(url, organism = "Pf", plasmoDB_version = "")
 }
 \arguments{
-\item{url}{= url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: /url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip}. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
+\item{url}{= url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip}. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
 
 \item{organism}{= optional string to include in your output file-name. Defaults to "Pf".}
 

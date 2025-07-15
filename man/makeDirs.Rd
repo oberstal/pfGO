@@ -13,10 +13,10 @@ makeGOoutput.dir()
 
 makeGOhierarchy.dir()
 }
-\arguments{
-\item{...}{not required. Defaults to creating top-level Routput directory in current working directory.}
-}
 \description{
 Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
+}
+\details{
+param ... not required. Defaults to creating top-level Routput directory in current working directory.
 }
 \keyword{internal}
