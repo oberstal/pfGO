@@ -27,13 +27,14 @@ Imports:
     methods,
     AnnotationDbi,
     GO.db,
-    qvalue
+    qvalue,
+    Rgraphviz
 Depends: 
     R (>= 2.10),
     topGO
 Suggests: 
     testthat (>= 3.0.0)
-Remotes: bioc::release/topGO,bioc::release/Biobase,bioc::release/AnnotationDbi, bioc::release/qvalue
+Remotes: bioc::release/topGO,bioc::release/Biobase,bioc::release/AnnotationDbi, bioc::release/qvalue, bioc::release/Rgraphviz
 Config/testthat/edition: 3
 URL: https://github.com/oberstal/pfGO
 BugReports: https://github.com/oberstal/pfGO/issues
