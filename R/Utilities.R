@@ -806,8 +806,10 @@ get.pfannot <-
     annot
   }
 
-
-
+## including some call to Rgraphviz to nullify build-error
+ignore_unused_imports <- function() {
+  Rgraphviz::aaa_fun
+}
 
 
 
