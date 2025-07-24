@@ -20,7 +20,7 @@ make_enrichRes <- function(my.cpInput, interestCategory, ontology = "BP", pval_c
   #require(DOSE)
   #require(enrichplot)
 
-  res_df = my.cpInput[my.cpInput$interest.category==interestCategory,]
+  res_df = my.cpInput[my.cpInput$interest.category==interestCategory & my.cpInput$go.category==ontology,]
 
   # make vector out of geneIDs (actually geneNames) for gene universe
   geneNames = unlist(stringr::str_split(res_df$geneID, pattern = "/"), use.names = FALSE)
