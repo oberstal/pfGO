@@ -31,7 +31,7 @@ Imports:
     Rgraphviz,
     enrichplot
 Depends: 
-    R (>= 2.10),
+    R (>= 3.5),
     topGO
 Suggests: 
     testthat (>= 3.0.0)
