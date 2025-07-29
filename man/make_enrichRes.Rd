@@ -29,3 +29,21 @@ function to turn output of reformat_sigGenes into an enrichResult object, which 
 \details{
 Title
 }
+\examples{
+# example code
+
+\dontrun{
+my.sigGenes <- read.delim("Routput/GO/all.combined.sig.genes.per.sig.term.tsv")
+my.cp.df <- reformat_sigGenes(my.sigGenes)
+my.enrichRes <- make_enrichRes(my.cp.df, interestCategory = "sensitive", ontology = "BP")
+
+## from this point, enrichment results can be visualized many different ways with functions included in the enrichplot package (see \url{https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html} for an overview).
+
+barplot(my.enrichRes)
+cnetplot(my.enrichRes)
+dotplot(my.enrichRes)
+
+}
+
+
+}

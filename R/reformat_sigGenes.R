@@ -5,6 +5,7 @@
 #' Reformats significant genes in significant terms output to something more compatible with clusterProfiler/enrichPlot for visualization. Output is a dataframe with the appropriate columns that can be turned into an enrichRes object (see the DOSE package), which can then be plotted with enrichPlot functions.
 #' @param my.sigGenes   a dataframe of pfGO output all.combined.sig.genes.per.sig.term.tsv
 #'
+#' @seealso [make_enrichRes()]
 #' @export
 #'
 #' @examples

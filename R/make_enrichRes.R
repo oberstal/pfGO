@@ -15,6 +15,23 @@
 #' @returns an enrichResult object (which can be visualized in various ways using functions from the enrichplot package). The enrichResult object class is described in the DOSE package.
 #' @export
 #'
+#' @examples
+#' # example code
+#'
+#'\dontrun{
+#' my.sigGenes <- read.delim("Routput/GO/all.combined.sig.genes.per.sig.term.tsv")
+#' my.cp.df <- reformat_sigGenes(my.sigGenes)
+#' my.enrichRes <- make_enrichRes(my.cp.df, interestCategory = "sensitive", ontology = "BP")
+#'
+#' ## from this point, enrichment results can be visualized many different ways with functions included in the enrichplot package (see \url{https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html} for an overview).
+#'
+#' barplot(my.enrichRes)
+#' cnetplot(my.enrichRes)
+#' dotplot(my.enrichRes)
+#'
+#' }
+#'
+#'
 make_enrichRes <- function(my.cpInput, interestCategory, ontology = "BP", pval_cutoff = 0.05){
 
   #require(DOSE)

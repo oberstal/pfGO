@@ -21,3 +21,6 @@ my.cp.df <- reformat_sigGenes(my.sigGenes)
 }
 
 }
+\seealso{
+\code{\link[=make_enrichRes]{make_enrichRes()}}
+}
