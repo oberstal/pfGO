@@ -4,11 +4,11 @@
 #' @name Pfal_geneID2GO_curated
 #' @docType data
 #' @description
-#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 66; accessed Sep 28, 2023).
+#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 68; accessed July 29, 2025).
 #'
 #' @usage data(Pfal_geneID2GO_curated)
-#' @format A list of 3454 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
-#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_GO.gaf.gzip>
+#' @format A list of 4033 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz>
 #' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated)
@@ -20,11 +20,11 @@
 #' @name Pfal_geneID2GO
 #' @docType data
 #' @description
-#' A \emph{P. falciparum} GO database containing all GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 66; accessed October 18, 2023). Includes automated annotations (evidence code "IEA").
+#' A \emph{P. falciparum} GO database containing all GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 68; accessed July 29, 2025). Includes automated annotations (evidence code "IEA").
 #'
 #' @usage data(Pfal_geneID2GO)
-#' @format A list of 4477 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all GO-terms mapped to the geneID.
-#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_GO.gaf.gzip>
+#' @format A list of 4481 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz>
 #' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
