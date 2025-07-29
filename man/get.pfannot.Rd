@@ -6,11 +6,11 @@
 \usage{
 get.pfannot(
   gff_url =
-    "https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff"
+    "https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff"
 )
 }
 \arguments{
-\item{gff_url}{connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff}}
+\item{gff_url}{connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff}}
 }
 \description{
 Extracts and formats annotations from a gff file from PlasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the .gff file from PlasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
@@ -18,7 +18,7 @@ Extracts and formats annotations from a gff file from PlasmoDB. Not required pre
 \section{\strong{Notes on gff format}}{
 The .gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
 
-an annotation created from PlasmoDB's \emph{P. falciparum} gff file (v. 66, accessed September 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
+an annotation created from PlasmoDB's \emph{P. falciparum} gff file (v. 68, accessed July 29, 2025) pre-formatted using this function and ready for run.topGO.meta is included in this package (pf.annot).
 
 You \emph{will} need to update the gff url accordingly to the latest version when PlasmoDB is updated.
 }

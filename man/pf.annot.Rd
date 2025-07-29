@@ -20,7 +20,7 @@ A data frame of 5720 rows and 9 columns.
 }
 }
 \source{
-\url{https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff}
+\url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff}
 }
 \usage{
 data(pf.annot)
@@ -35,7 +35,7 @@ These data aren't explicitly required for running any enrichments with this pack
 
 Some redundant columns were filtered/removed from the original data source.
 
-Updated versions can be generated using the \link{get.pfannot} function and specifying the url or filepath to your preferred plasmoDB .gff file. Note the run.topGO.meta function currently calls get.pfannot with plasmoDB release 66 to annotate the significant-genes-in-enriched-terms output.
+Updated versions can be generated using the \link{get.pfannot} function and specifying the url or filepath to your preferred plasmoDB .gff file. Note the run.topGO.meta function currently calls get.pfannot with plasmoDB release 68 to annotate the significant-genes-in-enriched-terms output.
 }
 }
 \keyword{dataset}
