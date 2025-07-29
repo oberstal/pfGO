@@ -470,9 +470,10 @@ get.value <- function(id, lookupvector){
 #' @description
 #' Fetches \emph{P. falciparum} annotations from PlasmoDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
 #'
-#' @param url = url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip}. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
+#' @param url = url or filepath to a .gaf or gz-compressed gaf file. E.g. current latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz}.
+#' Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 #' @param organism = optional string to include in your output file-name. Defaults to "Pf".
-#' @param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v66").
+#' @param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v68").
 #'
 #' @details
 #'Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist. Note that the PlasmoDB release version isn't recorded automatically in the filename, so it is good practice to include the current PlasmoDB release number in the filename via the 'organism' parameter for your records.
@@ -487,7 +488,7 @@ get.value <- function(id, lookupvector){
 #'
 #' Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, Inferred-from-Electronic-Annotation assignments, Inferred from Biological aspect of Ancestor, or Nontraceable Author Statements is also included in this package (evidence codes IEA,IBA,NAS; see \code{\link{formatGOdb.curated}})
 #'
-#' a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
+#' a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 68; accessed July 29, 2025) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 #'
 #' @seealso [formatGOdb.curated()]
 #'
@@ -495,7 +496,7 @@ get.value <- function(id, lookupvector){
 formatGOdb <- function(url,
            organism = "Pf",
            plasmoDB_version = "") {
-  # updating to require manual input of URL as PlasmoDB link structure is not yet consistent. Example that will work: https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_Curated_GO.gaf.gzip
+  # updating to require manual input of URL as PlasmoDB link structure is not yet consistent. Example that will work: https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz
 
   # old pre-v65 plasmoDB link: "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf"
     # make connection to gaf file without downloading it, then read it in.
@@ -578,9 +579,10 @@ formatGOdb <- function(url,
 #' @description
 #' Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
 #'
-#' @param url url or filepath to a .gaf or gz-compressed gaf file. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
+#' @param url url or filepath to a .gaf or gz-compressed gaf file. This should be the complete GO.gaf file (not one that has "Curated" in the PlasmoDB filename).
+#'
 #'@param organism optional string to include in your output filename. Defaults to "Pf".
-#'@param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v66").
+#'@param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v68").
 #'
 #' @details
 #' Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist.
@@ -590,9 +592,9 @@ formatGOdb <- function(url,
 #' Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
 #'
 #' @details # \strong{Notes on gaf.gz format}
-#' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
+#' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url. Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 #'
-#' A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
+#' A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 68; accessed July 29, 2025) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 #'
 #' @seealso [formatGOdb()]
 #' @export
@@ -647,7 +649,7 @@ formatGOdb.curated <-
                       organism,
                       "_",
                       plasmoDB_version,
-                      "_curated",
+                      "_curated_",
                       today,
                       "_GOdb.out",
                       sep = "")
