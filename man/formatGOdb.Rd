@@ -7,11 +7,12 @@
 formatGOdb(url, organism = "Pf", plasmoDB_version = "")
 }
 \arguments{
-\item{url}{= url or filepath to a .gaf or gz-compressed gaf file. Defaults to latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-CURRENT_Pfalciparum3D7_GO.gaf.gzip}. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
+\item{url}{= url or filepath to a .gaf or gz-compressed gaf file. E.g. current latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz}.
+Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
 
 \item{organism}{= optional string to include in your output file-name. Defaults to "Pf".}
 
-\item{plasmoDB_version}{= optional string to include the PlasmoDB release version in your output filename (e.g. "v66").}
+\item{plasmoDB_version}{= optional string to include the PlasmoDB release version in your output filename (e.g. "v68").}
 }
 \description{
 Fetches \emph{P. falciparum} annotations from PlasmoDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
@@ -28,7 +29,7 @@ The .gaf file should be in tabular format with 17 columns, one row for each GO t
 
 Retrieves GO annotations assigned by \strong{all} evidence-codes. A version that weeds out any non-curated, Inferred-from-Electronic-Annotation assignments, Inferred from Biological aspect of Ancestor, or Nontraceable Author Statements is also included in this package (evidence codes IEA,IBA,NAS; see \code{\link{formatGOdb.curated}})
 
-a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
+a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB release 68; accessed July 29, 2025) pre-formatted using the \emph{curated} version of this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 }
 
 \seealso{

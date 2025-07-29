@@ -5,16 +5,16 @@
 \alias{Pfal_geneID2GO}
 \title{All GO terms mapped to \emph{P. falciparum} genes}
 \format{
-A list of 4477 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all GO-terms mapped to the geneID.
+A list of 4481 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all GO-terms mapped to the geneID.
 }
 \source{
-\url{https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_GO.gaf.gzip}
+\url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz}
 }
 \usage{
 data(Pfal_geneID2GO)
 }
 \description{
-A \emph{P. falciparum} GO database containing all GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 66; accessed October 18, 2023). Includes automated annotations (evidence code "IEA").
+A \emph{P. falciparum} GO database containing all GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 68; accessed July 29, 2025). Includes automated annotations (evidence code "IEA").
 
 Can be used as the geneID2GO input for run.topGO.meta.
 }
