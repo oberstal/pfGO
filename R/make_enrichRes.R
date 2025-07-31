@@ -2,35 +2,31 @@
 # Author: J. Oberstaller
 
 ## make_enrichRes----
-#' Title
 #' @title make_enrichRes
 #' @description
-#' function to turn output of reformat_sigGenes into an enrichResult object, which can then be visualized in many different ways with functions from the enrichplot package.
+#' Function to turn output of [reformat_sigGenes()] into an enrichResult object, which can then be visualized in many different ways with functions from the enrichplot package.
 #'
-#' @param my.cpInput  a reformatted df from pfGO output all.combined.sig.genes.per.sig.term.tsv (using the reformat_sigGenes function)
+#'[See an enrichplot visualization overview here](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html).
+#' @param my.cpInput  a reformatted dataframe from pfGO output file all.combined.sig.genes.per.sig.term.tsv (reformatted using the [reformat_sigGenes()] function)
 #' @param interestCategory  character string of your category of interest (should match a value from the interest.category column of my.cpInput)
 #' @param ontology  one of "BP", "CC" or "MF"
 #' @param pval_cutoff significance cutoff. Default is 0.05.
-#'
-#' @returns an enrichResult object (which can be visualized in various ways using functions from the enrichplot package). The enrichResult object class is described in the DOSE package.
-#' @export
-#'
+#' @returns An enrichResult object (which can be visualized in various ways using functions from the enrichplot package). The enrichResult object class is described in the DOSE package.
 #' @examples
-#' # example code
-#'
-#'\dontrun{
+#' # example pfGO-output-to-visualization workflow
+#' \dontrun{
 #' my.sigGenes <- read.delim("Routput/GO/all.combined.sig.genes.per.sig.term.tsv")
 #' my.cp.df <- reformat_sigGenes(my.sigGenes)
 #' my.enrichRes <- make_enrichRes(my.cp.df, interestCategory = "sensitive", ontology = "BP")
 #'
-#' ## from this point, enrichment results can be visualized many different ways with functions included in the enrichplot package (see \url{https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html} for an overview).
+#' ## from this point, enrichment results can be visualized many different ways with functions included in the enrichplot package.
 #'
 #' barplot(my.enrichRes)
 #' cnetplot(my.enrichRes)
 #' dotplot(my.enrichRes)
 #'
 #' }
-#'
+#' @export
 #'
 make_enrichRes <- function(my.cpInput, interestCategory, ontology = "BP", pval_cutoff = 0.05){
 

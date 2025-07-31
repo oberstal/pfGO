@@ -12,7 +12,7 @@ make_enrichRes(
 )
 }
 \arguments{
-\item{my.cpInput}{a reformatted df from pfGO output all.combined.sig.genes.per.sig.term.tsv (using the reformat_sigGenes function)}
+\item{my.cpInput}{a reformatted dataframe from pfGO output file all.combined.sig.genes.per.sig.term.tsv (reformatted using the \code{\link[=reformat_sigGenes]{reformat_sigGenes()}} function)}
 
 \item{interestCategory}{character string of your category of interest (should match a value from the interest.category column of my.cpInput)}
 
@@ -21,29 +21,25 @@ make_enrichRes(
 \item{pval_cutoff}{significance cutoff. Default is 0.05.}
 }
 \value{
-an enrichResult object (which can be visualized in various ways using functions from the enrichplot package). The enrichResult object class is described in the DOSE package.
+An enrichResult object (which can be visualized in various ways using functions from the enrichplot package). The enrichResult object class is described in the DOSE package.
 }
 \description{
-function to turn output of reformat_sigGenes into an enrichResult object, which can then be visualized in many different ways with functions from the enrichplot package.
-}
-\details{
-Title
+Function to turn output of \code{\link[=reformat_sigGenes]{reformat_sigGenes()}} into an enrichResult object, which can then be visualized in many different ways with functions from the enrichplot package.
+
+\href{https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html}{See an enrichplot visualization overview here}.
 }
 \examples{
-# example code
-
+# example pfGO-output-to-visualization workflow
 \dontrun{
 my.sigGenes <- read.delim("Routput/GO/all.combined.sig.genes.per.sig.term.tsv")
 my.cp.df <- reformat_sigGenes(my.sigGenes)
 my.enrichRes <- make_enrichRes(my.cp.df, interestCategory = "sensitive", ontology = "BP")
 
-## from this point, enrichment results can be visualized many different ways with functions included in the enrichplot package (see \url{https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html} for an overview).
+## from this point, enrichment results can be visualized many different ways with functions included in the enrichplot package.
 
 barplot(my.enrichRes)
 cnetplot(my.enrichRes)
 dotplot(my.enrichRes)
 
 }
-
-
 }
