@@ -1,3 +1,15 @@
+# pfGO 2.2.0
+
+Updates include:
+
+* New helper-functions `reformat_sigGenes()` and `make_enrichRes()` to convert pfGO output to format easily visualized via [enrichplot package functions](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)
+    * See `make_enrichRes()` documentation for pfGO output-to-plot example workflow.\*
+* Updated *P. falciparum* GO databases and gene annotations are included (made from PlasmoDB release 68; accessed July 29, 2025):
+    * Data objects `Pfal_geneID2GO`, `Pfal_geneID2GO_curated`, and `pf.annot`
+
+
+\*Ideally would add a full working example of taking pfGO output and turning it into various plots to the documentation for major release. For now I have example code in the `make_enrichRes()` documentation that isn't run/hasn't been well tested. 
+
 # pfGO 2.1
 
 Minor update to remove nonfunctional 'remote' url for dependency that caused some installs to fail
