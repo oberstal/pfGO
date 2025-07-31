@@ -1,41 +1,48 @@
 Package: pfGO
 Title: Plasmodium falciparum functional enrichment analysis tools
-Version: 2.1.1
+Version: 2.2.0
 Authors@R: 
-    person(given = "J",
-           family = "Oberstaller",
-           role = c("aut","cre"),
-           email = "jobersta@usf.edu",
+    person("J", "Oberstaller", , "jobersta@usf.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3033-2212"))
-Description: Handy functions and datasets specifically enabling Plasmodium falciparum functional enrichment analyses.
-    You provide a single list of all genes included with your experiment and how you categorized them (e.g. upregulated,
-    downregulated,neutral); then pfGO will test each category for functional enrichment. pfGO acts as a wrapper around
-    the topGO package for much of its enrichment functionality, while also providing several functions for incorporating
-    latest gene-ontology and functional annotations directly from PlasmoDB.org. pfGO enables chaining together many
-    parallel enrichment-analyses at once, generating thorough logs and outputs supporting reproducible analyses.
+Description: Handy functions and datasets specifically enabling Plasmodium
+    falciparum functional enrichment analyses.  You provide a single list
+    of all genes included with your experiment and how you categorized
+    them (e.g. upregulated, downregulated,neutral); then pfGO will test
+    each category for functional enrichment. pfGO acts as a wrapper around
+    the topGO package for much of its enrichment functionality, while also
+    providing several functions for incorporating latest gene-ontology and
+    functional annotations directly from PlasmoDB.org. pfGO enables
+    chaining together many parallel enrichment-analyses at once,
+    generating thorough logs and outputs supporting reproducible analyses.
 License: GPL (>= 3)
+URL: https://github.com/oberstal/pfGO
+BugReports: https://github.com/oberstal/pfGO/issues
+Depends: 
+    R (>= 3.5),
+    topGO
+Imports:
+    AnnotationDbi,
+    dplyr,
+    enrichplot,
+    GO.db,
+    magrittr,
+    methods,
+    plyr,
+    qvalue,
+    Rgraphviz,
+    stringr,
+    utils
+Suggests: 
+    testthat (>= 3.0.0)
+Remotes: 
+    bioc::release/AnnotationDbi,
+    bioc::release/Biobase,
+    bioc::release/enrichplot,
+    bioc::release/qvalue,
+    bioc::release/Rgraphviz,
+    bioc::release/topGO
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Imports:
-    plyr,
-    dplyr,
-    stringr,
-    magrittr,
-    utils,
-    methods,
-    AnnotationDbi,
-    GO.db,
-    qvalue,
-    Rgraphviz,
-    enrichplot
-Depends: 
-    R (>= 3.5),
-    topGO
-Suggests: 
-    testthat (>= 3.0.0)
-Remotes: bioc::release/topGO,bioc::release/Biobase,bioc::release/AnnotationDbi, bioc::release/qvalue, bioc::release/Rgraphviz,bioc::release/enrichplot
-Config/testthat/edition: 3
-URL: https://github.com/oberstal/pfGO
-BugReports: https://github.com/oberstal/pfGO/issues
