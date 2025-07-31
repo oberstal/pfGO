@@ -4,11 +4,11 @@
 #' @name Pfal_geneID2GO_curated
 #' @docType data
 #' @description
-#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 66; accessed Sep 28, 2023).
+#' A \emph{P. falciparum} GO database containing all curated GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 68; accessed July 29, 2025).
 #'
 #' @usage data(Pfal_geneID2GO_curated)
-#' @format A list of 3454 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
-#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_GO.gaf.gzip>
+#' @format A list of 4033 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all curated GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz>
 #' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated)
@@ -20,11 +20,11 @@
 #' @name Pfal_geneID2GO
 #' @docType data
 #' @description
-#' A \emph{P. falciparum} GO database containing all GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 66; accessed October 18, 2023). Includes automated annotations (evidence code "IEA").
+#' A \emph{P. falciparum} GO database containing all GO terms mapped to \emph{P. falciparum} genes (from PlasmoDB release 68; accessed July 29, 2025). Includes automated annotations (evidence code "IEA").
 #'
 #' @usage data(Pfal_geneID2GO)
-#' @format A list of 4477 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all GO-terms mapped to the geneID.
-#' @source <https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-66_Pfalciparum3D7_GO.gaf.gzip>
+#' @format A list of 4481 named vectors--one vector for each \emph{Pf} geneID to which GO terms are mapped. Each vector contains all GO-terms mapped to the geneID.
+#' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz>
 #' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
@@ -41,8 +41,7 @@
 #' @description
 #' A data frame with \emph{P. falciparum} geneIDs in column 1, and interest-category classifications in column 2. In pooled \emph{piggyBac}-mutant screening, common interest-category classifications may be some form of "sensitive", "tolerant", and "neutral".
 #'
-#' All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from /url{https://www.nature.com/articles/s41467-021-24814-1}, Table S2.
-
+#' All mutants detected above threshold in the pooled 1k-library heat shock screen are included in this table (n = 752). Derived from \url{https://www.nature.com/articles/s41467-021-24814-1}, Table S2.
 #'
 #' @usage data(exampleMydf)
 #' @format A 2-column data frame with 752 \emph{P. falciparum} geneIDs in column 1, and interest-category classifications (here, phenotypes in pooled screening) in column 2.
@@ -78,7 +77,7 @@
 #'   \item{source}{annotation source.}
 #' }
 #'
-#' @source <https://plasmodb.org/common/downloads/release-66/Pfalciparum3D7/gff/data/PlasmoDB-66_Pfalciparum3D7.gff>
+#' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff>
 #'
 #' @keywords dataset
 #' @details ## Keep in mind:
@@ -86,7 +85,7 @@
 #'
 #' Some redundant columns were filtered/removed from the original data source.
 #'
-#' Updated versions can be generated using the \link{get.pfannot} function and specifying the url or filepath to your preferred plasmoDB .gff file. Note the run.topGO.meta function currently calls get.pfannot with plasmoDB release 66 to annotate the significant-genes-in-enriched-terms output.
+#' Updated versions can be generated using the \link{get.pfannot} function and specifying the url or filepath to your preferred plasmoDB .gff file. Note the run.topGO.meta function currently calls get.pfannot with plasmoDB release 68 to annotate the significant-genes-in-enriched-terms output.
 #'
 "pf.annot"
 

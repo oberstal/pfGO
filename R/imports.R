@@ -45,6 +45,16 @@ NULL
 #' @importFrom AnnotationDbi unlist2
 NULL
 
+
+#' pairwise_termsim (imported from enrichplot)
+#'
+#' @name pairwise_termsim
+#' @rdname pairwise_termsim
+#' @keywords internal
+# #' @export
+#' @importFrom enrichplot pairwise_termsim
+NULL
+
 # # comment out topGO individual functions, import full package instead
 # #' runTest (imported from topGO)
 # #'

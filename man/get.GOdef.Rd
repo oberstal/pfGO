@@ -4,7 +4,7 @@
 \alias{get.GOdef}
 \title{Get GO terms and definitions}
 \usage{
-get.GOdef(geneID2GO = "Pfal_geneID2GO_curated")
+get.GOdef(geneID2GO = Pfal_geneID2GO_curated)
 }
 \arguments{
 \item{geneID2GO}{geneID2GO object. Defaults to Pfal_geneID2GO_curated (if using the default, you must first load the data-object \link{Pfal_geneID2GO_curated} ).}

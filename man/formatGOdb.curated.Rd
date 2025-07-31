@@ -7,11 +7,11 @@
 formatGOdb.curated(url, organism = "Pf", plasmoDB_version = "")
 }
 \arguments{
-\item{url}{url or filepath to a .gaf or gz-compressed gaf file. Note that zip archives won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
+\item{url}{url or filepath to a .gaf or gz-compressed gaf file. This should be the complete GO.gaf file (not one that has "Curated" in the PlasmoDB filename).}
 
 \item{organism}{optional string to include in your output filename. Defaults to "Pf".}
 
-\item{plasmoDB_version}{= optional string to include the PlasmoDB release version in your output filename (e.g. "v66").}
+\item{plasmoDB_version}{= optional string to include the PlasmoDB release version in your output filename (e.g. "v68").}
 }
 \description{
 Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.
@@ -24,9 +24,9 @@ You will need to run \code{topGO::readmappings()} on the file generated with for
 Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
 }
 \section{\strong{Notes on gaf.gz format}}{
-The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
+The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url. Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 
-A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 66; accessed Sep 28, 2023) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
+A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB release 68; accessed July 29, 2025) pre-formatted using this function and ready for run.topGO.meta is included in this package (Pfal_geneID2GO_curated).
 }
 
 \seealso{
