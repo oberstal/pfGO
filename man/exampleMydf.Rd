@@ -21,6 +21,10 @@ All mutants detected above threshold in the pooled 1k-library heat shock screen 
 can be used as example mydf input for run.topGO.meta.
 }
 \examples{
-run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
+\dontrun{
+#' data(exampleMydf)  ## load exampleMydf object (mutant classification data from a \emph{piggyBac} screen)
+data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
+run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated)
+}
 }
 \keyword{datasets}

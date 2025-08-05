@@ -19,6 +19,10 @@ A \emph{P. falciparum} GO database containing all curated GO terms mapped to \em
 Can be used as the geneID2GO input for run.topGO.meta.
 }
 \examples{
+\dontrun{
+data(exampleMydf)  ## load exampleMydf object (mutant classification data from a \emph{piggyBac} screen)
+data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
 run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated)
+}
 }
 \keyword{datasets}
