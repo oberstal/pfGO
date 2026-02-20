@@ -35,6 +35,9 @@ make_enrichRes <- function(my.cpInput, interestCategory, ontology = "BP", pval_c
 
   res_df = my.cpInput[my.cpInput$interest.category==interestCategory & my.cpInput$go.category==ontology,]
 
+  # add rownames (required for enrichRes object)
+  row.names(res_df) <- res_df$Description
+
   # make vector out of geneIDs (actually geneNames) for gene universe
   geneNames = unlist(stringr::str_split(res_df$geneID, pattern = "/"), use.names = FALSE)
 

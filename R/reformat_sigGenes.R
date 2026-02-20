@@ -48,7 +48,7 @@ reformat_sigGenes <- function(my.sigGenes){
   # add column for qvalue
   my.cpInput$qvalue <- qvalue::qvalue(my.cpInput$pvalue, fdr.level = NULL, lambda = 0)$qvalues
   # add rownames
-  rownames(my.cpInput) <- my.cpInput$ID
-
+#  rownames(my.cpInput) <- my.cpInput$ID
+   # do not set rownames here to avoid problems with duplicate GO terms (same term can be significant in multiple enrichments, so will have multiple rows with same GO ID and same term name, which will cause problems if set as rownames). Instead, can set rownames in make_enrichRes function.
   my.cpInput
 }
