@@ -11,7 +11,11 @@
 #' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz>
 #' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
+#' \dontrun{
+#' data(exampleMydf)  ## load exampleMydf object (mutant classification data from a \emph{piggyBac} screen)
+#' data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated)
+#' }
 "Pfal_geneID2GO_curated"
 
 
@@ -27,7 +31,11 @@
 #' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz>
 #' @description Can be used as the geneID2GO input for run.topGO.meta.
 #' @examples
+#' \dontrun{
+#' #' data(exampleMydf)  ## load exampleMydf object (mutant classification data from a \emph{piggyBac} screen)
+#' data(Pfal_geneID2GO)  ## load Pfal_geneID2GO object
 #' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
+#' }
 "Pfal_geneID2GO"
 
 
@@ -48,7 +56,11 @@
 #' @source <https://www.nature.com/articles/s41467-021-24814-1>
 #' @description can be used as example mydf input for run.topGO.meta.
 #' @examples
-#' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO)
+#' \dontrun{
+#' #' data(exampleMydf)  ## load exampleMydf object (mutant classification data from a \emph{piggyBac} screen)
+#' data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
+#' run.topGO.meta(mydf = exampleMydf, geneID2GO = Pfal_geneID2GO_curated)
+#' }
 "exampleMydf"
 
 

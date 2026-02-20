@@ -119,6 +119,8 @@ makeGOhierarchy.dir <- function() {
 #'
 #' @examples
 #'
+#' data(exampleMydf)  ## load exampleMydf object (mutant classification-data from pooled 1k heat shock screen)
+#' data(Pfal_geneID2GO_curated)  ## load Pfal_geneID2GO_curated object
 #' run.topGO.meta(exampleMydf,Pfal_geneID2GO_curated)
 #'
 #' @export
