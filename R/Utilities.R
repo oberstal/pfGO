@@ -474,7 +474,7 @@ get.value <- function(id, lookupvector){
 #'
 #' @param url = url or filepath to a .gaf or gz-compressed gaf file. E.g. current latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz}.
 #' Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
-#' @param organism = optional string to include in your output file-name. Defaults to "Pf".
+#' @param organism = optional string to include in your output file-name. Defaults to "PF3D7".
 #' @param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v68").
 #'
 #' @details
@@ -482,7 +482,7 @@ get.value <- function(id, lookupvector){
 #'
 #' You will need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
 #'
-#' Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
+#' Example: geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_GOdb.out")
 #'
 #'
 #' @details # \strong{Notes on .gaf format}
@@ -496,7 +496,7 @@ get.value <- function(id, lookupvector){
 #'
 #' @export
 formatGOdb <- function(url,
-           organism = "Pf",
+           organism = "PF3D7",
            plasmoDB_version = "") {
   # updating to require manual input of URL as PlasmoDB link structure is not yet consistent. Example that will work: https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz
 
@@ -534,8 +534,9 @@ formatGOdb <- function(url,
 #    print(str(id_list))
 
     # get date for output filename
-    today = Sys.Date()
-    today = format(today, format = "%b%d%Y")
+    today = Sys.Date() # e.g., "2026-04-22"
+    today = format(today, format = "%Y%m%d") # e.g., "20260422"
+#    today = format(today, format = "%b%d%Y")
 
     # create output file
     GOdb.file = paste("Routput/",
@@ -587,7 +588,7 @@ formatGOdb <- function(url,
 #'
 #' @param url url or filepath to a .gaf or gz-compressed gaf file. This should be the complete GO.gaf file (not one that has "Curated" in the PlasmoDB filename).
 #'
-#'@param organism optional string to include in your output filename. Defaults to "Pf".
+#'@param organism optional string to include in your output filename. Defaults to "PF3D7".
 #'@param plasmoDB_version = optional string to include the PlasmoDB release version in your output filename (e.g. "v68").
 #'
 #' @details
@@ -595,7 +596,7 @@ formatGOdb <- function(url,
 #'
 #' You will need to run `topGO::readmappings()` on the file generated with formatGOdb to use it as the geneID2GO parameter.
 #'
-#' Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
+#' Example: geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_GOdb.out")
 #'
 #' @details # \strong{Notes on gaf.gz format}
 #' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url. Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
@@ -606,7 +607,7 @@ formatGOdb <- function(url,
 #' @export
 formatGOdb.curated <-
   function(url,
-           organism = "Pf",
+           organism = "PF3D7",
            plasmoDB_version = ""){
 
     # old plasmoDB gaf link structure (up until release 65): "https://plasmodb.org/common/downloads/release-56/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf"
@@ -651,8 +652,9 @@ formatGOdb.curated <-
 #    print(str(id_list))
 
     # get date for output filename
-    today = Sys.Date()
-    today = format(today, format = "%b%d%Y")
+    today = Sys.Date() # e.g., "2026-04-22"
+    today = format(today, format = "%Y%m%d") # e.g., "20260422"
+#    today = format(today, format = "%b%d%Y")
 
     # create output file
     GOdb.file = paste("Routput/",
