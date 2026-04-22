@@ -805,9 +805,8 @@ get.annot <- function(x) {
 #' @description
 #' Extracts and formats annotations from a gff file from PlasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the .gff file from PlasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
 #'
-#' @param gff_url connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff}
-
-
+#' @param gff_url url or filepath to a .gff file. Defaults to \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff}
+#'
 #' @details # \strong{Notes on gff format}
 #' The .gff file should be in tabular format with 9 columns, one for each annotated feature associated with a geneID. No formatting is necessary when using the provided url.
 #'
@@ -820,7 +819,11 @@ get.annot <- function(x) {
 get.pfannot <-
   function(gff_url = "https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff") {
     # make connection to gff file without downloading it, then read it in.
-    con = gzcon(url(gff_url))
+    if (grepl("^https?://", gff_url)) {
+      con = gzcon(url(gff_url))
+    } else {
+      con = gzcon(file(gff_url))
+    }
     input = readLines(con)
 
     x = utils::read.delim(textConnection(input),

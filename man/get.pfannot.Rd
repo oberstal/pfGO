@@ -10,7 +10,7 @@ get.pfannot(
 )
 }
 \arguments{
-\item{gff_url}{connection to .gff file. Defaults to \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff}}
+\item{gff_url}{url or filepath to a .gff file. Defaults to \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff}}
 }
 \description{
 Extracts and formats annotations from a gff file from PlasmoDB. Not required presently for the GO enrichment pipeline, but provides useful context for results. Opens a connection to the .gff file from PlasmoDB without downloading it, then calls get_annot() to extract and format the annotation.
