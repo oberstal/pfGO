@@ -89,7 +89,7 @@
 #'   \item{source}{annotation source.}
 #' }
 #'
-#' @source <https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff>
+#' @source <https://beta.plasmodb.org/a/service/raw-files/release-69/Pfalciparum3D7/gaf/PlasmoDB-69_Pfalciparum3D7.gff>
 #'
 #' @keywords dataset
 #' @details ## Keep in mind:

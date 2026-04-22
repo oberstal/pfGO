@@ -20,7 +20,7 @@ A data frame of 5720 rows and 9 columns.
 }
 }
 \source{
-\url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gff/data/PlasmoDB-68_Pfalciparum3D7.gff}
+\url{https://beta.plasmodb.org/a/service/raw-files/release-69/Pfalciparum3D7/gaf/PlasmoDB-69_Pfalciparum3D7.gff}
 }
 \usage{
 data(pf.annot)
