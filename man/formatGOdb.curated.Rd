@@ -4,12 +4,12 @@
 \alias{formatGOdb.curated}
 \title{Generates new GO database from curated evidence-codes only for functional enrichment using run.topGO.meta.}
 \usage{
-formatGOdb.curated(url, organism = "Pf", plasmoDB_version = "")
+formatGOdb.curated(url, organism = "PF3D7", plasmoDB_version = "")
 }
 \arguments{
 \item{url}{url or filepath to a .gaf or gz-compressed gaf file. This should be the complete GO.gaf file (not one that has "Curated" in the PlasmoDB filename).}
 
-\item{organism}{optional string to include in your output filename. Defaults to "Pf".}
+\item{organism}{optional string to include in your output filename. Defaults to "PF3D7".}
 
 \item{plasmoDB_version}{= optional string to include the PlasmoDB release version in your output filename (e.g. "v68").}
 }
@@ -21,7 +21,7 @@ Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will 
 
 You will need to run \code{topGO::readmappings()} on the file generated with formatGOdb to use it as the geneID2GO parameter.
 
-Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
+Example: geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_GOdb.out")
 }
 \section{\strong{Notes on gaf.gz format}}{
 The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url. Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.

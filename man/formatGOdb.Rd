@@ -4,13 +4,13 @@
 \alias{formatGOdb}
 \title{Creates a GO database compatible with topGO from .gaf file retrieved from PlasmoDB.}
 \usage{
-formatGOdb(url, organism = "Pf", plasmoDB_version = "")
+formatGOdb(url, organism = "PF3D7", plasmoDB_version = "")
 }
 \arguments{
 \item{url}{= url or filepath to a .gaf or gz-compressed gaf file. E.g. current latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz}.
 Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.}
 
-\item{organism}{= optional string to include in your output file-name. Defaults to "Pf".}
+\item{organism}{= optional string to include in your output file-name. Defaults to "PF3D7".}
 
 \item{plasmoDB_version}{= optional string to include the PlasmoDB release version in your output filename (e.g. "v68").}
 }
@@ -22,7 +22,7 @@ Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will 
 
 You will need to run \code{topGO::readmappings()} on the file generated with formatGOdb before using it as the geneID2GO parameter.
 
-Example: geneID2GO <- topGO::readmappings("./Routput/Pf_Mar022022_GOdb.out")
+Example: geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_GOdb.out")
 }
 \section{\strong{Notes on .gaf format}}{
 The .gaf file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.

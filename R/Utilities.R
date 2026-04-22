@@ -538,6 +538,9 @@ formatGOdb <- function(url,
     today = format(today, format = "%Y%m%d") # e.g., "20260422"
 #    today = format(today, format = "%b%d%Y")
 
+    # create output directory if it doesn't exist
+    dir.create("Routput", showWarnings = FALSE)
+
     # create output file
     GOdb.file = paste("Routput/",
                       organism,
@@ -547,6 +550,11 @@ formatGOdb <- function(url,
                       today,
                       "_GOdb.out",
                       sep = "")
+
+    cat("creating output file", GOdb.file, "(this may take a couple minutes) . . .\n\n")
+
+    # ensure we overwrite any existing file
+    if (file.exists(GOdb.file)) file.remove(GOdb.file)
 
     for (i in id_list) {
       cat(paste(i),
@@ -576,7 +584,8 @@ formatGOdb <- function(url,
       }
     }
     GO.db = utils::read.delim(GOdb.file, header = FALSE)
-    return(GO.db)
+    cat("File is complete. To create the geneID2GO object for running a GO enrichment, run 'topGO::readMappings(\"", GOdb.file, "\")'\n\n", sep = "")
+    return(invisible(GO.db))
   }
 
 ## formatGOdb.curated----
@@ -656,6 +665,9 @@ formatGOdb.curated <-
     today = format(today, format = "%Y%m%d") # e.g., "20260422"
 #    today = format(today, format = "%b%d%Y")
 
+    # create output directory if it doesn't exist
+    dir.create("Routput", showWarnings = FALSE)
+
     # create output file
     GOdb.file = paste("Routput/",
                       organism,
@@ -665,6 +677,11 @@ formatGOdb.curated <-
                       today,
                       "_GOdb.out",
                       sep = "")
+
+    cat("creating output file", GOdb.file, "(this may take a couple minutes) . . .\n\n")
+
+    # ensure we overwrite any existing file
+    if (file.exists(GOdb.file)) file.remove(GOdb.file)
 
     for (i in id_list) {
       cat(paste(i),
@@ -694,7 +711,8 @@ formatGOdb.curated <-
       }
     }
     GO.db = utils::read.delim(GOdb.file, header = FALSE)
-    return(GO.db)
+    cat("File is complete. To create the geneID2GO object for running a GO enrichment, run 'topGO::readMappings(\"", GOdb.file, "\")'\n\n", sep = "")
+    return(invisible(GO.db))
     }
 
 
