@@ -1,3 +1,14 @@
+# pfGO 2.2.2
+
+Updates include:
+
+* Updated *P. falciparum* GO databases and gene annotations are included (made from PlasmoDB beta release 69; accessed April 22, 2026):
+    * Data objects `Pfal_geneID2GO`, `Pfal_geneID2GO_curated`, and `pf.annot`
+      * note `run.topGO.meta()` significant genes output still draws annotations from stable release 68 (will be updated when v69 release is live)
+* `formatGOdb()` and `get.pfannot()` family functions now accept local file paths as well as urls to .gaf, .gff input files
+* minor text/documentation/output/etc. updates to increase usability
+
+
 # pfGO 2.2.0
 
 Updates include:
