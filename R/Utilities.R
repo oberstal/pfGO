@@ -502,7 +502,11 @@ formatGOdb <- function(url,
 
   # old pre-v65 plasmoDB link: "https://plasmodb.org/common/downloads/Current_Release/Pfalciparum3D7/gaf/PlasmoDB-56_Pfalciparum3D7_GO.gaf"
     # make connection to gaf file without downloading it, then read it in.
-    con = gzcon(url(url))
+    if (grepl("^https?://", url)) {
+      con = gzcon(url(url))
+    } else {
+      con = gzcon(file(url))
+    }
     input = readLines(con)
     x = utils::read.delim(textConnection(input),
                    sep = "\t",
@@ -609,7 +613,11 @@ formatGOdb.curated <-
       ## NOTE: seems plasmoDB is not following a consistent convention yet after release 64; v65 uses zip archives while v66 switches to gzip files (up until v65 files were not compressed). The method here will work to extract gzip and noncompressed files. Zip archives are more complicated and won't work with this function. Zip files need to be downloaded and unzipped, then update the 'url' argument to the local unzipped file path.
 
     # make connection to .gaf or .gaf.gz file without downloading it, then read it in.
-    con = gzcon(url(url))
+    if (grepl("^https?://", url)) {
+      con = gzcon(url(url))
+    } else {
+      con = gzcon(file(url))
+    }
 
     input = readLines(con)
     x = utils::read.delim(textConnection(input),
