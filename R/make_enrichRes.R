@@ -68,7 +68,7 @@ make_enrichRes <- function(my.cpInput, interestCategory, ontology = c("BP", "MF"
                            ontology = ontology,
                            keytype = "UNKNOWN",
                            gene = res_df$geneID,
-                           universe = unique(geneNames[my.cpInput$interest.category!=interestCategory])
+                           universe = unique(geneNames)
   )
 
   # fill in term similarity slot in enrichRes object (required for cnetplots)
