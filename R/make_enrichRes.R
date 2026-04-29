@@ -9,7 +9,7 @@
 #'[See an enrichplot visualization overview here](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html).
 #' @param my.cpInput  a reformatted dataframe from pfGO output file all.combined.sig.genes.per.sig.term.tsv (reformatted using the [reformat_sigGenes()] function)
 #' @param interestCategory  character string of your category of interest (should match a value from the interest.category column of my.cpInput)
-#' @param ontology  one of "BP", "CC" or "MF"
+#' @param ontology  one of "BP", "CC", "MF" or "ALL" for all three ontologies. Not case-sensitive.
 #' @param pval_cutoff significance cutoff. Default is 0.05.
 #' @returns An enrichResult object (which can be visualized in various ways using functions from the enrichplot package). The enrichResult object class is described in the DOSE package.
 #' @examples
@@ -28,12 +28,28 @@
 #' }
 #' @export
 #'
-make_enrichRes <- function(my.cpInput, interestCategory, ontology = "BP", pval_cutoff = 0.05){
+make_enrichRes <- function(my.cpInput, interestCategory, ontology = c("BP", "MF", "CC", "ALL"), pval_cutoff = 0.05){
 
   #require(DOSE)
   #require(enrichplot)
 
-  res_df = my.cpInput[my.cpInput$interest.category==interestCategory & my.cpInput$go.category==ontology,]
+  ontology %<>% toupper
+  ontology <- match.arg(ontology)
+
+  ## sort input by smallest to largest adjusted p-value
+  my.cpInput <- my.cpInput[order(my.cpInput$p.adjust), ]
+
+  if (ontology == "ALL") {
+    res_df <- my.cpInput[
+      my.cpInput$interest.category == interestCategory &
+        my.cpInput$go.category %in% c("BP", "MF", "CC"),
+    ]
+  } else {
+    res_df <- my.cpInput[
+      my.cpInput$interest.category == interestCategory &
+        my.cpInput$go.category == ontology,
+    ]
+  }
 
   # add rownames (required for enrichRes object)
   row.names(res_df) <- res_df$Description
@@ -52,7 +68,7 @@ make_enrichRes <- function(my.cpInput, interestCategory, ontology = "BP", pval_c
                            ontology = ontology,
                            keytype = "UNKNOWN",
                            gene = res_df$geneID,
-                           universe = unique(geneNames[my.cpInput$interest.category!=interestCategory])
+                           universe = unique(geneNames)
   )
 
   # fill in term similarity slot in enrichRes object (required for cnetplots)
