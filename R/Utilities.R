@@ -1,13 +1,16 @@
-#' Creating directory-structure
+#' Creating directory structure
 #'
-#' Creates the output-directory structure I use for my topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
+#' Creates an output-directory structure for the pfGO topGO pipeline. All the included makeDir functions evaluate to the newly created path, or to the existing path if it already exists.
 #'
 #' param ... not required. Defaults to creating top-level Routput directory in current working directory.
 #'
 #' @name makeDirs
+#' @noRd
+#' @keywords internal
 NULL
 #> NULL
 
+#' @noRd
 #' @rdname makeDirs
 #' @keywords internal
 #' @export
@@ -22,6 +25,7 @@ makeRoutput.dir <- function () {
   newDir
 }
 
+#' @noRd
 #' @rdname makeDirs
 #' @keywords internal
 #' @export
@@ -38,6 +42,7 @@ makeGOoutput.dir <- function() {
 }
 
 
+#' @noRd
 #' @rdname makeDirs
 #' @keywords internal
 #' @export
