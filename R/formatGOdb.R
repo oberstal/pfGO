@@ -1,34 +1,46 @@
 ## formatGOdb ----
 #' @title
-#' Creates a GO database compatible with topGO from .gaf file retrieved from PlasmoDB.
+#' Creates new GO database from .gaf file retrieved from PlasmoDB.
 #'
 #' @description
 #' Fetches \emph{P. falciparum} annotations from PlasmoDB, from which it creates a GO database compatible with topGO. The output can be used as the geneID2GO parameter for run.topGO.meta. A generally useful tool for keeping GO analyses up-to-date.
 #'
 #' @param url  url or filepath to a .gaf or gz-compressed gaf file. E.g. current latest \emph{Pf} consortium .gaf annotation file hosted at PlasmoDB: \url{https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz}.
-#' Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 #' @param organism  optional string to include in your output file-name. Defaults to "PF3D7".
 #' @param plasmoDB_version  optional string to include the PlasmoDB release version in your output filename (e.g. "v68").
 #' @family formatGOdb functions
 #'
-#' @details
-#'Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist. Note that the PlasmoDB release version isn't recorded automatically in the filename, so it is good practice to include the current PlasmoDB release number in the filename via the 'organism' parameter for your records.
+#' @section Output:
+#' A dated file named "./Routput/*_GOdb.out". The ./Routput directory will be created if it doesn't already exist. Note that the PlasmoDB release version isn't recorded automatically, so it is good practice to include the current release number in the filename via the `plasmoDB_version` parameter for your records.
 #'
 #' You will need to run `topGO::readmappings()` on the file generated with formatGOdb before using it as the geneID2GO parameter.
 #'
-#' Example: geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_GOdb.out")
 #'
 #'
-#' @details # \strong{Notes on .gaf format}
+#' @section Notes on .gaf format:
 #' The .gaf file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' Retrieves GO annotations assigned by \strong{all} evidence-codes. 
+#' Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the `url` argument should be updated to the local unzipped file path.
 #'
-#' a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB beta release 69; accessed April 2026) pre-formatted using the this function and ready for run.topGO.meta is included in this package [Pfal_geneID2GO].
-#' 
-#' A version of this function that weeds out any non-curated, Inferred-from-Electronic-Annotation assignments, Inferred from Biological aspect of Ancestor, or Nontraceable Author Statements is also included in this package (evidence codes IEA,IBA,NAS; see \code{\link{formatGOdb.curated}}).
+#' @section Notes on included GO databases:
+#' a GOdb from PlasmoDB's \emph{P. falciparum} annotation (from PlasmoDB beta release 69; accessed April 2026) pre-formatted using the this function and ready for run.topGO.meta is included in this package ([Pfal_geneID2GO]).
 #'
-#' @seealso [formatGOdb.curated()]
+#' @section Other notes:
+#' Note that this function retrieves GO annotations assigned by \strong{all} evidence-codes, including lower-confidence/automated computer-assigned annotations.
+#'
+#' See [formatGOdb.curated()] for a version of this function that weeds out non-curated annotations (i.e., those with evidence codes IEA, Inferred-from-Electronic-Annotation; IBA, Inferred from Biological aspect of Ancestor; or NAS, Nontraceable Author Statements).
+#'
+#' @examples
+#' \dontrun{
+#' # Generate your GO database
+#' formatGOdb(url = "https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz", organism = "PF3D7", plasmoDB_version = "v68")
+#'
+#' # prepare it for pfGO
+#' my.geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_GOdb.out")
+#'
+#' # use as input to run pipeline
+#' run.topGO.meta(mydf, geneID2GO = my.geneID2GO)
+#' }
 #'
 #' @export
 formatGOdb <- function(url,

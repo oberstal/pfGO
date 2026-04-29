@@ -1,9 +1,9 @@
 ## formatGOdb.curated----
 #' @title
-#' Generates new GO database from curated evidence codes only for functional enrichment using run.topGO.meta.
+#' Creates new curated GO database from .gaf file retrieved from PlasmoDB.
 #'
 #' @description
-#' Generates new GO database from curated evidence codes only for functional enrichment using run.topGO.meta.
+#' Fetches \emph{P. falciparum} annotations having only curated evidence codes from PlasmoDB, from which it creates a new GO database compatible with topGO. The output can be used as the `geneID2GO` parameter for [run.topGO.meta()]. A generally useful tool for keeping GO analyses up-to-date.
 #'
 #' @param url url or filepath to a .gaf or gz-compressed gaf file. This should be the complete GO.gaf file (not one that has "Curated" in the PlasmoDB filename).
 #'
@@ -13,18 +13,31 @@
 #' @family formatGOdb functions
 #'
 #' @details
-#' Outputs a dated file named "*_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist.
+#' Outputs a dated file named "*_curated_GOdb.out" to the ./Routput folder. ./Routput will be created if it doesn't already exist.
 #'
 #' You will need to run `topGO::readmappings()` on the file generated with the formatGOdb functions to use it as the geneID2GO parameter.
 #'
-#' Example: geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_GOdb.out")
 #'
 #' @details # \strong{Notes on gaf.gz format}
-#' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url. Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
+#' The .gaf or .gaf.gz file should be in tabular format with 17 columns, one row for each GO term associated with a geneID. No formatting is necessary when using the provided url.
 #'
-#' A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB beta release 69; accessed April 2026) pre-formatted using this function and ready for run.topGO.meta is included in this package ([Pfal_geneID2GO_curated]) and is used as the default geneID2GO input to run.topGO.meta(). 
+#' Note that zip archives (extension: .zip) won't work directly with this function. Zip files need to be downloaded and unzipped, then the 'url' argument should be updated to the local unzipped file path.
 #'
-#' @seealso [formatGOdb()]
+#' @section Notes on included GO databases:
+#' A GOdb from Plasmo DB's \emph{P. falciparum} annotation (from PlasmoDB beta release 69; accessed April 2026) pre-formatted using this function and ready for run.topGO.meta is included in this package ([Pfal_geneID2GO_curated]) and is used as the default `geneID2GO` input to [run.topGO.meta()].
+#'
+#' @examples
+#' \dontrun{
+#' # Generate your GO database
+#' formatGOdb.curated(url = "https://plasmodb.org/common/downloads/release-68/Pfalciparum3D7/gaf/PlasmoDB-68_Pfalciparum3D7_GO.gaf.gz", organism = "PF3D7", plasmoDB_version = "v68")
+#'
+#' # prepare it for pfGO
+#' my.geneID2GO <- topGO::readmappings("./Routput/PF3D7_v68_20260422_curated_GOdb.out")
+#'
+#' # use as input to run pipeline
+#' run.topGO.meta(mydf, geneID2GO = my.geneID2GO)
+#' }
+#'
 #' @export
 formatGOdb.curated <-
   function(url,
