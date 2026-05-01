@@ -65,10 +65,10 @@ makeGOhierarchy.dir <- function() {
 #' Get GO terms and definitions
 #'
 #' @description
-#' Extracts the term, term-definition, and ontology for all GOIDs (e.g. GO:0000027) in a geneID2GO object into a dataframe. Output also includes a column for all geneIDs mapping to each term as a comma-separated list. Not required presently for the GO enrichment pipeline, but provides useful context for results--very handy to use as a lookup-table for both GO terms and individual geneIDs.
+#' Extracts the term, term-definition, and ontology for all GOIDs (e.g. GO:0000027) in a geneID2GO object into a dataframe. Output also includes a column for all geneIDs mapping to each term as a comma-separated list, and a total count of genes annotated to each term. Not required presently for the GO enrichment pipeline, but provides useful context for results--very handy to use as a lookup-table for both GO terms and individual geneIDs.
 #'
 #'
-#' @param geneID2GO  geneID2GO object. Defaults to Pfal_geneID2GO_curated (if using the default, you must first load the data-object \link{Pfal_geneID2GO_curated} ).
+#' @param geneID2GO  geneID2GO object. Defaults to [Pfal_geneID2GO_curated].
 #'
 #' @export
 #'
@@ -90,6 +90,9 @@ get.GOdef <- function(geneID2GO = Pfal_geneID2GO_curated){
   GOdef.df = AnnotationDbi::select(x = GO.db::GO.db, keys = terms, columns = as.character(AnnotationDbi::columns(GO.db::GO.db)), keytype = "GOID")
   # join GO term definitions with all genes mapping to each term (geneIDs in a comma-separated string for each GOterm)
   GOdef.df = dplyr::left_join(GOdef.df,go2genes.df)
+
+  # add count of genes mapped to GO term
+  GOdef.df$geneCount = stringr::str_count(GOdef.df$geneIDsList, pattern = ",") + 1
   GOdef.df
 }
 
