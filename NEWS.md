@@ -1,3 +1,14 @@
+# pfGO 2.2.2a (pre-release)
+
+New Features:
+* `run.topGO.meta()` now supports multiple enrichment algorithms via the `algorithm` argument. Default is still the GO hierarchy-aware "weight01".
+* `run.topGO.meta()` now allows user to set minimum number of genes mapped to a GO term in order for the term to be included in analysis via the `minTermSize` argument. Default has been increased to 5 (was previously set at 3).
+
+Minor improvements and fixes:
+* Documentation updates/improvements.
+
+
+
 # pfGO 2.2.2
 
 Updates include:

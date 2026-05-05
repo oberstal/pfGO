@@ -1,6 +1,6 @@
 Package: pfGO
 Title: Plasmodium falciparum functional enrichment analysis tools
-Version: 2.2.2
+Version: 2.2.2a
 Authors@R: 
     person("J", "Oberstaller", , "jobersta@usf.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3033-2212"))
