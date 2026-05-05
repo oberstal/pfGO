@@ -4,10 +4,10 @@
 #' Run topGO pipeline
 #'
 #' @description
-#' Tests for functional enrichment in gene-categories of interest.
+#' Tests for functional enrichment in gene-categories of interest. Enrichments are performed by each ontology (molecular function, biological process, cellular component), for each interest category, sequentially.
 #'
-#' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2. Your input dataframe
-#' @param geneID2GO A list of named vectors of GO IDs--one vector of GO-terms for each geneID. Defaults to the included ([Pfal_geneID2GO_curated]) object. See \linkSections{Using your own custom GO database} for other options.
+#' @param mydf data frame with geneIDs in column 1, and interest-category classifications in column 2. Columns beyond the first two are ignored.
+#' @param geneID2GO A list of named vectors of GO IDs--one vector of GO-terms for each geneID. Defaults to the included ([Pfal_geneID2GO_curated]) object. See *Using your own custom GO database* for other options.
 #' @param minTermSize minimum number of genes that must be mapped to a GO term for it to be included in the enrichment analysis. Defaults to 5.
 #' @param pval pvalue threshold for significance. Defaults to 0.05.
 #' @param algorithm algorithm to run for the enrichment analysis. Accepted values are c("classic", "elim", "weight", "weight01", "lea", "parentchild"). Defaults to "weight01". See the topGO package documentation and associated publications for details on algorithms.
@@ -19,29 +19,30 @@
 #' * plots of the GO-term hierarchy relevant to the analysis, and
 #' * thorough log-files for each gene-category of interest tested against the background of all other genes in the analysis.
 #'
-#' Primary results from run.topGO.meta will be in "Routput/GO/all.combined.GO.results.tsv".
+#' Primary results from run.topGO.meta will be in `./Routput/GO/all.combined.GO.results.tsv`.
 #'
 #'
 #' @details
 #' The **run.topGO.meta** function:
 #' * defines which genes are "interesting" and which should be defined as background for each category specified in mydf,
 #' * makes the GOdata object for topGO,
-#' * tests each category of interest for enriched GO-terms against all the other genes included in mydf (the "gene universe"),
+#' * tests each category of interest for enriched GO-terms against all the other genes included in mydf (the *gene universe*),
 #' * and then outputs results to table (.tsv files that can be opened in Excel).
 #'
-#' Enrichments are performed by each ontology (molecular function, biological process, cellular compartment) sequentially on all groups of interest using the specified `algorithm`, followed by the Fisher test to assess significance (pfGO only supports the fisher test statistic at this time, as it is compatible with all supported algorithms). Results are combined in the final output table ("Routput/GO/all.combined.GO.results.tsv").
-
+#' Enrichments are performed by each ontology (molecular function, biological process, cellular component) sequentially on all groups of interest using the specified `algorithm`, followed by the Fisher test to assess significance. Results are combined in a final output table (`./Routput/GO/all.combined.GO.results.tsv`).
 #'
 #'
-#' TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < `minTermSize` genes in the analysis) with "feasible genes" indicated in the topGO.log files in the "Routput/GO" folder.
+#' TopGO automatically accounts for genes that cannot be mapped to GO terms (or are mapped to terms with < `minTermSize` genes in the analysis) with *feasible genes* indicated in the topGO.log files in the `./Routput/GO/` folder.
+#'
+#' pfGO only supports the Fisher test statistic at this time (which is compatible with all supported algorithms).
 #'
 #'
 #' @section Concepts for common use-cases:
 #'
-#' *RNAseq*:
+#' **RNAseq**:
 #' In an RNAseq analysis, common categories might be "upregulated", "downregulated", and "neutral". The gene universe would consist of all genes detected above your threshold cutoffs (*not necessarily all genes in the genome*).
 #'
-#' *piggyBac screens*:
+#' **piggyBac screens**:
 #' In pooled *piggyBac*-mutant screening, common categories might be "sensitive", "tolerant", and "neutral". The gene universe would consist of all genes represented in your screened library of mutants (*again, not all genes in the genome*).
 #' See the included [exampleMydf] as an example.
 #'
@@ -50,11 +51,15 @@
 #'
 #' A correctly formatted geneID2GO object is included for *P. falciparum* enrichment analyses and is set as the default ([Pfal_geneID2GO_curated]). You may also provide your own, so long as it is a named character-vector of GO-terms (each vector named by geneID, with GO terms as each element).
 #'
-#' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB/PlasmoDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about including automated electronic annotations). If you're studying a model organism, several annotations are already available and can be downloaded through the AnnotationDbi bioconductor package.
+#' You can use the included [formatGOdb.curated()] function to format a custom GO database from curated GeneDB/PlasmoDB annotations for several non-model organisms (or the [formatGOdb()] function to include all GO annotations, if you aren't picky about including automated electronic annotations).
 #'
-#' @section Note on algorithms:
-#' The major advantage of GO-topology-aware methods ("elim", and "weight", and the default hybrid of the two, "weight01") . . .
-#' I find enrichment results returned via the "classic" method are much less biologically informative, as they tend to be dominated by redundant terms of the same direct parent-child lineage. But the classic method usually does return those general terms to which many genes are mapped as significant, and many times reviewers prefer to see larger numbers of significant genes to believe a term is biologically relevant. Therefore the classic method is a useful comparator for interpreting results from topology-aware methods.
+#' If you're studying a model organism, several annotations are already available and can be downloaded through the AnnotationDbi bioconductor package.
+#'
+#' @section Additional note on algorithms:
+#'
+#' The authors of topGO have put lots of work into documenting their algorithms, and it is worth it to check out their publication and resources. That said--I generally recommend using a GO-topology-aware method ("elim", "weight", or the default hybrid of the two, "weight01") for primary analyses; the "classic" method can then be a useful comparator for interpreting results from topology-aware methods.
+#'
+#' Enrichment results from the classic method are often less biologically informative than those from GO hierarchy‑aware approaches, as they tend to be dominated by redundant parent–child terms. However, the classic method reliably highlights broad terms with many mapped genes, and the larger number of significant genes can be reassuring when assessing biological relevance.
 #'
 #' @seealso [topGO::topGO()]
 #'
