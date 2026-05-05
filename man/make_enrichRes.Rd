@@ -7,7 +7,7 @@
 make_enrichRes(
   my.cpInput,
   interestCategory,
-  ontology = "BP",
+  ontology = c("BP", "MF", "CC", "ALL"),
   pval_cutoff = 0.05
 )
 }
@@ -16,7 +16,7 @@ make_enrichRes(
 
 \item{interestCategory}{character string of your category of interest (should match a value from the interest.category column of my.cpInput)}
 
-\item{ontology}{one of "BP", "CC" or "MF"}
+\item{ontology}{one of "BP", "CC", "MF" or "ALL" for all three ontologies. Not case-sensitive.}
 
 \item{pval_cutoff}{significance cutoff. Default is 0.05.}
 }
