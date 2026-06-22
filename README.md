@@ -20,11 +20,14 @@ analyses.
 
 ## Installation
 
-You can install pfGO from [GitHub](https://github.com/) with:
+You can install the latest stable release of pfGO from
+[GitHub](https://github.com/) with:
 
 ``` r
+# UPDATE (6/22/26): This is the recommended method until I sort out the main branch:
 # install.packages("devtools")
-devtools::install_github("oberstal/pfGO")
+devtools::install_github(“oberstal/pfGO@latest”)
+
 
 # or if authenticating via ssh:
 devtools::install_git("https://github.com/oberstal/pfGO")
